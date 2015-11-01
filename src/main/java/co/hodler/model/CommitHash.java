@@ -14,4 +14,30 @@ public class CommitHash {
   public String value() {
     return this.hashValue;
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((hashValue == null) ? 0 : hashValue.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    CommitHash other = (CommitHash) obj;
+    if (hashValue == null) {
+      if (other.hashValue != null)
+        return false;
+    } else if (!hashValue.equals(other.hashValue))
+      return false;
+    return true;
+  }
+
 }
