@@ -17,16 +17,16 @@ public class GitCommitPairProvider implements CommitPairProvider {
 
   @Override
   public Set<LinkedCommitHashPair> providePairs() {
-    Set<String> commitLog = provideLog.provide();
+    Set<CommitHash> commitLog = provideLog.provide();
 
-    Iterator<String> commitLogIter = commitLog.iterator();
+    Iterator<CommitHash> commitLogIter = commitLog.iterator();
     commitLogIter.next();
 
     Set<LinkedCommitHashPair> pairs = new LinkedHashSet<>();
 
     commitLog.stream().forEach(commitHash -> {
       if (commitLogIter.hasNext())
-        pairs.add(new LinkedCommitHashPair(new CommitHash(commitHash), new CommitHash(commitLogIter.next().toString())));
+        pairs.add(new LinkedCommitHashPair(commitHash, commitLogIter.next()));
     });
 
     return pairs;

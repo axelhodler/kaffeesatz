@@ -31,10 +31,10 @@ public class GitCommitPairProviderShould {
 
   @Test
   public void pairLinkedCommitIdsFromLog() {
-    Set<String> commitLog = new LinkedHashSet<>();
-    commitLog.add("79972e25c2891d6187b633a4735982ee1a210f90");
-    commitLog.add("f9a67ea400a4d33b3cf9914bab5e240c708be755");
-    commitLog.add("5c82c9cabf18bed0f32877208b070f3c9a4bcce0");
+    Set<CommitHash> commitLog = new LinkedHashSet<>();
+    commitLog.add(new CommitHash("79972e25c2891d6187b633a4735982ee1a210f90"));
+    commitLog.add(new CommitHash("f9a67ea400a4d33b3cf9914bab5e240c708be755"));
+    commitLog.add(new CommitHash("5c82c9cabf18bed0f32877208b070f3c9a4bcce0"));
     given(provideLog.provide()).willReturn(commitLog);
 
     Set<LinkedCommitHashPair> pairs = provider.providePairs();
@@ -50,10 +50,10 @@ public class GitCommitPairProviderShould {
 
   @Test
   public void beAbleToHandleDifferentLogs() {
-    Set<String> commitLog = new LinkedHashSet<>();
-    commitLog.add("9a287ecdcbcb777b98a720ad01514afff506103c");
-    commitLog.add("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b");
-    commitLog.add("d866ef6f405be734e15db6ad97845e6ebcc7673d");
+    Set<CommitHash> commitLog = new LinkedHashSet<>();
+    commitLog.add(new CommitHash("9a287ecdcbcb777b98a720ad01514afff506103c"));
+    commitLog.add(new CommitHash("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b"));
+    commitLog.add(new CommitHash("d866ef6f405be734e15db6ad97845e6ebcc7673d"));
     given(provideLog.provide()).willReturn(commitLog);
 
     Set<LinkedCommitHashPair> pairs = provider.providePairs();
