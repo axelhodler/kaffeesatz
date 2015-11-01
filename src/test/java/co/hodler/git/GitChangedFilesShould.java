@@ -1,4 +1,4 @@
-package co.hodler;
+package co.hodler.git;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -13,6 +13,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import co.hodler.ChangedFiles;
+import co.hodler.ChangesBetweenTwoCommitsProvider;
+import co.hodler.CommitPairProvider;
+import co.hodler.git.GitChangedFiles;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 

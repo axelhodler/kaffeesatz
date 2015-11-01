@@ -1,8 +1,12 @@
-package co.hodler;
+package co.hodler.git;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import co.hodler.ChangedFiles;
+import co.hodler.ChangesBetweenTwoCommitsProvider;
+import co.hodler.CommitPairProvider;
 
 public class GitChangedFiles implements ChangedFiles {
 

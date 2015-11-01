@@ -1,9 +1,11 @@
-package co.hodler;
+package co.hodler.git;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import co.hodler.CommitPairProvider;
+import co.hodler.ProvideLog;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
