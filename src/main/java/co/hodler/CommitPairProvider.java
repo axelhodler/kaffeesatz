@@ -2,9 +2,9 @@ package co.hodler;
 
 import java.util.Set;
 
-import co.hodler.model.CommitPair;
+import co.hodler.model.LinkedCommitHashPair;
 
 public interface CommitPairProvider {
 
-  Set<CommitPair> providePairs();
+  Set<LinkedCommitHashPair> providePairs();
 }

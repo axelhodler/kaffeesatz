@@ -1,11 +1,11 @@
 package co.hodler.model;
 
-public class CommitPair {
+public class LinkedCommitHashPair {
 
   private CommitHash upperCommitHash;
   private CommitHash lowerCommitHash;
 
-  public CommitPair(CommitHash upperCommitHash, CommitHash lowerCommitHash) {
+  public LinkedCommitHashPair(CommitHash upperCommitHash, CommitHash lowerCommitHash) {
     this.upperCommitHash = upperCommitHash;
     this.lowerCommitHash = lowerCommitHash;
   }
@@ -37,7 +37,7 @@ public class CommitPair {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CommitPair other = (CommitPair) obj;
+    LinkedCommitHashPair other = (LinkedCommitHashPair) obj;
     if (lowerCommitHash == null) {
       if (other.lowerCommitHash != null)
         return false;

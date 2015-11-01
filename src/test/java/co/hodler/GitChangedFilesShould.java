@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.model.CommitHash;
-import co.hodler.model.CommitPair;
+import co.hodler.model.LinkedCommitHashPair;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GitChangedFilesShould {
@@ -26,9 +26,9 @@ public class GitChangedFilesShould {
 
   @Test
   public void provideAllChangedFiles() {
-    CommitPair pair = new CommitPair(new CommitHash("ef3cc2dc4c04be7c87af619ad1d7cc1d6f11bb26"),
+    LinkedCommitHashPair pair = new LinkedCommitHashPair(new CommitHash("ef3cc2dc4c04be7c87af619ad1d7cc1d6f11bb26"),
         new CommitHash("63c29e3323b5cec97a6214a22110fa8d7dae660b"));
-    Set<CommitPair> pairs = new HashSet<>();
+    Set<LinkedCommitHashPair> pairs = new HashSet<>();
     pairs.add(pair);
     given(commitPairProvider.providePairs()).willReturn(pairs);
     Set<String> changes = new HashSet<>();

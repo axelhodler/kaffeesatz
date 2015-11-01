@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import co.hodler.model.CommitHash;
-import co.hodler.model.CommitPair;
+import co.hodler.model.LinkedCommitHashPair;
 
 public class GitCommitPairProvider implements CommitPairProvider {
 
@@ -16,17 +16,17 @@ public class GitCommitPairProvider implements CommitPairProvider {
   }
 
   @Override
-  public Set<CommitPair> providePairs() {
+  public Set<LinkedCommitHashPair> providePairs() {
     Set<String> commitLog = provideLog.provide();
 
     Iterator<String> commitLogIter = commitLog.iterator();
     commitLogIter.next();
 
-    Set<CommitPair> pairs = new LinkedHashSet<>();
+    Set<LinkedCommitHashPair> pairs = new LinkedHashSet<>();
 
     commitLog.stream().forEach(commitHash -> {
       if (commitLogIter.hasNext())
-        pairs.add(new CommitPair(new CommitHash(commitHash), new CommitHash(commitLogIter.next().toString())));
+        pairs.add(new LinkedCommitHashPair(new CommitHash(commitHash), new CommitHash(commitLogIter.next().toString())));
     });
 
     return pairs;
