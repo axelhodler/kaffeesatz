@@ -10,12 +10,6 @@ public class CommitPair {
     this.lowerCommitHash = lowerCommitHash;
   }
 
-  @Deprecated
-  public CommitPair(String upperCommitHash, String lowerCommitHash) {
-    this.upperCommitHash = new CommitHash(upperCommitHash);
-    this.lowerCommitHash = new CommitHash(lowerCommitHash);
-  }
-
   public String getUpperCommitHashValue() {
     return upperCommitHash.value();
   }

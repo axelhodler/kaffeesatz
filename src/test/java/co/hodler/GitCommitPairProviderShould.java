@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import co.hodler.model.CommitHash;
 import co.hodler.model.CommitPair;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,11 +41,11 @@ public class GitCommitPairProviderShould {
 
     verify(provideLog).provide();
     assertThat(pairs,
-        hasItem(new CommitPair("79972e25c2891d6187b633a4735982ee1a210f90",
-            "f9a67ea400a4d33b3cf9914bab5e240c708be755")));
+        hasItem(new CommitPair(new CommitHash("79972e25c2891d6187b633a4735982ee1a210f90"),
+            new CommitHash("f9a67ea400a4d33b3cf9914bab5e240c708be755"))));
     assertThat(pairs,
-        hasItem(new CommitPair("f9a67ea400a4d33b3cf9914bab5e240c708be755",
-            "5c82c9cabf18bed0f32877208b070f3c9a4bcce0")));
+        hasItem(new CommitPair(new CommitHash("f9a67ea400a4d33b3cf9914bab5e240c708be755"),
+            new CommitHash("5c82c9cabf18bed0f32877208b070f3c9a4bcce0"))));
   }
 
   @Test
@@ -58,10 +59,10 @@ public class GitCommitPairProviderShould {
     Set<CommitPair> pairs = provider.providePairs();
 
     assertThat(pairs,
-        hasItem(new CommitPair("9a287ecdcbcb777b98a720ad01514afff506103c",
-            "ec840c1bfca417cb2b71d3ab01e1f4c46a17612b")));
+        hasItem(new CommitPair(new CommitHash("9a287ecdcbcb777b98a720ad01514afff506103c"),
+            new CommitHash("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b"))));
     assertThat(pairs,
-        hasItem(new CommitPair("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b",
-            "d866ef6f405be734e15db6ad97845e6ebcc7673d")));
+        hasItem(new CommitPair(new CommitHash("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b"),
+            new CommitHash("d866ef6f405be734e15db6ad97845e6ebcc7673d"))));
   }
 }
