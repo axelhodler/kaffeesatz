@@ -23,13 +23,10 @@ public class GitCommitPairProvider implements CommitPairProvider {
 
     Set<CommitPair> pairs = new LinkedHashSet<>();
 
-    String currentLowerHash;
-    for (String commitHash : commitLog) {
-      if (commitLogIter.hasNext()) {
-        currentLowerHash = commitLogIter.next().toString();
-        pairs.add(new CommitPair(commitHash, currentLowerHash));
-      }
-    }
+    commitLog.stream().forEach(commitHash -> {
+      if (commitLogIter.hasNext())
+        pairs.add(new CommitPair(commitHash, commitLogIter.next().toString()));
+    });
 
     return pairs;
   }

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,6 +21,12 @@ public class GitCommitPairProviderShould {
 
   @Mock
   ProvideLog provideLog;
+  private CommitPairProvider provider;
+
+  @Before
+  public void initialize() {
+    provider = new GitCommitPairProvider(provideLog);
+  }
 
   @Test
   public void pairLinkedCommitIdsFromLog() {
@@ -28,7 +35,6 @@ public class GitCommitPairProviderShould {
     commitLog.add("f9a67ea400a4d33b3cf9914bab5e240c708be755");
     commitLog.add("5c82c9cabf18bed0f32877208b070f3c9a4bcce0");
     given(provideLog.provide()).willReturn(commitLog);
-    CommitPairProvider provider = new GitCommitPairProvider(provideLog);
 
     Set<CommitPair> pairs = provider.providePairs();
 
@@ -48,7 +54,6 @@ public class GitCommitPairProviderShould {
     commitLog.add("ec840c1bfca417cb2b71d3ab01e1f4c46a17612b");
     commitLog.add("d866ef6f405be734e15db6ad97845e6ebcc7673d");
     given(provideLog.provide()).willReturn(commitLog);
-    CommitPairProvider provider = new GitCommitPairProvider(provideLog);
 
     Set<CommitPair> pairs = provider.providePairs();
 
