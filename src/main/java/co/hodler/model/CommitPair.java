@@ -2,20 +2,26 @@ package co.hodler.model;
 
 public class CommitPair {
 
-  private String upperCommitHash;
-  private String lowerCommitHash;
+  private CommitHash upperCommitHash;
+  private CommitHash lowerCommitHash;
 
-  public CommitPair(String upperCommitHash, String lowerCommitHash) {
+  public CommitPair(CommitHash upperCommitHash, CommitHash lowerCommitHash) {
     this.upperCommitHash = upperCommitHash;
     this.lowerCommitHash = lowerCommitHash;
   }
 
-  public String getUpperCommitHash() {
-    return upperCommitHash;
+  @Deprecated
+  public CommitPair(String upperCommitHash, String lowerCommitHash) {
+    this.upperCommitHash = new CommitHash(upperCommitHash);
+    this.lowerCommitHash = new CommitHash(lowerCommitHash);
   }
 
-  public String getLowerCommitHash() {
-    return lowerCommitHash;
+  public String getUpperCommitHashValue() {
+    return upperCommitHash.value();
+  }
+
+  public String getLowerCommitHashValue() {
+    return lowerCommitHash.value();
   }
 
   @Override
