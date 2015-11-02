@@ -102,5 +102,10 @@
         </executions>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/it/resources</directory>
+      </resource>
+    </resources>
   </build>
 </project>

@@ -1,10 +1,10 @@
-package co.hodler.integrationtests;
+package co.hodler;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-public class ProvideGitLogShould {
+public class ProvideGitLogIT {
 
   @Test
   public void beAbleToReadRepository() {
