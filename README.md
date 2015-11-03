@@ -3,11 +3,10 @@ Offers some stats to a git repo
 
 ## Development
 
-Run full tests via
+Run unit- and integrationtests via
 
-    mvn clean verify
+    ./bin/run_integration_tests.sh
 
 Run only unit tests via
 
     mvn clean test
-
