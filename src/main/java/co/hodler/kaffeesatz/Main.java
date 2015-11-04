@@ -23,6 +23,6 @@ public class Main {
 
     Map<String, Integer> changedFilesChart = fileChangeChart.create();
     changedFilesChart.keySet().stream().forEach(
-        key -> System.out.println(key + " | " + changedFilesChart.get(key)));
+        key -> System.out.printf("%d | %s\n", changedFilesChart.get(key), key));
   }
 }
