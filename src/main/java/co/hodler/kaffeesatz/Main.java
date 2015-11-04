@@ -1,14 +1,15 @@
-package co.hodler;
+package co.hodler.kaffeesatz;
 
 import java.io.File;
 import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
 
-import co.hodler.git.GitChangedFiles;
-import co.hodler.git.GitCommitPairProvider;
-import co.hodler.git.ProvideChangesBetweenTwoGitCommits;
-import co.hodler.git.ProvideGitLogHashes;
+import co.hodler.kaffeesatz.actions.FileChangeChart;
+import co.hodler.kaffeesatz.actions.GitChangedFiles;
+import co.hodler.kaffeesatz.actions.GitCommitPairProvider;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoGitCommits;
+import co.hodler.kaffeesatz.actions.ProvideGitLogHashes;
 
 public class Main {
 

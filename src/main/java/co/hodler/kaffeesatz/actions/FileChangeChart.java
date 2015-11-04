@@ -1,4 +1,4 @@
-package co.hodler;
+package co.hodler.kaffeesatz.actions;
 
 import java.util.Collections;
 import java.util.HashMap;

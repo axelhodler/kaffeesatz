@@ -1,4 +1,4 @@
-package co.hodler.git;
+package co.hodler.kaffeesatz.actions;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -6,7 +6,6 @@ import java.util.Set;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-import co.hodler.ProvideLog;
 import co.hodler.model.CommitHash;
 
 public class ProvideGitLogHashes implements ProvideLog {

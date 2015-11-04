@@ -1,4 +1,4 @@
-package co.hodler.git;
+package co.hodler.kaffeesatz.actions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -14,9 +14,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.CommitPairProvider;
-import co.hodler.ProvideLog;
-import co.hodler.git.GitCommitPairProvider;
+import co.hodler.kaffeesatz.actions.CommitPairProvider;
+import co.hodler.kaffeesatz.actions.GitCommitPairProvider;
+import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
