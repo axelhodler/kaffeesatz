@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FileChangeChart {
 
@@ -32,6 +33,13 @@ public class FileChangeChart {
         .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
         .forEach(entry -> changesSortedByAmount.put(entry.getKey(), entry.getValue()));
 
+    return changesSortedByAmount;
+  }
+
+  public Map<String, Integer> createTop10() {
+    Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();
+    create().entrySet().stream().limit(10).forEach(
+        entry -> changesSortedByAmount.put(entry.getKey(), entry.getValue()));
     return changesSortedByAmount;
   }
 
