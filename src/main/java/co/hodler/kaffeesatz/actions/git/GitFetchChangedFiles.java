@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import co.hodler.kaffeesatz.actions.ChangedFiles;
-import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
-import co.hodler.kaffeesatz.actions.CommitPairProvider;
+import co.hodler.kaffeesatz.actions.FetchChangedFiles;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 
-public class GitChangedFiles implements ChangedFiles {
+public class GitFetchChangedFiles implements FetchChangedFiles {
 
-  private CommitPairProvider commitPairProvider;
-  private ChangesBetweenTwoCommitsProvider changesBetweenTwoCommitsProvider;
+  private FindLinkedCommitPairs commitPairProvider;
+  private ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider;
 
-  public GitChangedFiles(CommitPairProvider commitPairProvider,
-      ChangesBetweenTwoCommitsProvider changesBetweenTwoCommitsProvider) {
+  public GitFetchChangedFiles(FindLinkedCommitPairs commitPairProvider,
+      ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider) {
     this.commitPairProvider = commitPairProvider;
     this.changesBetweenTwoCommitsProvider = changesBetweenTwoCommitsProvider;
   }

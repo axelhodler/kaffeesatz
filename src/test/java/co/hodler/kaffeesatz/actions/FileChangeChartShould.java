@@ -23,7 +23,7 @@ import co.hodler.kaffeesatz.actions.FileChangeChart;
 public class FileChangeChartShould {
 
   @Mock
-  ChangedFiles changedFiles;
+  FetchChangedFiles changedFiles;
 
   private FileChangeChart chart;
 

@@ -4,7 +4,7 @@ import java.util.Set;
 
 import co.hodler.model.LinkedCommitHashPair;
 
-public interface ChangesBetweenTwoCommitsProvider {
+public interface ProvideChangesBetweenTwoCommits {
 
   Set<String> fetchChangesBetween(LinkedCommitHashPair commitPair);
 }

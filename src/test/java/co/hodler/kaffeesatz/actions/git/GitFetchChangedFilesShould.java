@@ -13,20 +13,20 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.ChangedFiles;
-import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
-import co.hodler.kaffeesatz.actions.CommitPairProvider;
-import co.hodler.kaffeesatz.actions.git.GitChangedFiles;
+import co.hodler.kaffeesatz.actions.FetchChangedFiles;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
+import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GitChangedFilesShould {
+public class GitFetchChangedFilesShould {
 
   @Mock
-  CommitPairProvider commitPairProvider;
+  FindLinkedCommitPairs commitPairProvider;
   @Mock
-  ChangesBetweenTwoCommitsProvider changesForPairProvider;
+  ProvideChangesBetweenTwoCommits changesForPairProvider;
 
   @Test
   public void provideAllChangedFiles() {
@@ -39,7 +39,7 @@ public class GitChangedFilesShould {
     changes.add(".gitignore");
     changes.add("/src/main/java/App.java");
     given(changesForPairProvider.fetchChangesBetween(pair)).willReturn(changes);
-    ChangedFiles changedFiles = new GitChangedFiles(commitPairProvider, changesForPairProvider);
+    FetchChangedFiles changedFiles = new GitFetchChangedFiles(commitPairProvider, changesForPairProvider);
 
     List<String> filesChanged = changedFiles.fetchChangedFiles();
 

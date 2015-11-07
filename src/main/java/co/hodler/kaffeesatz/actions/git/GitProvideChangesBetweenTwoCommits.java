@@ -16,14 +16,14 @@ import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
-import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.model.LinkedCommitHashPair;
 
-public class ProvideChangesBetweenTwoGitCommits implements ChangesBetweenTwoCommitsProvider {
+public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetweenTwoCommits {
 
   private Git git;
 
-  public ProvideChangesBetweenTwoGitCommits(Git git) {
+  public GitProvideChangesBetweenTwoCommits(Git git) {
     this.git = git;
   }
 

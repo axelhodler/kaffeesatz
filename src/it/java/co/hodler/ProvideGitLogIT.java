@@ -9,7 +9,7 @@ import java.util.Set;
 import org.eclipse.jgit.api.Git;
 import org.junit.Test;
 
-import co.hodler.kaffeesatz.actions.git.ProvideGitLogHashes;
+import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
 import co.hodler.model.CommitHash;
 
 public class ProvideGitLogIT {
@@ -19,7 +19,7 @@ public class ProvideGitLogIT {
     File gitWorkDir = new File(System.getenv("REPO_DIR").toString());
     Git git = Git.open(gitWorkDir);
 
-    ProvideGitLogHashes provideGitLogHashes = new ProvideGitLogHashes(git);
+    GitProvideLogHashes provideGitLogHashes = new GitProvideLogHashes(git);
     Set<CommitHash> hashes = provideGitLogHashes.provide();
 
     assertThat(secondCommitIn(hashes),

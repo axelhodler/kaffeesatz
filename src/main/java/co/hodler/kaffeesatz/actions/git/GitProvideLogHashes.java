@@ -9,11 +9,11 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 
-public class ProvideGitLogHashes implements ProvideLog {
+public class GitProvideLogHashes implements ProvideLog {
 
   private Git git;
 
-  public ProvideGitLogHashes(Git git) {
+  public GitProvideLogHashes(Git git) {
     this.git = git;
   }
 

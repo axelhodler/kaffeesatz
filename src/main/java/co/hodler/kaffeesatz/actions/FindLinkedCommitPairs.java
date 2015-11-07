@@ -4,7 +4,7 @@ import java.util.Set;
 
 import co.hodler.model.LinkedCommitHashPair;
 
-public interface CommitPairProvider {
+public interface FindLinkedCommitPairs {
 
   Set<LinkedCommitHashPair> providePairs();
 }

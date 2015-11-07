@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class FileChangeChart {
 
-  private ChangedFiles changedFiles;
+  private FetchChangedFiles changedFiles;
 
-  public FileChangeChart(ChangedFiles changedFiles) {
+  public FileChangeChart(FetchChangedFiles changedFiles) {
     this.changedFiles = changedFiles;
   }
 

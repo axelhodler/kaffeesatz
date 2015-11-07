@@ -4,16 +4,16 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import co.hodler.kaffeesatz.actions.CommitPairProvider;
+import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
-public class GitCommitPairProvider implements CommitPairProvider {
+public class GitFindLinkedCommitPairs implements FindLinkedCommitPairs {
 
   private ProvideLog provideLog;
 
-  public GitCommitPairProvider(ProvideLog provideLog) {
+  public GitFindLinkedCommitPairs(ProvideLog provideLog) {
     this.provideLog = provideLog;
   }
 

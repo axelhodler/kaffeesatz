@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
-import co.hodler.kaffeesatz.actions.git.ProvideChangesBetweenTwoGitCommits;
+import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
@@ -20,7 +20,7 @@ public class ProvideChangesBetweenTwoGitCommitsIT {
     File gitWorkDir = new File(System.getenv("REPO_DIR").toString());
     Git git = Git.open(gitWorkDir);
 
-    ProvideChangesBetweenTwoGitCommits provideChanges = new ProvideChangesBetweenTwoGitCommits(git);
+    GitProvideChangesBetweenTwoCommits provideChanges = new GitProvideChangesBetweenTwoCommits(git);
     Set<String> changedFiles = provideChanges.fetchChangesBetween(
         new LinkedCommitHashPair(
             new CommitHash("1ab34bcc4b4e891577bdcd8254cccc6742955f51"),

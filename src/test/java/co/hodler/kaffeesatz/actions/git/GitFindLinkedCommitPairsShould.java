@@ -14,22 +14,22 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.CommitPairProvider;
+import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffeesatz.actions.git.GitCommitPairProvider;
+import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GitCommitPairProviderShould {
+public class GitFindLinkedCommitPairsShould {
 
   @Mock
   ProvideLog provideLog;
-  private CommitPairProvider provider;
+  private FindLinkedCommitPairs provider;
 
   @Before
   public void initialize() {
-    provider = new GitCommitPairProvider(provideLog);
+    provider = new GitFindLinkedCommitPairs(provideLog);
   }
 
   @Test
