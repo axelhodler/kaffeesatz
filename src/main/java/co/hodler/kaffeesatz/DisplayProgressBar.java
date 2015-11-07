@@ -6,4 +6,16 @@ public class DisplayProgressBar {
     System.out.println("progress");
   }
 
+  public void begin() {
+    System.out.print(">         \r");
+  }
+
+  public void full() {
+    System.out.print("==========\r");
+  }
+
+  public void tenPercentDone() {
+    System.out.print("=>        \r");
+  }
+
 }

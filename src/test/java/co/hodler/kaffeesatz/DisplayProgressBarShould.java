@@ -7,19 +7,49 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DisplayProgressBarShould {
 
-  @Test
-  public void displayProgressbar() {
-    final ByteArrayOutputStream sysOutputContent = new ByteArrayOutputStream();
+  private ByteArrayOutputStream sysOutputContent;
+  private DisplayProgressBar progressBar;
+
+  @Before
+  public void setUp() {
+    sysOutputContent = new ByteArrayOutputStream();
     System.setOut(new PrintStream(sysOutputContent));
 
-    DisplayProgressBar progressBar = new DisplayProgressBar();
+    progressBar = new DisplayProgressBar();
+  }
+
+  @Test
+  public void displayProgressbar() {
     progressBar.display();
 
     assertThat(sysOutputContent.toString(), is("progress\n"));
+  }
+
+  @Test
+  public void displayAMovingProgressbar() {
+    progressBar.begin();
+
+    assertThat(sysOutputContent.toString(), is(">         \r"));
+  }
+
+  @Test
+  public void displayFullProgressBar() {
+    progressBar.full();
+
+    assertThat(sysOutputContent.toString(), is("==========\r"));
+  }
+
+  @Test
+  public void display10Percent() {
+    progressBar.tenPercentDone();
+
+    assertThat(sysOutputContent.toString(), is("=>        \r"));
   }
 
   @After
