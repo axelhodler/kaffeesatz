@@ -2,6 +2,7 @@ package co.hodler.kaffeesatz;
 
 import static org.mockito.Mockito.verify;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,9 +25,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTenPercentMarkAs10PercentOfTheCommitsIsReached() {
-    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 10);
+    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 10);
 
-    trackProgress.track();
     trackProgress.track();
 
     verify(displayProgressBar).tenPercentDone();
@@ -34,13 +34,9 @@ public class TrackProgressShould {
 
   @Test
   public void thrityPercentMarkIsReachedOnSixthCommitOfTwenty() {
-    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 20);
+    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 20);
+    trackProgress.timesTracked = 5;
 
-    trackProgress.track();
-    trackProgress.track();
-    trackProgress.track();
-    trackProgress.track();
-    trackProgress.track();
     trackProgress.track();
 
     verify(displayProgressBar).thrityPercentDone();
@@ -51,19 +47,32 @@ public class TrackProgressShould {
     TrackProgress trackProgress = new TrackProgress(displayProgressBar, 1);
 
     trackProgress.track();
-    trackProgress.track();
 
     verify(displayProgressBar).full();
   }
 
   @Test
   public void triggerTwentyPercentAsTwentyPercentOfCommitsIsReached() {
-    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 10);
+    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    trackProgress.timesTracked = 1;
 
-    trackProgress.track();
-    trackProgress.track();
     trackProgress.track();
 
     verify(displayProgressBar).twentyPercentDone();
+  }
+
+  class TestableTrackProgress extends TrackProgress {
+
+    public int timesTracked = 0;
+
+    public TestableTrackProgress(DisplayProgressBar displayProgressBar,
+        int commitAmount) {
+      super(displayProgressBar, commitAmount);
+    }
+
+    @Override
+    protected int timesTracked() {
+      return timesTracked;
+    }
   }
 }
