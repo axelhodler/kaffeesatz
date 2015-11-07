@@ -2,11 +2,11 @@ package co.hodler.kaffeesatz;
 
 public class TrackProgress {
 
-  private DisplayProgressBar displayProgressBar;
+  private TerminalDisplayProgressBar displayProgressBar;
   private int commitAmount;
   private int commitCounter;
 
-  public TrackProgress(DisplayProgressBar displayProgressBar, int commitAmount) {
+  public TrackProgress(TerminalDisplayProgressBar displayProgressBar, int commitAmount) {
     this.displayProgressBar = displayProgressBar;
     this.commitAmount = commitAmount;
     this.commitCounter = 0;

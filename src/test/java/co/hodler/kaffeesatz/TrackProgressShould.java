@@ -11,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class TrackProgressShould {
 
   @Mock
-  DisplayProgressBar displayProgressBar;
+  TerminalDisplayProgressBar displayProgressBar;
 
   @Test
   public void triggerBeginningDisplayOnFirstCall() {

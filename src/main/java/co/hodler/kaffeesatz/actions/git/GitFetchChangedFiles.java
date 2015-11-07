@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import co.hodler.kaffeesatz.DisplayProgressBar;
+import co.hodler.kaffeesatz.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
@@ -13,11 +13,11 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
 
   private FindLinkedCommitPairs commitPairProvider;
   private ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider;
-  private DisplayProgressBar displayProgressBar;
+  private TerminalDisplayProgressBar displayProgressBar;
 
   public GitFetchChangedFiles(FindLinkedCommitPairs commitPairProvider,
       ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
-      DisplayProgressBar displayProgressBar) {
+      TerminalDisplayProgressBar displayProgressBar) {
     this.commitPairProvider = commitPairProvider;
     this.changesBetweenTwoCommitsProvider = changesBetweenTwoCommitsProvider;
     this.displayProgressBar = displayProgressBar;

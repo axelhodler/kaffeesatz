@@ -18,7 +18,7 @@ public class Main {
 
     FileChangeChart fileChangeChart = new FileChangeChart(new GitFetchChangedFiles(
         new GitFindLinkedCommitPairs(new GitProvideLogHashes(git)),
-        new GitProvideChangesBetweenTwoCommits(git), new DisplayProgressBar()));
+        new GitProvideChangesBetweenTwoCommits(git), new TerminalDisplayProgressBar()));
 
     Map<String, Integer> changedFilesChart = fileChangeChart.create();
     changedFilesChart.keySet().stream().forEach(

@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.DisplayProgressBar;
+import co.hodler.kaffeesatz.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
@@ -31,7 +31,7 @@ public class GitFetchChangedFilesShould {
   @Mock
   ProvideChangesBetweenTwoCommits changesForPairProvider;
   @Mock
-  DisplayProgressBar displayProgressBar;
+  TerminalDisplayProgressBar displayProgressBar;
 
   private FetchChangedFiles changedFiles;
 

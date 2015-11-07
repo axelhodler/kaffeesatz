@@ -11,17 +11,17 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class DisplayProgressBarShould {
+public class TerminalDisplayProgressBarShould {
 
   private ByteArrayOutputStream sysOutputContent;
-  private DisplayProgressBar progressBar;
+  private TerminalDisplayProgressBar progressBar;
 
   @Before
   public void setUp() {
     sysOutputContent = new ByteArrayOutputStream();
     System.setOut(new PrintStream(sysOutputContent));
 
-    progressBar = new DisplayProgressBar();
+    progressBar = new TerminalDisplayProgressBar();
   }
 
   @Test
