@@ -14,8 +14,8 @@ public class TrackProgress {
   public void track() {
     if (timesTracked() == 0)
       displayProgressBar.begin();
-    commitCounter++;
-    if (timesTracked() == 5)
+    ++commitCounter;
+    if (timesTracked() == 6)
       displayProgressBar.thrityPercentDone();
     else if (timesTracked() == commitAmount)
       displayProgressBar.full();
