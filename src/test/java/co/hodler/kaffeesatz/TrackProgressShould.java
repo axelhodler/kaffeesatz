@@ -2,7 +2,6 @@ package co.hodler.kaffeesatz;
 
 import static org.mockito.Mockito.verify;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,9 +13,11 @@ public class TrackProgressShould {
   @Mock
   DisplayProgressBar displayProgressBar;
 
+  private TestableTrackProgress trackProgress;
+
   @Test
   public void triggerBeginningDisplayOnFirstCall() {
-    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 0);
+    trackProgress = new TestableTrackProgress(displayProgressBar, 0);
 
     trackProgress.track();
 
@@ -25,7 +26,7 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTenPercentMarkAs10PercentOfTheCommitsIsReached() {
-    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
 
     trackProgress.track();
 
@@ -34,7 +35,7 @@ public class TrackProgressShould {
 
   @Test
   public void thrityPercentMarkIsReachedOnSixthCommitOfTwenty() {
-    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 20);
+    trackProgress = new TestableTrackProgress(displayProgressBar, 20);
     trackProgress.timesTracked = 5;
 
     trackProgress.track();
@@ -44,7 +45,7 @@ public class TrackProgressShould {
 
   @Test
   public void triggerFullProgressMarkAsTheLastCommitIsReached() {
-    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 1);
+    trackProgress = new TestableTrackProgress(displayProgressBar, 1);
 
     trackProgress.track();
 
@@ -53,7 +54,7 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTwentyPercentAsTwentyPercentOfCommitsIsReached() {
-    TestableTrackProgress trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
