@@ -12,16 +12,16 @@ public class TrackProgress {
   }
 
   public void track() {
-    if (timesTracked() == 0)
+    if (commitCounter == 0)
       displayProgressBar.begin();
-    ++commitCounter;
-    if (timesTracked() == 6)
+    commitCounter = timesTracked() + 1;
+    if (commitCounter == 6)
       displayProgressBar.thrityPercentDone();
-    else if (timesTracked() == commitAmount)
+    else if (commitCounter == commitAmount)
       displayProgressBar.full();
-    else if (timesTracked() == commitAmount*0.2)
+    else if (commitCounter == commitAmount*0.2)
       displayProgressBar.twentyPercentDone();
-    else if (timesTracked() == 1)
+    else if (commitCounter == 1)
       displayProgressBar.tenPercentDone();
   }
 
