@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoGitCommits;
+import co.hodler.kaffeesatz.actions.git.ProvideChangesBetweenTwoGitCommits;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 

@@ -1,8 +1,12 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz.actions.git;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import co.hodler.kaffeesatz.actions.ChangedFiles;
+import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
+import co.hodler.kaffeesatz.actions.CommitPairProvider;
 
 public class GitChangedFiles implements ChangedFiles {
 

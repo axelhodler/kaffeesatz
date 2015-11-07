@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz.actions.git;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -16,6 +16,7 @@ import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
+import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
 import co.hodler.model.LinkedCommitHashPair;
 
 public class ProvideChangesBetweenTwoGitCommits implements ChangesBetweenTwoCommitsProvider {

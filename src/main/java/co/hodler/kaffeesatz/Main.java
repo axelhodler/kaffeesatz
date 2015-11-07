@@ -6,10 +6,10 @@ import java.util.Map;
 import org.eclipse.jgit.api.Git;
 
 import co.hodler.kaffeesatz.actions.FileChangeChart;
-import co.hodler.kaffeesatz.actions.GitChangedFiles;
-import co.hodler.kaffeesatz.actions.GitCommitPairProvider;
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoGitCommits;
-import co.hodler.kaffeesatz.actions.ProvideGitLogHashes;
+import co.hodler.kaffeesatz.actions.git.GitChangedFiles;
+import co.hodler.kaffeesatz.actions.git.GitCommitPairProvider;
+import co.hodler.kaffeesatz.actions.git.ProvideChangesBetweenTwoGitCommits;
+import co.hodler.kaffeesatz.actions.git.ProvideGitLogHashes;
 
 public class Main {
 

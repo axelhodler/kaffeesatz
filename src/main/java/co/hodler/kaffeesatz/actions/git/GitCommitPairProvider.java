@@ -1,9 +1,11 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz.actions.git;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import co.hodler.kaffeesatz.actions.CommitPairProvider;
+import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 

@@ -9,7 +9,7 @@ import java.util.Set;
 import org.eclipse.jgit.api.Git;
 import org.junit.Test;
 
-import co.hodler.kaffeesatz.actions.ProvideGitLogHashes;
+import co.hodler.kaffeesatz.actions.git.ProvideGitLogHashes;
 import co.hodler.model.CommitHash;
 
 public class ProvideGitLogIT {

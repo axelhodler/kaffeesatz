@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz.actions.git;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -16,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import co.hodler.kaffeesatz.actions.ChangedFiles;
 import co.hodler.kaffeesatz.actions.ChangesBetweenTwoCommitsProvider;
 import co.hodler.kaffeesatz.actions.CommitPairProvider;
-import co.hodler.kaffeesatz.actions.GitChangedFiles;
+import co.hodler.kaffeesatz.actions.git.GitChangedFiles;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
