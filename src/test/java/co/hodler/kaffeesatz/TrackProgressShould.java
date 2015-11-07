@@ -33,6 +33,20 @@ public class TrackProgressShould {
   }
 
   @Test
+  public void thrityPercentMarkIsReachedOnSixthCommitOfTwenty() {
+    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 20);
+
+    trackProgress.track();
+    trackProgress.track();
+    trackProgress.track();
+    trackProgress.track();
+    trackProgress.track();
+    trackProgress.track();
+
+    verify(displayProgressBar).thrityPercentDone();
+  }
+
+  @Test
   public void triggerFullProgressMarkAsTheLastCommitIsReached() {
     TrackProgress trackProgress = new TrackProgress(displayProgressBar, 1);
 
@@ -40,5 +54,16 @@ public class TrackProgressShould {
     trackProgress.track();
 
     verify(displayProgressBar).full();
+  }
+
+  @Test
+  public void triggerTwentyPercentAsTwentyPercentOfCommitsIsReached() {
+    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 10);
+
+    trackProgress.track();
+    trackProgress.track();
+    trackProgress.track();
+
+    verify(displayProgressBar).twentyPercentDone();
   }
 }

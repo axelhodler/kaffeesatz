@@ -15,10 +15,14 @@ public class TrackProgress {
   public void track() {
     if (commitCounter == 0)
       displayProgressBar.begin();
+    commitCounter++;
+    if (commitCounter == 5)
+      displayProgressBar.thrityPercentDone();
     else if (commitCounter == commitAmount)
       displayProgressBar.full();
-    else
+    else if (commitCounter == commitAmount*0.2)
+      displayProgressBar.twentyPercentDone();
+    else if (commitCounter == 1)
       displayProgressBar.tenPercentDone();
-    commitCounter++;
   }
 }
