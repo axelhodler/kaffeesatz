@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 
 public class FileChangeChart {
 

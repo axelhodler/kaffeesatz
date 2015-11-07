@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
 
-import co.hodler.kaffeesatz.actions.FileChangeChart;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;

@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions;
+package co.hodler.kaffeesatz;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,7 +17,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.FileChangeChart;
+import co.hodler.kaffeesatz.actions.FetchChangedFiles;
+import co.hodler.kaffeesatz.FileChangeChart;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FileChangeChartShould {
