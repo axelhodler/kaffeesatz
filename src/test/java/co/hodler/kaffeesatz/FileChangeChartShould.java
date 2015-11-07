@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
-import co.hodler.kaffeesatz.FileChangeChart;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FileChangeChartShould {
