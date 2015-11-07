@@ -21,4 +21,24 @@ public class TrackProgressShould {
 
     verify(displayProgressBar).begin();
   }
+
+  @Test
+  public void triggerTenPercentMarkAs10PercentOfTheCommitsIsReached() {
+    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 10);
+
+    trackProgress.track();
+    trackProgress.track();
+
+    verify(displayProgressBar).tenPercentDone();
+  }
+
+  @Test
+  public void triggerFullProgressMarkAsTheLastCommitIsReached() {
+    TrackProgress trackProgress = new TrackProgress(displayProgressBar, 1);
+
+    trackProgress.track();
+    trackProgress.track();
+
+    verify(displayProgressBar).full();
+  }
 }
