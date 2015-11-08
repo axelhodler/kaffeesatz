@@ -19,7 +19,7 @@ public class Main {
     FileChangeChart fileChangeChart =
         new FileChangeChart(findAllChangedFiles(gitRepo.byFilePath(args[0])));
 
-    Map<String, Integer> changedFilesChart = fileChangeChart.create();
+    Map<String, Integer> changedFilesChart = fileChangeChart.createTop(30);
     changedFilesChart.keySet().stream().forEach(
         key -> System.out.printf("%d | %s\n", changedFilesChart.get(key), key));
   }
