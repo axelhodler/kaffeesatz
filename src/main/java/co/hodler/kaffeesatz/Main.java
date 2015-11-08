@@ -1,22 +1,23 @@
 package co.hodler.kaffeesatz;
 
-import java.io.File;
 import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
 
+import co.hodler.kaffeesatz.actions.git.GitCommitCount;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
+import co.hodler.kaffeesatz.actions.git.GitRepo;
 
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    File gitWorkDir = new File(args[0]);
-    Git git = Git.open(gitWorkDir);
+    GitRepo gitRepo = new GitRepo();
 
-    FileChangeChart fileChangeChart = new FileChangeChart(findAllChangedFiles(git));
+    FileChangeChart fileChangeChart =
+        new FileChangeChart(findAllChangedFiles(gitRepo.byFilePath(args[0])));
 
     Map<String, Integer> changedFilesChart = fileChangeChart.create();
     changedFilesChart.keySet().stream().forEach(
