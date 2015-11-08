@@ -15,13 +15,13 @@ public class TrackProgress {
     if (commitCounter == 0)
       displayProgressBar.begin();
     commitCounter = timesTracked() + 1;
-    if (commitCounter == 6)
+    if (commitCounter == commitAmount*0.3)
       displayProgressBar.thrityPercentDone();
     else if (commitCounter == commitAmount)
       displayProgressBar.full();
     else if (commitCounter == commitAmount*0.2)
       displayProgressBar.twentyPercentDone();
-    else if (commitCounter == 1)
+    else if (commitCounter == commitAmount*0.1)
       displayProgressBar.tenPercentDone();
   }
 
