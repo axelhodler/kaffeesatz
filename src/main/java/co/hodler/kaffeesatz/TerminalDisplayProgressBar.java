@@ -14,47 +14,65 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   @Override
   public void tenPercentDone() {
-    System.out.print("=>        \r");
+    print(createProgressBarWithEqualSignAmountOf(1));
   }
 
   @Override
   public void twentyPercentDone() {
-    System.out.print("==>       \r");
+    print(createProgressBarWithEqualSignAmountOf(2));
   }
 
   @Override
   public void thirtyPercentDone() {
-    System.out.print("===>      \r");
+    print(createProgressBarWithEqualSignAmountOf(3));
   }
 
   @Override
   public void fourtyPercentDone() {
-    System.out.print("====>     \r");
+    print(createProgressBarWithEqualSignAmountOf(4));
   }
 
   @Override
   public void fiftyPercentDone() {
-    System.out.print("=====>    \r");
+    print(createProgressBarWithEqualSignAmountOf(5));
   }
 
   @Override
   public void sixtyPercentDone() {
-    System.out.print("======>   \r");
+    print(createProgressBarWithEqualSignAmountOf(6));
   }
 
   @Override
   public void seventyPercentDone() {
-    System.out.print("=======>  \r");
+    print(createProgressBarWithEqualSignAmountOf(7));
   }
 
   @Override
   public void eightyPercentDone() {
-    System.out.print("========> \r");
+    print(createProgressBarWithEqualSignAmountOf(8));
   }
 
   @Override
   public void ninetyPercentDone() {
-    System.out.print("=========>\r");
+    print(createProgressBarWithEqualSignAmountOf(9));
   }
 
+  private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {
+    return repeatEqualSignTimes(amountOfEqualSigns)
+        .concat(">")
+        .concat(repeatSpacesTimes(9 - amountOfEqualSigns))
+        .concat("\r");
+  }
+
+  private String repeatEqualSignTimes(int amountOfEqualSigns) {
+    return new String(new char[amountOfEqualSigns]).replace("\0", "=");
+  }
+
+  private String repeatSpacesTimes(int amountOfSpaces) {
+    return new String(new char[amountOfSpaces]).replace("\0", " ");
+  }
+
+  private void print(String toPrint) {
+    System.out.print(toPrint);
+  }
 }
