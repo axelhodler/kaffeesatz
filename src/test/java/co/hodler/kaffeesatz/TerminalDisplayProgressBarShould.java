@@ -25,13 +25,6 @@ public class TerminalDisplayProgressBarShould {
   }
 
   @Test
-  public void displayProgressbar() {
-    progressBar.display();
-
-    assertThat(sysOutputContent.toString(), is("progress\n"));
-  }
-
-  @Test
   public void displayAMovingProgressbar() {
     progressBar.begin();
 
