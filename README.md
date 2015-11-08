@@ -2,12 +2,13 @@
 Offers some stats to a git repo
 
 ## Usage
+The following will provide the Top 30 of the most changed files
 
-   ./bin/run.sh git_repo_dir_of_choice
+    ./bin/run.sh git_repo_dir_of_choice
 
 e.g. inside of this repo
 
-   ./bin/run.sh $(pwd)
+    ./bin/run.sh $(pwd)
 
 ## Development
 
