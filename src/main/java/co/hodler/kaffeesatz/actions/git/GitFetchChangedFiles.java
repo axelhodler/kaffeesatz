@@ -17,7 +17,7 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
 
   public GitFetchChangedFiles(FindLinkedCommitPairs commitPairProvider,
       ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
-      TrackProgress displayProgressBar) {
+      TrackProgress trackProgress) {
     this.commitPairProvider = commitPairProvider;
     this.changesBetweenTwoCommitsProvider = changesBetweenTwoCommitsProvider;
     this.trackProgress = trackProgress;
@@ -28,7 +28,10 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
     List<String> changedFiles = new ArrayList<>();
     commitPairProvider.providePairs().stream()
         .collect(Collectors.toList())
-        .forEach(commitPair -> changedFiles.addAll(changesBetweenTwoCommitsProvider.fetchChangesBetween(commitPair)));
+        .forEach(commitPair -> {
+          changedFiles.addAll(changesBetweenTwoCommitsProvider.fetchChangesBetween(commitPair));
+          trackProgress.track();
+        });
 
     return changedFiles;
   }
