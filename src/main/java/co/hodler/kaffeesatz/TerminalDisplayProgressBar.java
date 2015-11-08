@@ -4,12 +4,12 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   @Override
   public void begin() {
-    System.out.print(">         \r");
+    print(createProgressBarWithEqualSignAmountOf(0));
   }
 
   @Override
   public void full() {
-    System.out.print("==========\r");
+    print("|==========|\r");
   }
 
   @Override
@@ -58,10 +58,10 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
   }
 
   private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {
-    return repeatEqualSignTimes(amountOfEqualSigns)
+    return "|" + repeatEqualSignTimes(amountOfEqualSigns)
         .concat(">")
         .concat(repeatSpacesTimes(9 - amountOfEqualSigns))
-        .concat("\r");
+        .concat("|\r");
   }
 
   private String repeatEqualSignTimes(int amountOfEqualSigns) {
