@@ -82,6 +82,36 @@ public class TrackProgressShould {
     verify(displayProgressBar).thrityPercentDone();
   }
 
+  @Test
+  public void thirtyPercentOfFifteenCommitsIsFiveCommits() {
+    trackProgress = new TestableTrackProgress(displayProgressBar, 15);
+    trackProgress.timesTracked = 4;
+
+    trackProgress.track();
+
+    verify(displayProgressBar).thrityPercentDone();
+  }
+
+  @Test
+  public void twentyPercentOfSeventeenCommitsIsThreeCommits() {
+    trackProgress = new TestableTrackProgress(displayProgressBar, 17);
+    trackProgress.timesTracked = 2;
+
+    trackProgress.track();
+
+    verify(displayProgressBar).twentyPercentDone();
+  }
+
+  @Test
+  public void tenPercentOfFifteenIsTwoCommits() {
+    trackProgress = new TestableTrackProgress(displayProgressBar, 15);
+    trackProgress.timesTracked = 1;
+
+    trackProgress.track();
+
+    verify(displayProgressBar).tenPercentDone();
+  }
+
   class TestableTrackProgress extends TrackProgress {
 
     public int timesTracked = 0;
