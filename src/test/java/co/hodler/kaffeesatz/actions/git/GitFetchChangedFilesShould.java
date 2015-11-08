@@ -3,7 +3,6 @@ package co.hodler.kaffeesatz.actions.git;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
-import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
@@ -30,15 +28,13 @@ public class GitFetchChangedFilesShould {
   FindLinkedCommitPairs commitPairProvider;
   @Mock
   ProvideChangesBetweenTwoCommits changesForPairProvider;
-  @Mock
-  TerminalDisplayProgressBar displayProgressBar;
 
   private FetchChangedFiles changedFiles;
 
   @Before
   public void setUp() {
     changedFiles = new GitFetchChangedFiles(commitPairProvider,
-        changesForPairProvider, displayProgressBar);
+        changesForPairProvider, null);
   }
 
   @Test
@@ -49,15 +45,6 @@ public class GitFetchChangedFilesShould {
 
     assertThat(filesChanged, hasItem(".gitignore"));
     assertThat(filesChanged, hasItem("/src/main/java/App.java"));
-  }
-
-  @Test
-  public void informsProgressBar() {
-    willHaveTwoChangedFiles(oneCommitPair());
-
-    changedFiles.fetchChangedFiles();
-
-    verify(displayProgressBar).display();
   }
 
   private void willHaveTwoChangedFiles(LinkedCommitHashPair pair) {

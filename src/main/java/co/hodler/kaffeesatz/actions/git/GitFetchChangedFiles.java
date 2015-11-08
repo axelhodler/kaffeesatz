@@ -26,7 +26,6 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
   @Override
   public List<String> fetchChangedFiles() {
     List<String> changedFiles = new ArrayList<>();
-    displayProgressBar.display();
     commitPairProvider.providePairs().stream()
         .collect(Collectors.toList())
         .forEach(commitPair -> changedFiles.addAll(changesBetweenTwoCommitsProvider.fetchChangesBetween(commitPair)));
