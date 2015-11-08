@@ -1,4 +1,4 @@
-# Kaffeesatz
+# Kaffeesatz [![Build Status](https://travis-ci.org/axelhodler/kaffeesatz.svg)](https://travis-ci.org/axelhodler/kaffeesatz)
 Offers some stats to a git repo
 
 ## Usage
