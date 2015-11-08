@@ -16,7 +16,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.model.CommitHash;
 import co.hodler.model.LinkedCommitHashPair;
 
