@@ -68,7 +68,7 @@ public class FileChangeChartShould {
     given(changedFiles.fetchChangedFiles()).willReturn(filesWithChanges);
     FileChangeChart chart = new FileChangeChart(changedFiles);
 
-    Map<String, Integer> orderedChanges = chart.createTop10();
+    Map<String, Integer> orderedChanges = chart.createTop(10);
 
     Iterator<Entry<String, Integer>> iter = orderedChanges.entrySet().iterator();
     assertThat(iter.next().getValue(), is(3));

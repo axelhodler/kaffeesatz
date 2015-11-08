@@ -37,9 +37,9 @@ public class FileChangeChart {
     return changesSortedByAmount;
   }
 
-  public Map<String, Integer> createTop10() {
+  public Map<String, Integer> createTop(int amount) {
     Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();
-    create().entrySet().stream().limit(10).forEach(
+    create().entrySet().stream().limit(amount).forEach(
         entry -> changesSortedByAmount.put(entry.getKey(), entry.getValue()));
     return changesSortedByAmount;
   }
