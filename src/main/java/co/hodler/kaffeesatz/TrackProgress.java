@@ -24,6 +24,18 @@ public class TrackProgress {
       displayProgressBar.twentyPercentDone();
     else if (percentageReached(0.3))
       displayProgressBar.thirtyPercentDone();
+    else if (percentageReached(0.4))
+      displayProgressBar.fourtyPercentDone();
+    else if (percentageReached(0.5))
+      displayProgressBar.fiftyPercentDone();
+    else if (percentageReached(0.6))
+      displayProgressBar.sixtyPercentDone();
+    else if (percentageReached(0.7))
+      displayProgressBar.seventyPercentDone();
+    else if (percentageReached(0.8))
+      displayProgressBar.eightyPercentDone();
+    else if (percentageReached(0.9))
+      displayProgressBar.ninetyPercentDone();
   }
 
   private boolean trackingHasBegun() {
