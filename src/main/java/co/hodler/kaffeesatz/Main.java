@@ -16,12 +16,30 @@ public class Main {
     File gitWorkDir = new File(args[0]);
     Git git = Git.open(gitWorkDir);
 
-    FileChangeChart fileChangeChart = new FileChangeChart(new GitFetchChangedFiles(
-        new GitFindLinkedCommitPairs(new GitProvideLogHashes(git)),
-        new GitProvideChangesBetweenTwoCommits(git), new TrackProgress(new TerminalDisplayProgressBar(), 0)));
+    FileChangeChart fileChangeChart = new FileChangeChart(findAllChangedFiles(git));
 
     Map<String, Integer> changedFilesChart = fileChangeChart.create();
     changedFilesChart.keySet().stream().forEach(
         key -> System.out.printf("%d | %s\n", changedFilesChart.get(key), key));
+  }
+
+  private static GitFetchChangedFiles findAllChangedFiles(Git git) {
+    return new GitFetchChangedFiles(
+        findAllCommitPairs(git),
+        findAllChangesBetweenCommits(git),
+        trackProgressOnTerminal());
+  }
+
+  private static TrackProgress trackProgressOnTerminal() {
+    return new TrackProgress(new TerminalDisplayProgressBar(), 0);
+  }
+
+  private static GitProvideChangesBetweenTwoCommits findAllChangesBetweenCommits(
+      Git git) {
+    return new GitProvideChangesBetweenTwoCommits(git);
+  }
+
+  private static GitFindLinkedCommitPairs findAllCommitPairs(Git git) {
+    return new GitFindLinkedCommitPairs(new GitProvideLogHashes(git));
   }
 }
