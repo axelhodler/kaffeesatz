@@ -27,11 +27,12 @@ public class Main {
     return new GitFetchChangedFiles(
         findAllCommitPairs(git),
         findAllChangesBetweenCommits(git),
-        trackProgressOnTerminal());
+        trackProgressOnTerminal(git));
   }
 
-  private static TrackProgress trackProgressOnTerminal() {
-    return new TrackProgress(new TerminalDisplayProgressBar(), 0);
+  private static TrackProgress trackProgressOnTerminal(Git git) {
+    GitCommitCount gitCommitCount = new GitCommitCount(git);
+    return new TrackProgress(new TerminalDisplayProgressBar(), gitCommitCount.value());
   }
 
   private static GitProvideChangesBetweenTwoCommits findAllChangesBetweenCommits(
