@@ -12,18 +12,23 @@ public class TrackProgress {
   }
 
   public void track() {
-    commitCounter = timesTracked();
-    if (commitCounter == 0)
+    if (trackingHasBegun())
       displayProgressBar.begin();
     commitCounter = timesTracked() + 1;
-    if (percentageReached(0.3))
-      displayProgressBar.thrityPercentDone();
-    else if (commitCounter == commitAmount)
+
+    if (commitCounter == commitAmount)
       displayProgressBar.full();
-    else if (percentageReached(0.2))
-      displayProgressBar.twentyPercentDone();
     else if (percentageReached(0.1))
       displayProgressBar.tenPercentDone();
+    else if (percentageReached(0.2))
+      displayProgressBar.twentyPercentDone();
+    else if (percentageReached(0.3))
+      displayProgressBar.thirtyPercentDone();
+  }
+
+  private boolean trackingHasBegun() {
+    commitCounter = timesTracked();
+    return commitCounter == 0;
   }
 
   protected int timesTracked() {

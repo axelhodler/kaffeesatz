@@ -40,7 +40,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thrityPercentDone();
+    verify(displayProgressBar).thirtyPercentDone();
   }
 
   @Test
@@ -79,7 +79,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thrityPercentDone();
+    verify(displayProgressBar).thirtyPercentDone();
   }
 
   @Test
@@ -89,7 +89,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thrityPercentDone();
+    verify(displayProgressBar).thirtyPercentDone();
   }
 
   @Test

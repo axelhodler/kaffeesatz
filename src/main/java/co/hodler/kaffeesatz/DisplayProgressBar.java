@@ -10,7 +10,7 @@ public interface DisplayProgressBar {
 
   void twentyPercentDone();
 
-  void thrityPercentDone();
+  void thirtyPercentDone();
 
   void fourtyPercentDone();
 
