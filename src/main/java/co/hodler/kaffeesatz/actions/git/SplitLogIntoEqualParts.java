@@ -20,8 +20,14 @@ public class SplitLogIntoEqualParts {
     Set<CommitHash> logHashes = provideLog.provide();
     List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
 
-    splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
-    splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
+    if (parts == 2) {
+      splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
+    } else {
+      splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(2).collect(Collectors.toSet()));
+    }
 
     return splitLogHashes;
   }
