@@ -29,4 +29,15 @@ public class CalculateFirstSplitSizeShould {
   public void beTwoWhenFourPartsOfFiveCommitsAreDesired() {
     assertThat(calcFirstSplitSize.using(4, 5), is(2));
   }
+
+  @Test
+  public void beThreeWhenTwoPartsOfFiveCommitsAreDesired() {
+    assertThat(calcFirstSplitSize.using(2, 5), is(3));
+  }
+
+  @Test
+  public void beFiveWhenTwoPartsOfTenCommitsAreDesired() {
+    assertThat(calcFirstSplitSize.using(2, 10), is(5));
+  }
+
 }

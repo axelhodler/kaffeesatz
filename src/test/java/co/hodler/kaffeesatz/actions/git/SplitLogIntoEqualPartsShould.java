@@ -91,6 +91,20 @@ public class SplitLogIntoEqualPartsShould {
     assertThat(fourth(logParts), hasCommitHash("5633c849c06f6063fdca5dec5054950e403447b4"));
   }
 
+  @Test
+  public void splitFiveCommitsIntoTwoPieces() {
+    given(provideLog.provide()).willReturn(fiveCommits());
+
+    List<Set<CommitHash>> logParts = splitLog.splitInto(2);
+
+    assertThat(first(logParts), hasCommitHash("1e121305db8fa36f1dbc6083e628b245e20ef4c1"));
+    assertThat(first(logParts), hasCommitHash("2633c849c06f6063fdca5dec5054950e403447b2"));
+    assertThat(first(logParts), hasCommitHash("3633c849c06f6063fdca5dec5054950e403447b3"));
+    assertThat(second(logParts), hasCommitHash("3633c849c06f6063fdca5dec5054950e403447b3"));
+    assertThat(second(logParts), hasCommitHash("4633c849c06f6063fdca5dec5054950e403447b4"));
+    assertThat(second(logParts), hasCommitHash("5633c849c06f6063fdca5dec5054950e403447b4"));
+  }
+
   private Set<CommitHash> fourCommits() {
     Set<CommitHash> commitLogHashes = Sets.newSet(
         new CommitHash("1e121305db8fa36f1dbc6083e628b245e20ef4c1"),
