@@ -26,6 +26,11 @@ public class SplitLogIntoEqualParts {
     } else if (parts == 2 && logHashes.size() == 4) {
       splitLogHashes.add(logHashes.stream().limit(3).collect(Collectors.toSet()));
       splitLogHashes.add(logHashes.stream().skip(2).collect(Collectors.toSet()));
+    } else if (parts == 4) {
+      splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(2).collect(Collectors.toSet()));
+      splitLogHashes.add(logHashes.stream().skip(3).collect(Collectors.toSet()));
     } else {
       splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
       splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
