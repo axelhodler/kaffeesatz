@@ -126,4 +126,5 @@ public class SplitLogIntoEqualPartsShould {
   private Set<CommitHash> first(List<Set<CommitHash>> logParts) {
     return logParts.get(0);
   }
+
 }

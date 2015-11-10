@@ -6,32 +6,25 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import co.hodler.kaffeesatz.CalculateFirstSplitSize;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 
 public class SplitLogIntoEqualParts {
 
   private ProvideLog provideLog;
+  private CalculateFirstSplitSize calcFirstSplitSize;
 
   public SplitLogIntoEqualParts(ProvideLog provideLog) {
     this.provideLog = provideLog;
+    this.calcFirstSplitSize = new CalculateFirstSplitSize();
   }
 
   public List<Set<CommitHash>> splitInto(int desiredParts) {
     Set<CommitHash> logHashes = provideLog.provide();
-    List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
 
-    if (desiredParts == 2 && logHashes.size() == 3) {
-      splitLogHashes = splitLog(logHashes, 2, desiredParts);
-    } else if (desiredParts == 2 && logHashes.size() == 4) {
-      splitLogHashes = splitLog(logHashes, 3, desiredParts);
-    } else if (desiredParts == 4) {
-      splitLogHashes = splitLog(logHashes, 2, desiredParts);
-    } else {
-      splitLogHashes = splitLog(logHashes, 2, desiredParts);
-    }
-
-    return splitLogHashes;
+    return splitLog(logHashes,
+        calcFirstSplitSize.using(desiredParts, logHashes.size()), desiredParts);
   }
 
   private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int limit, int splits) {
