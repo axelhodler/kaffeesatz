@@ -6,12 +6,10 @@ public class CalculateFirstSplitSize {
     int firstPartSize = 0;
     if (amountOfCommits == 4)
       firstPartSize = 3;
-    else if (parts == 2 && amountOfCommits == 5)
-      firstPartSize = 3;
-    else if (parts == 2 && amountOfCommits == 10)
-      firstPartSize = 5;
+    else if (amountOfCommits % parts == 0)
+      firstPartSize = amountOfCommits / parts;
     else
-      firstPartSize = 2;
+      firstPartSize = amountOfCommits / parts + 1;
     return firstPartSize;
   }
 
