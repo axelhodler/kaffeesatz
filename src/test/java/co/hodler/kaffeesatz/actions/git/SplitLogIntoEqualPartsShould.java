@@ -48,8 +48,7 @@ public class SplitLogIntoEqualPartsShould {
 
   @Test
   public void splitLogIntoThree() {
-    Set<CommitHash> commitLogHashes = fourCommits();
-    given(provideLog.provide()).willReturn(commitLogHashes);
+    given(provideLog.provide()).willReturn(fourCommits());
 
     List<Set<CommitHash>> logParts = splitLog.splitInto(3);
 
