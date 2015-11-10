@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.given;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -22,6 +23,13 @@ public class SplitLogIntoEqualPartsShould {
   @Mock
   ProvideLog provideLog;
 
+  private SplitLogIntoEqualParts splitLog;
+
+  @Before
+  public void setUp() {
+    splitLog = new SplitLogIntoEqualParts(provideLog);
+  }
+
   @Test
   public void splitLogIntoTwo() {
     Set<CommitHash> commitLogHashes = Sets.newSet(
@@ -29,7 +37,6 @@ public class SplitLogIntoEqualPartsShould {
         new CommitHash("5633c849c06f6063fdca5dec5054950e403447b8"),
         new CommitHash("1b937db69b4f7edb519b051ef8319de56de6f627"));
     given(provideLog.provide()).willReturn(commitLogHashes);
-    SplitLogIntoEqualParts splitLog = new SplitLogIntoEqualParts(provideLog);
 
     List<Set<CommitHash>> logParts = splitLog.splitInto(2);
 
@@ -47,7 +54,6 @@ public class SplitLogIntoEqualPartsShould {
         new CommitHash("3633c849c06f6063fdca5dec5054950e403447b3"),
         new CommitHash("4633c849c06f6063fdca5dec5054950e403447b4"));
     given(provideLog.provide()).willReturn(commitLogHashes);
-    SplitLogIntoEqualParts splitLog = new SplitLogIntoEqualParts(provideLog);
 
     List<Set<CommitHash>> logParts = splitLog.splitInto(3);
 
