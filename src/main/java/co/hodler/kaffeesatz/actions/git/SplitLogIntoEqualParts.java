@@ -17,23 +17,18 @@ public class SplitLogIntoEqualParts {
     this.provideLog = provideLog;
   }
 
-  public List<Set<CommitHash>> splitInto(int parts) {
+  public List<Set<CommitHash>> splitInto(int desiredParts) {
     Set<CommitHash> logHashes = provideLog.provide();
     List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
 
-    if (parts == 2 && logHashes.size() == 3) {
-      splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
-      splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
-    } else if (parts == 2 && logHashes.size() == 4) {
-      splitLogHashes.add(logHashes.stream().limit(3).collect(Collectors.toSet()));
-      splitLogHashes.add(logHashes.stream().skip(2).collect(Collectors.toSet()));
-    } else if (parts == 4) {
-      splitLogHashes.add(logHashes.stream().limit(2).collect(Collectors.toSet()));
-      splitLogHashes.add(logHashes.stream().skip(1).collect(Collectors.toSet()));
-      splitLogHashes.add(logHashes.stream().skip(2).collect(Collectors.toSet()));
-      splitLogHashes.add(logHashes.stream().skip(3).collect(Collectors.toSet()));
+    if (desiredParts == 2 && logHashes.size() == 3) {
+      splitLogHashes = splitLog(logHashes, 2, desiredParts);
+    } else if (desiredParts == 2 && logHashes.size() == 4) {
+      splitLogHashes = splitLog(logHashes, 3, desiredParts);
+    } else if (desiredParts == 4) {
+      splitLogHashes = splitLog(logHashes, 2, desiredParts);
     } else {
-      splitLogHashes = splitLog(logHashes, 2, 3);
+      splitLogHashes = splitLog(logHashes, 2, desiredParts);
     }
 
     return splitLogHashes;
