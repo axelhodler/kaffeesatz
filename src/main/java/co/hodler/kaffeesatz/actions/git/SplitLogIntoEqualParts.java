@@ -20,12 +20,24 @@ public class SplitLogIntoEqualParts {
   public List<Set<CommitHash>> splitInto(int desiredParts) {
     Set<CommitHash> logHashes = provideLog.provide();
 
+    return splitLog(logHashes, calculateLimit(desiredParts, logHashes), desiredParts);
+  }
+
+  private int calculateLimit(int desiredParts, Set<CommitHash> logHashes) {
     int limit = 0;
-    if (logHashes.size() % desiredParts == 0)
-      limit = logHashes.size() / desiredParts + 1;
+    if (divisionRemainder(desiredParts, logHashes) == 0)
+      limit = divide(desiredParts, logHashes) + 1;
     else
-      limit = logHashes.size() / desiredParts + logHashes.size() % desiredParts;
-    return splitLog(logHashes, limit, desiredParts);
+      limit = divide(desiredParts, logHashes) + divisionRemainder(desiredParts, logHashes);
+    return limit;
+  }
+
+  private int divide(int desiredParts, Set<CommitHash> logHashes) {
+    return logHashes.size() / desiredParts;
+  }
+
+  private int divisionRemainder(int desiredParts, Set<CommitHash> logHashes) {
+    return logHashes.size() % desiredParts;
   }
 
   private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int limit, int splits) {
