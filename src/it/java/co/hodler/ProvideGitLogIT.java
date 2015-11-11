@@ -10,7 +10,7 @@ import org.eclipse.jgit.api.Git;
 import org.junit.Test;
 
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
-import co.hodler.model.CommitHash;
+import co.hodler.kaffesatz.model.CommitHash;
 
 public class ProvideGitLogIT {
 

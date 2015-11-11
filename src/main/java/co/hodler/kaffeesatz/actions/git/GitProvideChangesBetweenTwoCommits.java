@@ -12,7 +12,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
-import co.hodler.model.LinkedCommitHashPair;
+import co.hodler.kaffesatz.model.LinkedCommitHashPair;
 
 public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetweenTwoCommits {
 

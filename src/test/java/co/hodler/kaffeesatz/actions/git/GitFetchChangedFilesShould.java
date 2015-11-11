@@ -21,8 +21,8 @@ import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
-import co.hodler.model.CommitHash;
-import co.hodler.model.LinkedCommitHashPair;
+import co.hodler.kaffesatz.model.CommitHash;
+import co.hodler.kaffesatz.model.LinkedCommitHashPair;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GitFetchChangedFilesShould {
