@@ -31,12 +31,18 @@ public class SplitLogIntoEqualParts {
   }
 
   private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int limit, int splits) {
+    DistributeParts distributeParts = new DistributeParts();
+
+    int[] distributed = distributeParts.distribute(logHashes.size(), splits);
+
     List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
     splitLogHashes.add(logHashes.stream().limit(limit).collect(Collectors.toSet()));
-    IntStream.range(1, splits)
-              .forEach(amountToSkip -> splitLogHashes.add(logHashes.stream()
-                                                                    .skip(amountToSkip)
-                                                                    .collect(Collectors.toSet())));
+    IntStream.range(0, splits - 1)
+              .forEach(counter ->
+                splitLogHashes.add(logHashes.stream()
+                  .skip(limit + counter * distributed[1] - counter - 1)
+                  .limit(distributed[1])
+                  .collect(Collectors.toSet())));
     return splitLogHashes;
   }
 
