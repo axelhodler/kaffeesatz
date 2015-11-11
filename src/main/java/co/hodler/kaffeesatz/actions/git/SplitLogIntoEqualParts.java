@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import co.hodler.kaffeesatz.DistributeParts;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 
@@ -24,20 +25,9 @@ public class SplitLogIntoEqualParts {
   }
 
   private int calculateLimit(int desiredParts, Set<CommitHash> logHashes) {
-    int limit = 0;
-    if (divisionRemainder(desiredParts, logHashes) == 0)
-      limit = divide(desiredParts, logHashes) + 1;
-    else
-      limit = divide(desiredParts, logHashes) + divisionRemainder(desiredParts, logHashes);
-    return limit;
-  }
+    DistributeParts distributeParts = new DistributeParts();
 
-  private int divide(int desiredParts, Set<CommitHash> logHashes) {
-    return logHashes.size() / desiredParts;
-  }
-
-  private int divisionRemainder(int desiredParts, Set<CommitHash> logHashes) {
-    return logHashes.size() % desiredParts;
+    return distributeParts.distribute(logHashes.size(), desiredParts)[0];
   }
 
   private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int limit, int splits) {
