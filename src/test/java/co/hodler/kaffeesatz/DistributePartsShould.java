@@ -17,10 +17,10 @@ public class DistributePartsShould {
 
   @Test
   public void beAbleToDistribute21into2Parts() {
-    int[] distributedParts = distributeParts.distribute(21, 2);
+    PartSizes distributedParts = distributeParts.distributeSizes(21, 2);
 
-    assertThat(distributedParts[0], is(11));
-    assertThat(distributedParts[1], is(11));
+    assertThat(distributedParts.sizeOfFirstPart(), is(11));
+    assertThat(distributedParts.sizeOfEveryOtherPart(), is(11));
   }
 
   @Test

@@ -4,6 +4,11 @@ import java.util.stream.IntStream;
 
 public class DistributeParts {
 
+  public PartSizes distributeSizes(int amountOfCommits, int parts) {
+    int[] sizes = distribute(amountOfCommits, parts);
+    return new PartSizes(sizes[0], sizes[1]);
+  }
+
   public int[] distribute(int amountOfCommits, int parts) {
     int[] distributedParts = new int[parts];
     distributedParts[0] = firstAmount(amountOfCommits, parts);
