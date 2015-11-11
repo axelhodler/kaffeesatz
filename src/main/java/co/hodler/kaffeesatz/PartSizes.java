@@ -2,8 +2,8 @@ package co.hodler.kaffeesatz;
 
 public class PartSizes {
 
-  int firstPart;
-  int everyOtherPart;
+  private int firstPart;
+  private int everyOtherPart;
 
   public PartSizes(int firstPart, int everyOtherPart) {
     this.firstPart = firstPart;
