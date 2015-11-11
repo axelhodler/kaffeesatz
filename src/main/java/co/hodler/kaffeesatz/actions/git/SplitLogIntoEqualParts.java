@@ -21,27 +21,23 @@ public class SplitLogIntoEqualParts {
   public List<Set<CommitHash>> splitInto(int desiredParts) {
     Set<CommitHash> logHashes = provideLog.provide();
 
-    return splitLog(logHashes, calculateLimit(desiredParts, logHashes), desiredParts);
+    return splitLog(logHashes, desiredParts);
   }
 
-  private int calculateLimit(int desiredParts, Set<CommitHash> logHashes) {
-    DistributeParts distributeParts = new DistributeParts();
-
-    return distributeParts.distribute(logHashes.size(), desiredParts)[0];
-  }
-
-  private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int limit, int splits) {
+  private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int splits) {
     DistributeParts distributeParts = new DistributeParts();
 
     int[] distributed = distributeParts.distribute(logHashes.size(), splits);
+    int firstPartSize = distributed[0];
+    int eachFollowingPartSize = distributed[1];
 
     List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
-    splitLogHashes.add(logHashes.stream().limit(limit).collect(Collectors.toSet()));
+    splitLogHashes.add(logHashes.stream().limit(firstPartSize).collect(Collectors.toSet()));
     IntStream.range(0, splits - 1)
               .forEach(counter ->
                 splitLogHashes.add(logHashes.stream()
-                  .skip(limit + counter * distributed[1] - counter - 1)
-                  .limit(distributed[1])
+                  .skip(firstPartSize + counter * eachFollowingPartSize - counter - 1)
+                  .limit(eachFollowingPartSize)
                   .collect(Collectors.toSet())));
     return splitLogHashes;
   }
