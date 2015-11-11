@@ -40,4 +40,9 @@ public class CommitHash {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "CommitHash [hashValue=" + hashValue + "]";
+  }
+
 }
