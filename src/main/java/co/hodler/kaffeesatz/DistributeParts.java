@@ -9,8 +9,7 @@ public class DistributeParts {
     return new PartSizes(sizes[0], sizes[1]);
   }
 
-  @Deprecated
-  public int[] distribute(int amountOfCommits, int parts) {
+  private int[] distribute(int amountOfCommits, int parts) {
     int[] distributedParts = new int[parts];
     distributedParts[0] = firstAmount(amountOfCommits, parts);
     IntStream.range(1, parts).forEach(counter -> {

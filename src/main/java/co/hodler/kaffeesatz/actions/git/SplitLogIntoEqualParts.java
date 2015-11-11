@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import co.hodler.kaffeesatz.DistributeParts;
+import co.hodler.kaffeesatz.PartSizes;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffesatz.model.CommitHash;
 
@@ -27,17 +28,15 @@ public class SplitLogIntoEqualParts {
   private List<Set<CommitHash>> splitLog(Set<CommitHash> logHashes, int splits) {
     DistributeParts distributeParts = new DistributeParts();
 
-    int[] distributed = distributeParts.distribute(logHashes.size(), splits);
-    int firstPartSize = distributed[0];
-    int eachFollowingPartSize = distributed[1];
+    PartSizes sizes = distributeParts.distributeSizes(logHashes.size(), splits);
 
     List<Set<CommitHash>> splitLogHashes = new ArrayList<>();
-    splitLogHashes.add(logHashes.stream().limit(firstPartSize).collect(Collectors.toSet()));
+    splitLogHashes.add(logHashes.stream().limit(sizes.sizeOfFirstPart()).collect(Collectors.toSet()));
     IntStream.range(0, splits - 1)
               .forEach(counter ->
                 splitLogHashes.add(logHashes.stream()
-                  .skip(firstPartSize + counter * eachFollowingPartSize - counter - 1)
-                  .limit(eachFollowingPartSize)
+                  .skip(sizes.sizeOfFirstPart() + counter * sizes.sizeOfEveryOtherPart() - counter - 1)
+                  .limit(sizes.sizeOfEveryOtherPart())
                   .collect(Collectors.toSet())));
     return splitLogHashes;
   }
