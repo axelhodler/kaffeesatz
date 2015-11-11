@@ -25,40 +25,34 @@ public class DistributePartsShould {
 
   @Test
   public void beAbleToDistribute10into4Parts() {
-    int[] distributedParts = distributeParts.distribute(10, 4);
+    PartSizes distributedParts = distributeParts.distributeSizes(10, 4);
 
-    assertThat(distributedParts[0], is(4));
-    assertThat(distributedParts[1], is(3));
-    assertThat(distributedParts[2], is(3));
-    assertThat(distributedParts[3], is(3));
+    assertThat(distributedParts.sizeOfFirstPart(), is(4));
+    assertThat(distributedParts.sizeOfEveryOtherPart(), is(3));
   }
 
   @Test
   public void beAbleToDistribute20into2Parts() {
-    int[] distributedParts = distributeParts.distribute(20, 2);
+    PartSizes distributedParts = distributeParts.distributeSizes(20, 2);
 
-    assertThat(distributedParts[0], is(11));
-    assertThat(distributedParts[1], is(10));
+    assertThat(distributedParts.sizeOfFirstPart(), is(11));
+    assertThat(distributedParts.sizeOfEveryOtherPart(), is(10));
   }
 
   @Test
   public void beAbleToDistribute8into3parts() {
-    int[] distributedParts = distributeParts.distribute(8, 3);
+    PartSizes distributedParts = distributeParts.distributeSizes(8, 3);
 
-    assertThat(distributedParts[0], is(4));
-    assertThat(distributedParts[1], is(3));
-    assertThat(distributedParts[2], is(3));
+    assertThat(distributedParts.sizeOfFirstPart(), is(4));
+    assertThat(distributedParts.sizeOfEveryOtherPart(), is(3));
   }
 
 
   @Test
   public void beAbleToDistribute28into5parts() throws Exception {
-    int[] distributedParts = distributeParts.distribute(28, 5);
+    PartSizes distributedParts = distributeParts.distributeSizes(28, 5);
 
-    assertThat(distributedParts[0], is(8));
-    assertThat(distributedParts[1], is(6));
-    assertThat(distributedParts[2], is(6));
-    assertThat(distributedParts[3], is(6));
-    assertThat(distributedParts[4], is(6));
+    assertThat(distributedParts.sizeOfFirstPart(), is(8));
+    assertThat(distributedParts.sizeOfEveryOtherPart(), is(6));
   }
 }
