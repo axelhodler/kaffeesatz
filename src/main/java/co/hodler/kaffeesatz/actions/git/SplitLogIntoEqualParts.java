@@ -6,18 +6,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import co.hodler.kaffeesatz.CalculateFirstSplitSize;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.model.CommitHash;
 
 public class SplitLogIntoEqualParts {
 
   private ProvideLog provideLog;
-  private CalculateFirstSplitSize calcFirstSplitSize;
 
   public SplitLogIntoEqualParts(ProvideLog provideLog) {
     this.provideLog = provideLog;
-    this.calcFirstSplitSize = new CalculateFirstSplitSize();
   }
 
   public List<Set<CommitHash>> splitInto(int desiredParts) {
