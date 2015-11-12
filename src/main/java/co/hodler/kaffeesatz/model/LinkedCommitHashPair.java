@@ -51,4 +51,10 @@ public class LinkedCommitHashPair {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "[" + upperCommitHash
+        + ", " + lowerCommitHash + "]";
+  }
+
 }
