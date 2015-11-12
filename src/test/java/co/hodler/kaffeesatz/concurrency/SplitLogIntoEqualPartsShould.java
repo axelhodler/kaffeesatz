@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions.git;
+package co.hodler.kaffeesatz.concurrency;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -17,6 +17,7 @@ import org.mockito.internal.util.collections.Sets;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.ProvideLog;
+import co.hodler.kaffeesatz.concurrency.SplitLogIntoEqualParts;
 import co.hodler.kaffesatz.model.CommitHash;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -1,10 +1,13 @@
-package co.hodler.kaffeesatz;
+package co.hodler.kaffeesatz.concurrency;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import co.hodler.kaffeesatz.concurrency.DistributeParts;
+import co.hodler.kaffeesatz.concurrency.PartSizes;
 
 public class DistributePartsShould {
 

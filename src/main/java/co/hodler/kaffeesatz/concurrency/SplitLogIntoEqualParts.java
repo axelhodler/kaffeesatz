@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz.actions.git;
+package co.hodler.kaffeesatz.concurrency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import co.hodler.kaffeesatz.DistributeParts;
-import co.hodler.kaffeesatz.PartSizes;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffesatz.model.CommitHash;
 

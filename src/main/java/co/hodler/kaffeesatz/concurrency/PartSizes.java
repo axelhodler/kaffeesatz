@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz;
+package co.hodler.kaffeesatz.concurrency;
 
 public class PartSizes {
 
