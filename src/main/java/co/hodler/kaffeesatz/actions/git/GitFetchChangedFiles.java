@@ -2,7 +2,6 @@ package co.hodler.kaffeesatz.actions.git;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
@@ -27,7 +26,6 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
   public List<String> fetchChangedFiles() {
     List<String> changedFiles = new ArrayList<>();
     commitPairProvider.providePairs().stream()
-        .collect(Collectors.toList())
         .forEach(commitPair -> {
           changedFiles.addAll(changesBetweenTwoCommitsProvider.fetchChangesBetween(commitPair));
           trackProgress.track();
