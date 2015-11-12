@@ -7,7 +7,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.CommitHash;
 
 public class GitProvideLogHashes implements ProvideLog {
 

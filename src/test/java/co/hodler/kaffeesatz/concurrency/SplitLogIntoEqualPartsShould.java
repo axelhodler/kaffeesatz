@@ -18,7 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffeesatz.concurrency.SplitLogIntoEqualParts;
-import co.hodler.kaffesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.CommitHash;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SplitLogIntoEqualPartsShould {

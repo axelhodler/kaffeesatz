@@ -6,8 +6,8 @@ import java.util.Set;
 
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffesatz.model.CommitHash;
-import co.hodler.kaffesatz.model.LinkedCommitHashPair;
+import co.hodler.kaffeesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class GitFindLinkedCommitPairs implements FindLinkedCommitPairs {
 

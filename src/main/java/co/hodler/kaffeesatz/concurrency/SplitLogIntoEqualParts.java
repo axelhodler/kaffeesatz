@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.CommitHash;
 
 public class SplitLogIntoEqualParts {
 

@@ -1,4 +1,4 @@
-package co.hodler.kaffesatz.model;
+package co.hodler.kaffeesatz.model;
 
 public class CommitHash {
 

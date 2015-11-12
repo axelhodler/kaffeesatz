@@ -1,8 +1,8 @@
-package co.hodler.kaffesatz.model;
+package co.hodler.kaffeesatz.model;
 
 import org.junit.Test;
 
-import co.hodler.kaffesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.CommitHash;
 
 public class CommitHashShould {
 

@@ -10,8 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
-import co.hodler.kaffesatz.model.CommitHash;
-import co.hodler.kaffesatz.model.LinkedCommitHashPair;
+import co.hodler.kaffeesatz.model.CommitHash;
+import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class ProvideChangesBetweenTwoGitCommitsIT {
 
