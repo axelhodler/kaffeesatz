@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
@@ -23,16 +24,15 @@ public class SplitPairsSetIntoEqualParts {
     this.counter = amount;
     Map<Object, List<LinkedCommitHashPair>> groups =
         findLinkedCommitPairs.providePairs().stream()
-        .collect(Collectors.groupingBy(pair -> nextKey(2)));
+        .collect(Collectors.groupingBy(pair -> nextKey(amount)));
 
     List<Set<LinkedCommitHashPair>> splitPairs = new ArrayList<>();
-    Set<LinkedCommitHashPair> firstSet = new HashSet<>();
-    firstSet.addAll(groups.get(amount - 1));
-    Set<LinkedCommitHashPair> secondSet = new HashSet<>();
-    secondSet.addAll(groups.get(amount));
-
-    splitPairs.add(firstSet);
-    splitPairs.add(secondSet);
+    IntStream.rangeClosed(1, amount)
+      .forEach(key -> {
+        Set<LinkedCommitHashPair> pairSet = new HashSet<>();
+        pairSet.addAll(groups.get(key));
+        splitPairs.add(pairSet);
+      });
 
     return splitPairs;
   }
