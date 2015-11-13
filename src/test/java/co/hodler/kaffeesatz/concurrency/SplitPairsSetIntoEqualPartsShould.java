@@ -36,7 +36,7 @@ public class SplitPairsSetIntoEqualPartsShould {
     given(findLinkedCommitPairs.providePairs()).willReturn(
         Sets.newSet(firstPair(), secondPair()));
 
-    List<Set<LinkedCommitHashPair>> splitPairs = splitter.splitIntoTwo();
+    List<Set<LinkedCommitHashPair>> splitPairs = splitter.splitInto(2);
 
     assertThat(splitPairs.get(0), hasItem(firstPair()));
     assertThat(splitPairs.get(1), hasItem(secondPair()));
@@ -47,7 +47,7 @@ public class SplitPairsSetIntoEqualPartsShould {
     given(findLinkedCommitPairs.providePairs()).willReturn(
         Sets.newSet(firstPair(), secondPair(), thirdPair()));
 
-    List<Set<LinkedCommitHashPair>> splitPairs = splitter.splitIntoTwo();
+    List<Set<LinkedCommitHashPair>> splitPairs = splitter.splitInto(2);
 
     assertThat(splitPairs.get(0), hasItem(firstPair()));
     assertThat(splitPairs.get(0), hasItem(thirdPair()));

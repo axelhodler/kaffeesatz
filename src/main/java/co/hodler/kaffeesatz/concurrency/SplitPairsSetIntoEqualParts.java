@@ -19,16 +19,17 @@ public class SplitPairsSetIntoEqualParts {
     this.findLinkedCommitPairs = findLinkedCommitPairs;
   }
 
-  public List<Set<LinkedCommitHashPair>> splitIntoTwo() {
+  public List<Set<LinkedCommitHashPair>> splitInto(int amount) {
+    this.counter = amount;
     Map<Object, List<LinkedCommitHashPair>> groups =
         findLinkedCommitPairs.providePairs().stream()
-        .collect(Collectors.groupingBy(pair -> nextKey()));
+        .collect(Collectors.groupingBy(pair -> nextKey(2)));
 
     List<Set<LinkedCommitHashPair>> splitPairs = new ArrayList<>();
     Set<LinkedCommitHashPair> firstSet = new HashSet<>();
-    firstSet.addAll(groups.get(0));
+    firstSet.addAll(groups.get(amount - 1));
     Set<LinkedCommitHashPair> secondSet = new HashSet<>();
-    secondSet.addAll(groups.get(1));
+    secondSet.addAll(groups.get(amount));
 
     splitPairs.add(firstSet);
     splitPairs.add(secondSet);
@@ -36,11 +37,11 @@ public class SplitPairsSetIntoEqualParts {
     return splitPairs;
   }
 
-  private int nextKey() {
-    if (counter == 1)
-      counter = 0;
-    else
+  private int nextKey(int amount) {
+    if (counter == amount)
       counter = 1;
+    else
+      counter++;
     return counter;
   }
 
