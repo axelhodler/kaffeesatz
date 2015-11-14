@@ -1,5 +1,6 @@
 package co.hodler.kaffeesatz.concurrency;
 
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -46,6 +47,18 @@ public class GatherChangesConcurrentlyShould {
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesFactory).createGatherChanges(new HashSet<>(),
+        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
+  }
+
+  @Test
+  public void create_as_much_gather_changes_as_groups_of_commit_pairs() {
+    List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
+    groupsOfCommitPairs.add(new HashSet<>());
+    groupsOfCommitPairs.add(new HashSet<>());
+
+    gatherChangesConcurrently.gather(groupsOfCommitPairs);
+
+    verify(gatherChangesFactory, times(2)).createGatherChanges(new HashSet<>(),
         provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
   }
 }

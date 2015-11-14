@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
@@ -27,8 +28,9 @@ public class GatherChangesConcurrently {
   }
 
   public void gather(List<Set<LinkedCommitHashPair>> groupsOfCommitPairs) {
-    gatherChangesFactory.createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
+    IntStream.range(0, groupsOfCommitPairs.size()).forEach(counter -> 
+      gatherChangesFactory.createGatherChanges(new HashSet<>(),
+        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>()));
   }
 
 }
