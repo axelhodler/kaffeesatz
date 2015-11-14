@@ -32,17 +32,19 @@ public class GatherChangesConcurrentlyShould {
   GatherChangesThreadFactory gatherChangesThreadFactory;
   @Mock
   private GatherChangesConcurrently gatherChangesConcurrently;
+  private List<Set<LinkedCommitHashPair>> groupsOfCommitPairs;
 
   @Before
   public void initialize() {
     gatherChangesConcurrently = new GatherChangesConcurrently(
         provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
         gatherChangesFactory, trackProgress);
+
+    groupsOfCommitPairs = new ArrayList<>();
   }
 
   @Test
   public void create_gatherchanges() {
-    List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
     groupsOfCommitPairs.add(new HashSet<>());
 
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
@@ -53,7 +55,6 @@ public class GatherChangesConcurrentlyShould {
 
   @Test
   public void create_as_much_gather_changes_as_groups_of_commit_pairs() {
-    List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
     groupsOfCommitPairs.add(new HashSet<>());
     groupsOfCommitPairs.add(new HashSet<>());
 
@@ -68,7 +69,6 @@ public class GatherChangesConcurrentlyShould {
     given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
         provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>())).willReturn(
             gatherChangesObject());
-    List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
     groupsOfCommitPairs.add(new HashSet<>());
     groupsOfCommitPairs.add(new HashSet<>());
 
