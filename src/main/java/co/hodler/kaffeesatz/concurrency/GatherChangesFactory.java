@@ -9,7 +9,7 @@ import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class GatherChangesFactory {
 
-  GatherChanges createThreadToGatherChanges(Set<LinkedCommitHashPair> commitPairs,
+  public GatherChanges createThreadToGatherChanges(Set<LinkedCommitHashPair> commitPairs,
       ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
       TrackProgress trackProgress, List<String> changedFiles) {
     return new GatherChanges(commitPairs,
