@@ -1,5 +1,6 @@
 package co.hodler.kaffeesatz.concurrency;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -29,7 +30,7 @@ public class GatherChangesConcurrentlyShould {
   GatherChangesFactory gatherChangesFactory;
   @Mock
   GatherChangesThreadFactory gatherChangesThreadFactory;
-
+  @Mock
   private GatherChangesConcurrently gatherChangesConcurrently;
 
   @Before
@@ -60,5 +61,24 @@ public class GatherChangesConcurrentlyShould {
 
     verify(gatherChangesFactory, times(2)).createGatherChanges(new HashSet<>(),
         provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
+  }
+
+  @Test
+  public void create_as_much_threads_as_groups_of_commit_pairs() {
+    given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
+        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>())).willReturn(
+            gatherChangesObject());
+    List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
+    groupsOfCommitPairs.add(new HashSet<>());
+    groupsOfCommitPairs.add(new HashSet<>());
+
+    gatherChangesConcurrently.gather(groupsOfCommitPairs);
+
+    verify(gatherChangesThreadFactory, times(2)).createThreadTo(gatherChangesObject());
+  }
+
+  private GatherChanges gatherChangesObject() {
+    return new GatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
+        trackProgress, new ArrayList<>());
   }
 }
