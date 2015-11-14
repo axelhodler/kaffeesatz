@@ -33,7 +33,7 @@ public class GatherChangesConcurrentlyShould {
   @Mock
   private GatherChangesConcurrently gatherChangesConcurrently;
   @Mock
-  Thread thread;
+  GatherChangesThread gatherChangesThread;
 
   private List<Set<LinkedCommitHashPair>> groupsOfCommitPairs;
 
@@ -50,7 +50,7 @@ public class GatherChangesConcurrentlyShould {
             .willReturn(gatherChangesObject());
     // beware, a mock is returning a mock
     given(gatherChangesThreadFactory.createThreadTo(gatherChangesObject()))
-        .willReturn(thread);
+        .willReturn(gatherChangesThread);
   }
 
   @Test
@@ -90,7 +90,7 @@ public class GatherChangesConcurrentlyShould {
 
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
-    verify(thread).start();
+    verify(gatherChangesThread).startGathering();
   }
 
   private GatherChanges gatherChangesObject() {

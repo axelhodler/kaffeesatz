@@ -16,10 +16,10 @@ public class GatherChangesThreadFactoryShould {
   @Test
   public void create_thread_gathering_changes() throws InterruptedException {
     GatherChangesThreadFactory distributeGathering = new GatherChangesThreadFactory();
-    Thread thread = distributeGathering.createThreadTo(gatherChanges);
+    GatherChangesThread thread = distributeGathering.createThreadTo(gatherChanges);
 
-    thread.start();
-    thread.join();
+    thread.startGathering();
+    thread.waitToFinish();
 
     verify(gatherChanges).run();
   }
