@@ -1,5 +1,6 @@
 package co.hodler.kaffeesatz.concurrency;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.BDDMockito.given;
@@ -52,6 +53,16 @@ public class SplitPairsSetIntoEqualPartsShould {
     assertThat(splitPairs.get(0), hasItem(firstPair()));
     assertThat(splitPairs.get(0), hasItem(thirdPair()));
     assertThat(splitPairs.get(1), hasItem(secondPair()));
+  }
+
+  @Test
+  public void split_three_pairs_into_three_times_one_and_one_empty() {
+    given(findLinkedCommitPairs.providePairs()).willReturn(
+        Sets.newSet(firstPair(), secondPair(), thirdPair()));
+
+    List<Set<LinkedCommitHashPair>> splitPairs = splitter.splitInto(4);
+
+    assertThat(splitPairs.get(3).size(), is(0));
   }
 
   private LinkedCommitHashPair firstPair() {

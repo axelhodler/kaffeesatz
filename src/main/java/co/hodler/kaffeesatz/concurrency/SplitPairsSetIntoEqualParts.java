@@ -1,6 +1,7 @@
 package co.hodler.kaffeesatz.concurrency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +35,19 @@ public class SplitPairsSetIntoEqualParts {
     List<Set<LinkedCommitHashPair>> splitPairs = new ArrayList<>();
     IntStream.rangeClosed(1, amount)
       .forEach(key -> {
-        Set<LinkedCommitHashPair> pairSet = new HashSet<>();
-        pairSet.addAll(groups.get(key));
-        splitPairs.add(pairSet);
+        splitPairs.add(addGroupsToSet(groups, key));
       });
     return splitPairs;
+  }
+
+  private Set<LinkedCommitHashPair> addGroupsToSet(
+      Map<Object, List<LinkedCommitHashPair>> groups, int key) {
+    Set<LinkedCommitHashPair> pairSet = new HashSet<>();
+    if (groups.get(key) != null)
+      pairSet.addAll(groups.get(key));
+    else
+      pairSet.addAll(Collections.emptySet());
+    return pairSet;
   }
 
   private int nextKey(int amount) {
