@@ -40,7 +40,7 @@ public class GatherChangesConcurrentlyShould {
 
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
-    verify(gatherChangesFactory).createThreadToGatherChanges(new HashSet<>(),
+    verify(gatherChangesFactory).createGatherChanges(new HashSet<>(),
         provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
   }
 }

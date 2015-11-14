@@ -10,7 +10,7 @@ import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class GatherChangesFactory {
 
-  public GatherChanges createThreadToGatherChanges(Set<LinkedCommitHashPair> commitPairs,
+  public GatherChanges createGatherChanges(Set<LinkedCommitHashPair> commitPairs,
       ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
       TrackProgress trackProgress, List<ChangedFile> changedFiles) {
     return new GatherChanges(commitPairs,

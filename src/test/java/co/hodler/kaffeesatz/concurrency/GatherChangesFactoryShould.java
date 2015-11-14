@@ -33,7 +33,7 @@ public class GatherChangesFactoryShould {
     GatherChangesFactory gatherChangesFactory = new GatherChangesFactory();
 
     GatherChanges gatherChangesRunnable = gatherChangesFactory
-        .createThreadToGatherChanges(commitPairs,
+        .createGatherChanges(commitPairs,
             provideChangesBetweenTwoCommits, trackProgress, changedFiles);
 
     GatherChanges expectedGatherChangesRunnable = 

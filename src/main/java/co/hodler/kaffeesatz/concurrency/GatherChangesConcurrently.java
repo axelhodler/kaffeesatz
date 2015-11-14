@@ -27,7 +27,7 @@ public class GatherChangesConcurrently {
   }
 
   public void gather(List<Set<LinkedCommitHashPair>> groupsOfCommitPairs) {
-    gatherChangesFactory.createThreadToGatherChanges(new HashSet<>(),
+    gatherChangesFactory.createGatherChanges(new HashSet<>(),
         provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
   }
 
