@@ -1,0 +1,18 @@
+package co.hodler.kaffeesatz.concurrency;
+
+import java.util.List;
+import java.util.Set;
+
+import co.hodler.kaffeesatz.TrackProgress;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
+
+public class GatherChangesFactory {
+
+  GatherChanges createThreadToGatherChanges(Set<LinkedCommitHashPair> commitPairs,
+      ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
+      TrackProgress trackProgress, List<String> changedFiles) {
+    return new GatherChanges(commitPairs,
+        changesBetweenTwoCommitsProvider, trackProgress, changedFiles);
+  }
+}
