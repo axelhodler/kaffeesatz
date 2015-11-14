@@ -32,6 +32,9 @@ public class GatherChangesConcurrentlyShould {
   GatherChangesThreadFactory gatherChangesThreadFactory;
   @Mock
   private GatherChangesConcurrently gatherChangesConcurrently;
+  @Mock
+  Thread thread;
+
   private List<Set<LinkedCommitHashPair>> groupsOfCommitPairs;
 
   @Before
@@ -41,6 +44,13 @@ public class GatherChangesConcurrentlyShould {
         gatherChangesFactory, trackProgress);
 
     groupsOfCommitPairs = new ArrayList<>();
+
+    given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
+        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>()))
+            .willReturn(gatherChangesObject());
+    // beware, a mock is returning a mock
+    given(gatherChangesThreadFactory.createThreadTo(gatherChangesObject()))
+        .willReturn(thread);
   }
 
   @Test
@@ -66,15 +76,21 @@ public class GatherChangesConcurrentlyShould {
 
   @Test
   public void create_as_much_threads_as_groups_of_commit_pairs() {
-    given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>())).willReturn(
-            gatherChangesObject());
     groupsOfCommitPairs.add(new HashSet<>());
     groupsOfCommitPairs.add(new HashSet<>());
 
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesThreadFactory, times(2)).createThreadTo(gatherChangesObject());
+  }
+
+  @Test
+  public void start_threads_that_are_created() {
+    groupsOfCommitPairs.add(new HashSet<>());
+
+    gatherChangesConcurrently.gather(groupsOfCommitPairs);
+
+    verify(thread).start();
   }
 
   private GatherChanges gatherChangesObject() {

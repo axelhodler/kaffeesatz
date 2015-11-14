@@ -28,11 +28,12 @@ public class GatherChangesConcurrently {
   }
 
   public void gather(List<Set<LinkedCommitHashPair>> groupsOfCommitPairs) {
-    IntStream.range(0, groupsOfCommitPairs.size())
-        .forEach(counter -> gatherChangesThreadFactory.createThreadTo(
-            gatherChangesFactory.createGatherChanges(new HashSet<>(),
-                provideChangesBetweenTwoCommits, trackProgress,
-                new ArrayList<>())));
+    IntStream.range(0, groupsOfCommitPairs.size()).forEach(counter -> {
+      Thread t = gatherChangesThreadFactory.createThreadTo(gatherChangesFactory
+          .createGatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
+              trackProgress, new ArrayList<>()));
+      t.start();
+    });
   }
 
 }
