@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
+import co.hodler.kaffeesatz.model.ChangedFile;
 
 public class FileChangeChart {
 
@@ -20,12 +21,12 @@ public class FileChangeChart {
 
   public Map<String, Integer> create() {
     Map<String, Integer> changesWithAmount = new HashMap<>();
-    List<String> filesWithChanges = changedFiles.fetchChangedFiles();
+    List<ChangedFile> filesWithChanges = changedFiles.fetchChangedFiles();
 
-    Set<String> uniqueFiles = new HashSet<>(filesWithChanges);
+    Set<ChangedFile> uniqueFiles = new HashSet<>(filesWithChanges);
 
-    for (String key : uniqueFiles) {
-      changesWithAmount.put(key, Collections.frequency(filesWithChanges, key));
+    for (ChangedFile key : uniqueFiles) {
+      changesWithAmount.put(key.value(), Collections.frequency(filesWithChanges, key));
     }
 
     Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();

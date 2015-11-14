@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,7 +29,7 @@ public class GatherChangesFactoryShould {
   @Test
   public void create_gatherchanges_runnable() {
     Set<LinkedCommitHashPair> commitPairs = new HashSet<>();
-    List<String> changedFiles = new ArrayList<>();
+    List<ChangedFile> changedFiles = new ArrayList<>();
     GatherChangesFactory gatherChangesFactory = new GatherChangesFactory();
 
     GatherChanges gatherChangesRunnable = gatherChangesFactory

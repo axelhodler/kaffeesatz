@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
+import co.hodler.kaffeesatz.model.ChangedFile;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FileChangeChartShould {
@@ -26,7 +27,7 @@ public class FileChangeChartShould {
 
   private FileChangeChart chart;
 
-  private List<String> filesWithChanges;
+  private List<ChangedFile> filesWithChanges;
 
   @Before
   public void initialize() {
@@ -35,9 +36,13 @@ public class FileChangeChartShould {
 
   @Test
   public void provideAllChangedFilesOrderedBy() {
-    filesWithChanges = Arrays.asList(".gitignore", "src/main/java/App.java",
-        "src/main/java/App.java", ".gitignore", ".gitignore",
-        "src/test/java/AppTest.java");
+    filesWithChanges = Arrays.asList(
+        new ChangedFile(".gitignore"),
+        new ChangedFile("src/main/java/App.java"),
+        new ChangedFile("src/main/java/App.java"),
+        new ChangedFile(".gitignore"),
+        new ChangedFile(".gitignore"),
+        new ChangedFile("src/test/java/AppTest.java"));
     given(changedFiles.fetchChangedFiles()).willReturn(filesWithChanges);
 
     Map<String, Integer> orderedChanges = chart.create();
@@ -53,18 +58,31 @@ public class FileChangeChartShould {
 
   @Test
   public void beAbleToProvideTheTopTenOfChangedFiles() {
-    filesWithChanges = Arrays.asList(".gitignore", ".gitignore",
-        "src/main/java/App.java", "src/main/java/App.java", ".gitignore",
-        "src/test/java/AppTest.java", "src/test/java/First.java",
-        "src/test/java/First.java", "src/test/java/Second.java",
-        "src/test/java/Second.java", "src/test/java/Three.java",
-        "src/test/java/Three.java", "src/test/java/Four.java",
-        "src/test/java/Four.java", "src/test/java/Five.java",
-        "src/test/java/Five.java", "src/test/java/Six.java",
-        "src/test/java/Six.java", "src/test/java/Seven.java",
-        "src/test/java/Seven.java", "src/test/java/Eigth.java",
-        "src/test/java/Eigth.java", "src/test/java/Nine.java",
-        "src/test/java/Ten.java");
+    filesWithChanges = Arrays.asList(
+        new ChangedFile(".gitignore"),
+        new ChangedFile(".gitignore"),
+        new ChangedFile("src/main/java/App.java"),
+        new ChangedFile("src/main/java/App.java"),
+        new ChangedFile(".gitignore"),
+        new ChangedFile("src/test/java/AppTest.java"),
+        new ChangedFile("src/test/java/First.java"),
+        new ChangedFile("src/test/java/First.java"),
+        new ChangedFile("src/test/java/Second.java"),
+        new ChangedFile("src/test/java/Second.java"),
+        new ChangedFile("src/test/java/Three.java"),
+        new ChangedFile("src/test/java/Three.java"),
+        new ChangedFile("src/test/java/Four.java"),
+        new ChangedFile("src/test/java/Four.java"),
+        new ChangedFile("src/test/java/Five.java"),
+        new ChangedFile("src/test/java/Five.java"),
+        new ChangedFile("src/test/java/Six.java"),
+        new ChangedFile("src/test/java/Six.java"),
+        new ChangedFile("src/test/java/Seven.java"),
+        new ChangedFile("src/test/java/Seven.java"),
+        new ChangedFile("src/test/java/Eigth.java"),
+        new ChangedFile("src/test/java/Eigth.java"),
+        new ChangedFile("src/test/java/Nine.java"),
+        new ChangedFile("src/test/java/Ten.java"));
     given(changedFiles.fetchChangedFiles()).willReturn(filesWithChanges);
     FileChangeChart chart = new FileChangeChart(changedFiles);
 

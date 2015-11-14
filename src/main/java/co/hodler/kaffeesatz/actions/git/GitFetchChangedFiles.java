@@ -7,6 +7,7 @@ import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 
 public class GitFetchChangedFiles implements FetchChangedFiles {
 
@@ -23,8 +24,8 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
   }
 
   @Override
-  public List<String> fetchChangedFiles() {
-    List<String> changedFiles = new ArrayList<>();
+  public List<ChangedFile> fetchChangedFiles() {
+    List<ChangedFile> changedFiles = new ArrayList<>();
     commitPairProvider.providePairs().stream()
         .forEach(commitPair -> {
           changedFiles.addAll(changesBetweenTwoCommitsProvider.fetchChangesBetween(commitPair));

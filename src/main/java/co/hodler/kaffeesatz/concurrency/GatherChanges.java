@@ -5,6 +5,7 @@ import java.util.Set;
 
 import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class GatherChanges implements Runnable {
@@ -12,11 +13,11 @@ public class GatherChanges implements Runnable {
   private Set<LinkedCommitHashPair> commitPairs;
   private ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider;
   private TrackProgress trackProgress;
-  private List<String> changedFiles;
+  private List<ChangedFile> changedFiles;
 
   public GatherChanges(Set<LinkedCommitHashPair> commitPairs,
       ProvideChangesBetweenTwoCommits changesBetweenTwoCommitsProvider,
-      TrackProgress trackProgress, List<String> changedFiles) {
+      TrackProgress trackProgress, List<ChangedFile> changedFiles) {
     this.commitPairs = commitPairs;
     this.changesBetweenTwoCommitsProvider = changesBetweenTwoCommitsProvider;
     this.trackProgress = trackProgress;

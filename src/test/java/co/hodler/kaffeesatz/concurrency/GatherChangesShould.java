@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
@@ -28,7 +29,7 @@ public class GatherChangesShould {
   TrackProgress trackProgress;
   @Mock
   ProvideChangesBetweenTwoCommits provideChanges;
-  private List<String> changedFiles;
+  private List<ChangedFile> changedFiles;
   private GatherChanges gatherChanges;
 
   @Before
@@ -42,11 +43,11 @@ public class GatherChangesShould {
   @Test
   public void gather_changes() {
     given(provideChanges.fetchChangesBetween(firstPair()))
-        .willReturn(Sets.newSet("README.md"));
+        .willReturn(Sets.newSet(new ChangedFile("README.md")));
 
     gatherChanges.run();
 
-    assertThat(changedFiles, hasItem("README.md"));
+    assertThat(changedFiles, hasItem(new ChangedFile("README.md")));
   }
 
   @Test

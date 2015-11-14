@@ -21,6 +21,7 @@ import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
@@ -47,10 +48,10 @@ public class GitFetchChangedFilesShould {
     logHasFollowingCommitPairs(firstCommitPair());
     willHaveTwoChangedFiles(firstCommitPair());
 
-    List<String> filesChanged = changedFiles.fetchChangedFiles();
+    List<ChangedFile> filesChanged = changedFiles.fetchChangedFiles();
 
-    assertThat(filesChanged, hasItem(".gitignore"));
-    assertThat(filesChanged, hasItem("/src/main/java/App.java"));
+    assertThat(filesChanged, hasItem(new ChangedFile(".gitignore")));
+    assertThat(filesChanged, hasItem(new ChangedFile("/src/main/java/App.java")));
   }
 
   @Test
@@ -74,9 +75,9 @@ public class GitFetchChangedFilesShould {
   }
 
   private void willHaveTwoChangedFiles(LinkedCommitHashPair... pairs) {
-    Set<String> changes = new HashSet<>();
-    changes.add(".gitignore");
-    changes.add("/src/main/java/App.java");
+    Set<ChangedFile> changes = new HashSet<>();
+    changes.add(new ChangedFile(".gitignore"));
+    changes.add(new ChangedFile("/src/main/java/App.java"));
     Arrays.asList(pairs).stream()
       .forEach(pair -> given(changesForPairProvider.fetchChangesBetween(pair)).willReturn(changes));
   }

@@ -12,6 +12,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetweenTwoCommits {
@@ -23,7 +24,7 @@ public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetween
   }
 
   @Override
-  public Set<String> fetchChangesBetween(LinkedCommitHashPair commitPair) {
+  public Set<ChangedFile> fetchChangesBetween(LinkedCommitHashPair commitPair) {
     try {
       Repository repo = git.getRepository();
       ObjectId head = repo.resolve(commitPair.getUpperCommitHashValue() + "^{tree}");
@@ -39,8 +40,8 @@ public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetween
                               .setOldTree(oldTreeIter)
                               .call();
 
-      Set<String> fileChanges = new HashSet<>();
-      diffs.stream().forEach(diff -> fileChanges.add(diff.getNewPath()));
+      Set<ChangedFile> fileChanges = new HashSet<>();
+      diffs.stream().forEach(diff -> fileChanges.add(new ChangedFile(diff.getNewPath())));
       return fileChanges;
     } catch (Exception e) {
       throw new RuntimeException("Could not fetch changes between two commits", e);
