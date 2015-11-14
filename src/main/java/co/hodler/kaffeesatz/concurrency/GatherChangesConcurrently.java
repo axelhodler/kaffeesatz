@@ -1,7 +1,6 @@
 package co.hodler.kaffeesatz.concurrency;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
@@ -33,7 +32,7 @@ public class GatherChangesConcurrently {
     IntStream.range(0, groupsOfCommitPairs.size()).forEach(counter -> {
       List<ChangedFile> groupOfChangedFiles = createListToHoldChangedFiles();
       GatherChangesThread t = gatherChangesThreadFactory.createThreadTo(
-          gatherChangesFactory.createGatherChanges(new HashSet<>(),
+          gatherChangesFactory.createGatherChanges(groupsOfCommitPairs.get(counter),
               provideChangesBetweenTwoCommits, trackProgress,
               groupOfChangedFiles));
       t.startGathering();
@@ -42,6 +41,7 @@ public class GatherChangesConcurrently {
     });
 
     List<ChangedFile> allChangedFiles = new ArrayList<>();
+
     allGroups.stream().forEach(
         group -> allChangedFiles.addAll(group));
 

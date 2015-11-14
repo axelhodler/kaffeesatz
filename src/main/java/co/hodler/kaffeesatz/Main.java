@@ -10,6 +10,10 @@ import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
 import co.hodler.kaffeesatz.actions.git.GitRepo;
+import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
+import co.hodler.kaffeesatz.concurrency.GatherChangesFactory;
+import co.hodler.kaffeesatz.concurrency.GatherChangesThreadFactory;
+import co.hodler.kaffeesatz.concurrency.SplitPairsSetIntoEqualParts;
 import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.ui.TrackProgress;
 
@@ -28,9 +32,11 @@ public class Main {
 
   private static GitFetchChangedFiles findAllChangedFiles(Git git) {
     return new GitFetchChangedFiles(
-        findAllCommitPairs(git),
-        findAllChangesBetweenCommits(git),
-        trackProgressOnTerminal(git));
+        new SplitPairsSetIntoEqualParts(findAllCommitPairs(git)),
+        new GatherChangesConcurrently(findAllChangesBetweenCommits(git),
+            new GatherChangesThreadFactory(),
+            new GatherChangesFactory(),
+            trackProgressOnTerminal(git)));
   }
 
   private static TrackProgress trackProgressOnTerminal(Git git) {
