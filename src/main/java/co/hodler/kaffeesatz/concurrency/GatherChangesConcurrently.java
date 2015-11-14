@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
 
@@ -27,14 +28,28 @@ public class GatherChangesConcurrently {
     this.trackProgress = trackProgress;
   }
 
-  public void gather(List<Set<LinkedCommitHashPair>> groupsOfCommitPairs) {
+  public List<ChangedFile> gather(List<Set<LinkedCommitHashPair>> groupsOfCommitPairs) {
+    List<List<ChangedFile>> allGroups = new ArrayList<>();
     IntStream.range(0, groupsOfCommitPairs.size()).forEach(counter -> {
-      GatherChangesThread t = gatherChangesThreadFactory.createThreadTo(gatherChangesFactory
-          .createGatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
-              trackProgress, new ArrayList<>()));
+      List<ChangedFile> groupOfChangedFiles = createListToHoldChangedFiles();
+      GatherChangesThread t = gatherChangesThreadFactory.createThreadTo(
+          gatherChangesFactory.createGatherChanges(new HashSet<>(),
+              provideChangesBetweenTwoCommits, trackProgress,
+              groupOfChangedFiles));
       t.startGathering();
       t.waitToFinish();
+      allGroups.add(groupOfChangedFiles);
     });
+
+    List<ChangedFile> allChangedFiles = new ArrayList<>();
+    allGroups.stream().forEach(
+        group -> allChangedFiles.addAll(group));
+
+    return allChangedFiles;
+  }
+
+  protected List<ChangedFile> createListToHoldChangedFiles() {
+    return new ArrayList<>();
   }
 
 }

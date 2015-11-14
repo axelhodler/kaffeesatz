@@ -1,5 +1,8 @@
 package co.hodler.kaffeesatz.concurrency;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
 
@@ -39,14 +43,14 @@ public class GatherChangesConcurrentlyShould {
 
   @Before
   public void initialize() {
-    gatherChangesConcurrently = new GatherChangesConcurrently(
+    gatherChangesConcurrently = new TestableGatherChangesConcurrently(
         provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
         gatherChangesFactory, trackProgress);
 
     groupsOfCommitPairs = new ArrayList<>();
 
     given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>()))
+        provideChangesBetweenTwoCommits, trackProgress, changedFiles()))
             .willReturn(gatherChangesObject());
     // beware, a mock is returning a mock
     given(gatherChangesThreadFactory.createThreadTo(gatherChangesObject()))
@@ -60,7 +64,7 @@ public class GatherChangesConcurrentlyShould {
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesFactory).createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
+        provideChangesBetweenTwoCommits, trackProgress, changedFiles());
   }
 
   @Test
@@ -71,7 +75,7 @@ public class GatherChangesConcurrentlyShould {
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesFactory, times(2)).createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, new ArrayList<>());
+        provideChangesBetweenTwoCommits, trackProgress, changedFiles());
   }
 
   @Test
@@ -102,8 +106,42 @@ public class GatherChangesConcurrentlyShould {
     verify(gatherChangesThread).waitToFinish();
   }
 
+  @Test
+  public void returns_changed_files() {
+    groupsOfCommitPairs.add(new HashSet<>());
+
+    List<ChangedFile> changes = gatherChangesConcurrently
+        .gather(groupsOfCommitPairs);
+
+    assertThat(changes, hasItem(new ChangedFile("README.md")));
+    assertThat(changes.size(), is(1));
+  }
+
+  public class TestableGatherChangesConcurrently extends GatherChangesConcurrently {
+
+    public TestableGatherChangesConcurrently(
+        ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits,
+        GatherChangesThreadFactory gatherChangesThreadFactory,
+        GatherChangesFactory gatherChangesFactory,
+        TrackProgress trackProgress) {
+      super(provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
+          gatherChangesFactory, trackProgress);
+    }
+
+    @Override
+    protected List<ChangedFile> createListToHoldChangedFiles() {
+      return changedFiles();
+    }
+  }
+
+  private List<ChangedFile> changedFiles() {
+    List<ChangedFile> changedFiles = new ArrayList<>();
+    changedFiles.add(new ChangedFile("README.md"));
+    return changedFiles;
+  }
+
   private GatherChanges gatherChangesObject() {
     return new GatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
-        trackProgress, new ArrayList<>());
+        trackProgress, changedFiles());
   }
 }
