@@ -26,6 +26,11 @@ public class SplitPairsSetIntoEqualParts {
         findLinkedCommitPairs.providePairs().stream()
         .collect(Collectors.groupingBy(pair -> nextKey(amount)));
 
+    return toSet(amount, groups);
+  }
+
+  private List<Set<LinkedCommitHashPair>> toSet(int amount,
+      Map<Object, List<LinkedCommitHashPair>> groups) {
     List<Set<LinkedCommitHashPair>> splitPairs = new ArrayList<>();
     IntStream.rangeClosed(1, amount)
       .forEach(key -> {
@@ -33,7 +38,6 @@ public class SplitPairsSetIntoEqualParts {
         pairSet.addAll(groups.get(key));
         splitPairs.add(pairSet);
       });
-
     return splitPairs;
   }
 
