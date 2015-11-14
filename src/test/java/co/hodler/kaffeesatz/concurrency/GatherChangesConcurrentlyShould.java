@@ -93,6 +93,15 @@ public class GatherChangesConcurrentlyShould {
     verify(gatherChangesThread).startGathering();
   }
 
+  @Test
+  public void wait_for_created_threads_to_finish() {
+    groupsOfCommitPairs.add(new HashSet<>());
+
+    gatherChangesConcurrently.gather(groupsOfCommitPairs);
+
+    verify(gatherChangesThread).waitToFinish();
+  }
+
   private GatherChanges gatherChangesObject() {
     return new GatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
         trackProgress, new ArrayList<>());

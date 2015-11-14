@@ -33,6 +33,7 @@ public class GatherChangesConcurrently {
           .createGatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
               trackProgress, new ArrayList<>()));
       t.startGathering();
+      t.waitToFinish();
     });
   }
 
