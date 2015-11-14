@@ -32,4 +32,52 @@ public class GatherChanges implements Runnable {
     });
   }
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result
+        + ((changedFiles == null) ? 0 : changedFiles.hashCode());
+    result = prime * result + ((changesBetweenTwoCommitsProvider == null) ? 0
+        : changesBetweenTwoCommitsProvider.hashCode());
+    result = prime * result
+        + ((commitPairs == null) ? 0 : commitPairs.hashCode());
+    result = prime * result
+        + ((trackProgress == null) ? 0 : trackProgress.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GatherChanges other = (GatherChanges) obj;
+    if (changedFiles == null) {
+      if (other.changedFiles != null)
+        return false;
+    } else if (!changedFiles.equals(other.changedFiles))
+      return false;
+    if (changesBetweenTwoCommitsProvider == null) {
+      if (other.changesBetweenTwoCommitsProvider != null)
+        return false;
+    } else if (!changesBetweenTwoCommitsProvider
+        .equals(other.changesBetweenTwoCommitsProvider))
+      return false;
+    if (commitPairs == null) {
+      if (other.commitPairs != null)
+        return false;
+    } else if (!commitPairs.equals(other.commitPairs))
+      return false;
+    if (trackProgress == null) {
+      if (other.trackProgress != null)
+        return false;
+    } else if (!trackProgress.equals(other.trackProgress))
+      return false;
+    return true;
+  }
+
 }
