@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -30,11 +31,15 @@ public class GatherChangesConcurrentlyShould {
 
   private GatherChangesConcurrently gatherChangesConcurrently;
 
-  @Test
-  public void create_threads_to_gather_changes() {
+  @Before
+  public void initialize() {
     gatherChangesConcurrently = new GatherChangesConcurrently(
         provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
         gatherChangesFactory, trackProgress);
+  }
+
+  @Test
+  public void create_gatherchanges() {
     List<Set<LinkedCommitHashPair>> groupsOfCommitPairs = new ArrayList<>();
     groupsOfCommitPairs.add(new HashSet<>());
 
