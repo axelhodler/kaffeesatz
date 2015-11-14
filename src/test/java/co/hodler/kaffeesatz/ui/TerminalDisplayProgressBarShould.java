@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz;
+package co.hodler.kaffeesatz.ui;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,6 +9,8 @@ import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 
 public class TerminalDisplayProgressBarShould {
 

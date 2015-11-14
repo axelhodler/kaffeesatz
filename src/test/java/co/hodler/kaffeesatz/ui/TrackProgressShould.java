@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz;
+package co.hodler.kaffeesatz.ui;
 
 import static org.mockito.Mockito.verify;
 
@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import co.hodler.kaffeesatz.ui.DisplayProgressBar;
+import co.hodler.kaffeesatz.ui.TrackProgress;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrackProgressShould {

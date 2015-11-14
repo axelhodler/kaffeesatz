@@ -1,4 +1,4 @@
-package co.hodler.kaffeesatz;
+package co.hodler.kaffeesatz.ui;
 
 public class TerminalDisplayProgressBar implements DisplayProgressBar {
 

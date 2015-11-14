@@ -3,10 +3,10 @@ package co.hodler.kaffeesatz.concurrency;
 import java.util.List;
 import java.util.Set;
 
-import co.hodler.kaffeesatz.TrackProgress;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
+import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class GatherChanges implements Runnable {
 

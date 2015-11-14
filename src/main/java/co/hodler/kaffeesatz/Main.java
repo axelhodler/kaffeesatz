@@ -10,6 +10,8 @@ import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
 import co.hodler.kaffeesatz.actions.git.GitRepo;
+import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
+import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class Main {
 
