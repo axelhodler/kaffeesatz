@@ -37,13 +37,13 @@ public class GitFetchChangedFilesShould {
   private FetchChangedFiles changedFiles;
 
   @Before
-  public void setUp() {
+  public void initialize() {
     changedFiles = new GitFetchChangedFiles(commitPairProvider,
         changesForPairProvider, trackProgress);
   }
 
   @Test
-  public void provideAllChangedFiles() {
+  public void provide_all_changed_files() {
     logHasFollowingCommitPairs(firstCommitPair());
     willHaveTwoChangedFiles(firstCommitPair());
 
@@ -54,7 +54,7 @@ public class GitFetchChangedFilesShould {
   }
 
   @Test
-  public void trackProgressForEveryCommitPairOnePair() {
+  public void track_progress_for_every_pair_using_one_pair() {
     logHasFollowingCommitPairs(firstCommitPair());
     willHaveTwoChangedFiles(firstCommitPair());
 
@@ -64,7 +64,7 @@ public class GitFetchChangedFilesShould {
   }
 
   @Test
-  public void trackProgressForEveryCommitPairUsingTwoPairs() {
+  public void track_pogress_for_every_pair_using_two_pairs() {
     logHasFollowingCommitPairs(firstCommitPair(), secondCommitPair());
     willHaveTwoChangedFiles(firstCommitPair(), secondCommitPair());
 

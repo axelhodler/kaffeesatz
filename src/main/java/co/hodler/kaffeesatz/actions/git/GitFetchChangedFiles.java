@@ -33,5 +33,4 @@ public class GitFetchChangedFiles implements FetchChangedFiles {
 
     return changedFiles;
   }
-
 }
