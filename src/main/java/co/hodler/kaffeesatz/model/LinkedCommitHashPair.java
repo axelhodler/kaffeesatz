@@ -19,36 +19,22 @@ public class LinkedCommitHashPair {
   }
 
   @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result
-        + ((lowerCommitHash == null) ? 0 : lowerCommitHash.hashCode());
-    result = prime * result
-        + ((upperCommitHash == null) ? 0 : upperCommitHash.hashCode());
-    return result;
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LinkedCommitHashPair that = (LinkedCommitHashPair) o;
+
+    if (upperCommitHash != null ? !upperCommitHash.equals(that.upperCommitHash) : that.upperCommitHash != null)
+      return false;
+    return !(lowerCommitHash != null ? !lowerCommitHash.equals(that.lowerCommitHash) : that.lowerCommitHash != null);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    LinkedCommitHashPair other = (LinkedCommitHashPair) obj;
-    if (lowerCommitHash == null) {
-      if (other.lowerCommitHash != null)
-        return false;
-    } else if (!lowerCommitHash.equals(other.lowerCommitHash))
-      return false;
-    if (upperCommitHash == null) {
-      if (other.upperCommitHash != null)
-        return false;
-    } else if (!upperCommitHash.equals(other.upperCommitHash))
-      return false;
-    return true;
+  public int hashCode() {
+    int result = upperCommitHash != null ? upperCommitHash.hashCode() : 0;
+    result = 31 * result + (lowerCommitHash != null ? lowerCommitHash.hashCode() : 0);
+    return result;
   }
 
   @Override

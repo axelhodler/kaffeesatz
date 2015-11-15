@@ -16,28 +16,18 @@ public class CommitHash {
   }
 
   @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((hashValue == null) ? 0 : hashValue.hashCode());
-    return result;
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    CommitHash that = (CommitHash) o;
+
+    return !(hashValue != null ? !hashValue.equals(that.hashValue) : that.hashValue != null);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    CommitHash other = (CommitHash) obj;
-    if (hashValue == null) {
-      if (other.hashValue != null)
-        return false;
-    } else if (!hashValue.equals(other.hashValue))
-      return false;
-    return true;
+  public int hashCode() {
+    return hashValue != null ? hashValue.hashCode() : 0;
   }
 
   @Override

@@ -13,28 +13,17 @@ public class ChangedFile {
   }
 
   @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((file == null) ? 0 : file.hashCode());
-    return result;
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ChangedFile that = (ChangedFile) o;
+
+    return !(file != null ? !file.equals(that.file) : that.file != null);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ChangedFile other = (ChangedFile) obj;
-    if (file == null) {
-      if (other.file != null)
-        return false;
-    } else if (!file.equals(other.file))
-      return false;
-    return true;
+  public int hashCode() {
+    return file != null ? file.hashCode() : 0;
   }
-
 }
