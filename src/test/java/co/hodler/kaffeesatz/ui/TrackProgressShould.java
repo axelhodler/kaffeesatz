@@ -1,5 +1,6 @@
 package co.hodler.kaffeesatz.ui;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
@@ -7,20 +8,22 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.ui.DisplayProgressBar;
-import co.hodler.kaffeesatz.ui.TrackProgress;
+import co.hodler.kaffeesatz.actions.CommitCount;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrackProgressShould {
 
   @Mock
   DisplayProgressBar displayProgressBar;
+  @Mock
+  CommitCount commitCount;
 
   private TestableTrackProgress trackProgress;
 
   @Test
   public void triggerBeginningDisplayOnFirstCall() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 0);
+    given(commitCount.value()).willReturn(0);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
 
     trackProgress.track();
 
@@ -29,7 +32,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTenPercentMarkAs10PercentOfTheCommitsIsReached() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
 
     trackProgress.track();
 
@@ -38,7 +42,8 @@ public class TrackProgressShould {
 
   @Test
   public void thrityPercentMarkIsReachedOnSixthCommitOfTwenty() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 20);
+    given(commitCount.value()).willReturn(20);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 5;
 
     trackProgress.track();
@@ -48,7 +53,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerFullProgressMarkAsTheLastCommitIsReached() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 1);
+    given(commitCount.value()).willReturn(1);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
 
     trackProgress.track();
 
@@ -57,7 +63,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTwentyPercentAsTwentyPercentOfCommitsIsReached() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -67,7 +74,8 @@ public class TrackProgressShould {
 
   @Test
   public void tenPercentIsTwoCommitsOutOf20() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 20);
+    given(commitCount.value()).willReturn(20);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -77,7 +85,8 @@ public class TrackProgressShould {
 
   @Test
   public void thirtyPercentOfTenCommitsIsThreeCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 2;
 
     trackProgress.track();
@@ -87,7 +96,8 @@ public class TrackProgressShould {
 
   @Test
   public void thirtyPercentOfFifteenCommitsIsFiveCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 15);
+    given(commitCount.value()).willReturn(15);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 4;
 
     trackProgress.track();
@@ -97,7 +107,8 @@ public class TrackProgressShould {
 
   @Test
   public void twentyPercentOfSeventeenCommitsIsThreeCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 17);
+    given(commitCount.value()).willReturn(17);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 2;
 
     trackProgress.track();
@@ -107,7 +118,8 @@ public class TrackProgressShould {
 
   @Test
   public void fourtyPercentOfTenCommitsIsFourCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 3;
 
     trackProgress.track();
@@ -117,7 +129,8 @@ public class TrackProgressShould {
 
   @Test
   public void fiftyPercentOfTenCommitsIsFiveCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 4;
 
     trackProgress.track();
@@ -127,7 +140,8 @@ public class TrackProgressShould {
 
   @Test
   public void sixtyPercentOfTenCommitsIsSixCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 5;
 
     trackProgress.track();
@@ -137,7 +151,8 @@ public class TrackProgressShould {
 
   @Test
   public void seventyPercentOfTenCommitsIsSevenCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 6;
 
     trackProgress.track();
@@ -147,7 +162,8 @@ public class TrackProgressShould {
 
   @Test
   public void eightyPercentOfTenCommitsIsSevenCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 7;
 
     trackProgress.track();
@@ -157,7 +173,8 @@ public class TrackProgressShould {
 
   @Test
   public void ninetyPercentOfTenCommitsIsSevenCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 10);
+    given(commitCount.value()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 8;
 
     trackProgress.track();
@@ -167,7 +184,8 @@ public class TrackProgressShould {
 
   @Test
   public void tenPercentOfFifteenIsTwoCommits() {
-    trackProgress = new TestableTrackProgress(displayProgressBar, 15);
+    given(commitCount.value()).willReturn(15);
+    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -180,8 +198,8 @@ public class TrackProgressShould {
     public int timesTracked = 0;
 
     public TestableTrackProgress(DisplayProgressBar displayProgressBar,
-        int commitAmount) {
-      super(displayProgressBar, commitAmount);
+        CommitCount commitCount) {
+      super(displayProgressBar, commitCount);
     }
 
     @Override

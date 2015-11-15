@@ -51,6 +51,6 @@ public class Main {
   }
 
   private static TrackProgress trackProgressOnTerminal(Git git) {
-    return new TrackProgress(new TerminalDisplayProgressBar(), commitCounter.value());
+    return new TrackProgress(new TerminalDisplayProgressBar(), commitCounter);
   }
 }

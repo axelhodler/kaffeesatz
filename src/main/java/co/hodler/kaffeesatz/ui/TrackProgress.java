@@ -1,14 +1,16 @@
 package co.hodler.kaffeesatz.ui;
 
+import co.hodler.kaffeesatz.actions.CommitCount;
+
 public class TrackProgress {
 
   private DisplayProgressBar displayProgressBar;
   private int commitAmount;
   private int commitCounter;
 
-  public TrackProgress(DisplayProgressBar displayProgressBar, int commitAmount) {
+  public TrackProgress(DisplayProgressBar displayProgressBar, CommitCount counter) {
     this.displayProgressBar = displayProgressBar;
-    this.commitAmount = commitAmount;
+    this.commitAmount = counter.value();
   }
 
   public void track() {
