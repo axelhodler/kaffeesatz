@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.inject.Inject;
+
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
@@ -17,6 +19,7 @@ public class SplitPairsSetIntoEqualParts {
   private FindLinkedCommitPairs findLinkedCommitPairs;
   private int counter = 1;
 
+  @Inject
   public SplitPairsSetIntoEqualParts(FindLinkedCommitPairs findLinkedCommitPairs) {
     this.findLinkedCommitPairs = findLinkedCommitPairs;
   }
