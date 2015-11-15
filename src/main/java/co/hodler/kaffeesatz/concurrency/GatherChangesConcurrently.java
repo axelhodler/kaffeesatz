@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import javax.inject.Inject;
+
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
@@ -17,6 +19,7 @@ public class GatherChangesConcurrently {
   private TrackProgress trackProgress;
   private ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
 
+  @Inject
   public GatherChangesConcurrently(
       ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits,
       GatherChangesThreadFactory gatherChangesThreadFactory,
