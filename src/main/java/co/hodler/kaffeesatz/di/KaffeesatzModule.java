@@ -12,6 +12,8 @@ import co.hodler.kaffeesatz.actions.git.GitCommitCount;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
+import co.hodler.kaffeesatz.ui.DisplayProgressBar;
+import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 
 public class KaffeesatzModule extends AbstractModule {
 
@@ -31,6 +33,8 @@ public class KaffeesatzModule extends AbstractModule {
     bind(CommitCount.class).to(GitCommitCount.class);
 
     bind(ProvideChangesBetweenTwoCommits.class).to(GitProvideChangesBetweenTwoCommits.class);
+
+    bind(DisplayProgressBar.class).to(TerminalDisplayProgressBar.class);
   }
 
 }

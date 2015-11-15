@@ -16,7 +16,6 @@ import co.hodler.kaffeesatz.concurrency.GatherChangesFactory;
 import co.hodler.kaffeesatz.concurrency.GatherChangesThreadFactory;
 import co.hodler.kaffeesatz.concurrency.SplitPairsSetIntoEqualParts;
 import co.hodler.kaffeesatz.di.KaffeesatzModule;
-import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class Main {
@@ -24,6 +23,7 @@ public class Main {
   private static SplitPairsSetIntoEqualParts logSplitter;
   private static CommitCount commitCounter;
   private static ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
+  private static TrackProgress trackProgress;
 
   public static void main(String[] args) throws Exception {
     GitRepo gitRepo = new GitRepo();
@@ -32,6 +32,7 @@ public class Main {
     logSplitter = injector.getInstance(SplitPairsSetIntoEqualParts.class);
     commitCounter = injector.getInstance(CommitCount.class);
     provideChangesBetweenTwoCommits = injector.getInstance(ProvideChangesBetweenTwoCommits.class);
+    trackProgress = injector.getInstance(TrackProgress.class);
 
     FileChangeChart fileChangeChart =
         new FileChangeChart(findAllChangedFiles(git));
@@ -47,10 +48,6 @@ public class Main {
         new GatherChangesConcurrently(provideChangesBetweenTwoCommits,
             new GatherChangesThreadFactory(),
             new GatherChangesFactory(),
-            trackProgressOnTerminal(git)));
-  }
-
-  private static TrackProgress trackProgressOnTerminal(Git git) {
-    return new TrackProgress(new TerminalDisplayProgressBar(), commitCounter);
+            trackProgress));
   }
 }
