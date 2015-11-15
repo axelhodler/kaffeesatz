@@ -7,10 +7,9 @@ import org.eclipse.jgit.api.Git;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import co.hodler.kaffeesatz.actions.ProvideLog;
+import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitCommitCount;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
-import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitRepo;
 import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
@@ -23,13 +22,13 @@ import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class Main {
 
-  private static ProvideLog provideLog;
+  private static FindLinkedCommitPairs findLinkedCommitPairs;
 
   public static void main(String[] args) throws Exception {
     GitRepo gitRepo = new GitRepo();
     Git git = gitRepo.byFilePath(args[0]);
     Injector injector = Guice.createInjector(new KaffeesatzModule(git));
-    provideLog = injector.getInstance(ProvideLog.class);
+    findLinkedCommitPairs = injector.getInstance(FindLinkedCommitPairs.class);
 
     FileChangeChart fileChangeChart =
         new FileChangeChart(findAllChangedFiles(git));
@@ -41,7 +40,7 @@ public class Main {
 
   private static GitFetchChangedFiles findAllChangedFiles(Git git) {
     return new GitFetchChangedFiles(
-        new SplitPairsSetIntoEqualParts(findAllCommitPairs(git)),
+        new SplitPairsSetIntoEqualParts(findLinkedCommitPairs),
         new GatherChangesConcurrently(findAllChangesBetweenCommits(git),
             new GatherChangesThreadFactory(),
             new GatherChangesFactory(),
@@ -56,9 +55,5 @@ public class Main {
   private static GitProvideChangesBetweenTwoCommits findAllChangesBetweenCommits(
       Git git) {
     return new GitProvideChangesBetweenTwoCommits(git);
-  }
-
-  private static GitFindLinkedCommitPairs findAllCommitPairs(Git git) {
-    return new GitFindLinkedCommitPairs(provideLog);
   }
 }

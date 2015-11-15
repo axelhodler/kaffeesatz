@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffeesatz.model.CommitHash;
@@ -13,6 +15,7 @@ public class GitFindLinkedCommitPairs implements FindLinkedCommitPairs {
 
   private ProvideLog provideLog;
 
+  @Inject
   public GitFindLinkedCommitPairs(ProvideLog provideLog) {
     this.provideLog = provideLog;
   }
