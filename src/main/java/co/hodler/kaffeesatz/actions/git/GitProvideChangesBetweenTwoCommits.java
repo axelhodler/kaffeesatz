@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.lib.ObjectId;
@@ -19,6 +21,7 @@ public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetween
 
   private Git git;
 
+  @Inject
   public GitProvideChangesBetweenTwoCommits(Git git) {
     this.git = git;
   }

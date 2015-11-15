@@ -8,8 +8,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import co.hodler.kaffeesatz.actions.CommitCount;
+import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
-import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitRepo;
 import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
 import co.hodler.kaffeesatz.concurrency.GatherChangesFactory;
@@ -23,6 +23,7 @@ public class Main {
 
   private static SplitPairsSetIntoEqualParts logSplitter;
   private static CommitCount commitCounter;
+  private static ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
 
   public static void main(String[] args) throws Exception {
     GitRepo gitRepo = new GitRepo();
@@ -30,6 +31,7 @@ public class Main {
     Injector injector = Guice.createInjector(new KaffeesatzModule(git));
     logSplitter = injector.getInstance(SplitPairsSetIntoEqualParts.class);
     commitCounter = injector.getInstance(CommitCount.class);
+    provideChangesBetweenTwoCommits = injector.getInstance(ProvideChangesBetweenTwoCommits.class);
 
     FileChangeChart fileChangeChart =
         new FileChangeChart(findAllChangedFiles(git));
@@ -42,7 +44,7 @@ public class Main {
   private static GitFetchChangedFiles findAllChangedFiles(Git git) {
     return new GitFetchChangedFiles(
         logSplitter,
-        new GatherChangesConcurrently(findAllChangesBetweenCommits(git),
+        new GatherChangesConcurrently(provideChangesBetweenTwoCommits,
             new GatherChangesThreadFactory(),
             new GatherChangesFactory(),
             trackProgressOnTerminal(git)));
@@ -50,10 +52,5 @@ public class Main {
 
   private static TrackProgress trackProgressOnTerminal(Git git) {
     return new TrackProgress(new TerminalDisplayProgressBar(), commitCounter.value());
-  }
-
-  private static GitProvideChangesBetweenTwoCommits findAllChangesBetweenCommits(
-      Git git) {
-    return new GitProvideChangesBetweenTwoCommits(git);
   }
 }
