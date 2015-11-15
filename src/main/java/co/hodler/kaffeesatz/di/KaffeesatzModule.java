@@ -5,10 +5,12 @@ import org.eclipse.jgit.api.Git;
 import com.google.inject.AbstractModule;
 
 import co.hodler.kaffeesatz.actions.CommitCount;
+import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffeesatz.actions.git.GitCommitCount;
+import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
@@ -35,6 +37,8 @@ public class KaffeesatzModule extends AbstractModule {
     bind(ProvideChangesBetweenTwoCommits.class).to(GitProvideChangesBetweenTwoCommits.class);
 
     bind(DisplayProgressBar.class).to(TerminalDisplayProgressBar.class);
+
+    bind(FetchChangedFiles.class).to(GitFetchChangedFiles.class);
   }
 
 }
