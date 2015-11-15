@@ -3,6 +3,8 @@ package co.hodler.kaffeesatz.actions.git;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.revwalk.RevCommit;
 
@@ -13,6 +15,7 @@ public class GitProvideLogHashes implements ProvideLog {
 
   private Git git;
 
+  @Inject
   public GitProvideLogHashes(Git git) {
     this.git = git;
   }

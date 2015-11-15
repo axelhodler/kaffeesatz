@@ -4,26 +4,35 @@ import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import co.hodler.kaffeesatz.actions.ProvideLog;
 import co.hodler.kaffeesatz.actions.git.GitCommitCount;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
-import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
 import co.hodler.kaffeesatz.actions.git.GitRepo;
 import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
 import co.hodler.kaffeesatz.concurrency.GatherChangesFactory;
 import co.hodler.kaffeesatz.concurrency.GatherChangesThreadFactory;
 import co.hodler.kaffeesatz.concurrency.SplitPairsSetIntoEqualParts;
+import co.hodler.kaffeesatz.di.KaffeesatzModule;
 import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.ui.TrackProgress;
 
 public class Main {
 
+  private static ProvideLog provideLog;
+
   public static void main(String[] args) throws Exception {
     GitRepo gitRepo = new GitRepo();
+    Git git = gitRepo.byFilePath(args[0]);
+    Injector injector = Guice.createInjector(new KaffeesatzModule(git));
+    provideLog = injector.getInstance(ProvideLog.class);
 
     FileChangeChart fileChangeChart =
-        new FileChangeChart(findAllChangedFiles(gitRepo.byFilePath(args[0])));
+        new FileChangeChart(findAllChangedFiles(git));
 
     Map<String, Integer> changedFilesChart = fileChangeChart.createTop(30);
     changedFilesChart.keySet().stream().forEach(
@@ -50,6 +59,6 @@ public class Main {
   }
 
   private static GitFindLinkedCommitPairs findAllCommitPairs(Git git) {
-    return new GitFindLinkedCommitPairs(new GitProvideLogHashes(git));
+    return new GitFindLinkedCommitPairs(provideLog);
   }
 }
