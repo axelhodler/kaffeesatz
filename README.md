@@ -1,4 +1,4 @@
-# Kaffeesatz [![Build Status](https://travis-ci.org/axelhodler/kaffeesatz.svg)](https://travis-ci.org/axelhodler/kaffeesatz) [![Coverage Status](https://coveralls.io/repos/axelhodler/kaffeesatz/badge.svg?branch=master&service=github)](https://coveralls.io/github/axelhodler/kaffeesatz?branch=master)
+# Kaffeesatz [![Build Status](https://travis-ci.org/axelhodler/kaffeesatz.svg)](https://travis-ci.org/axelhodler/kaffeesatz) [![Coverage Status](https://img.shields.io/coveralls/axelhodler/kaffeesatz.svg)](https://coveralls.io/github/axelhodler/kaffeesatz)
 Offers some stats to a git repo
 
 ## Usage
