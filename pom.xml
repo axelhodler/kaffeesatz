@@ -18,6 +18,9 @@
     <hamcrest.version>1.3</hamcrest.version>
     <mockito.version>1.10.19</mockito.version>
 
+    <failsafe.plugin.version>2.19</failsafe.plugin.version>
+    <surefire.plugin.version>2.19</surefire.plugin.version>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -67,7 +70,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.18.1</version>
+        <version>${surefire.plugin.version}</version>
         <configuration>
           <includes>
             <include>**/*Should.*</include>
@@ -78,7 +81,7 @@
         <!-- run the integration tests -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.18.1</version>
+        <version>${failsafe.plugin.version}</version>
         <executions>
           <execution>
             <goals>
