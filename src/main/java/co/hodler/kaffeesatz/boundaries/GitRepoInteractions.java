@@ -6,7 +6,7 @@ import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 import java.util.Set;
 
-public interface GitFunctionality {
+public interface GitRepoInteractions {
   void initFunctionality(String path);
 
   Set<CommitHash> provideOrderedLogOfCommitHashes();
