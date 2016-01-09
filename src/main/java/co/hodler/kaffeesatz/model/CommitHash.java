@@ -1,6 +1,6 @@
 package co.hodler.kaffeesatz.model;
 
-public class CommitHash {
+public final class CommitHash {
 
   private String hashValue;
 
