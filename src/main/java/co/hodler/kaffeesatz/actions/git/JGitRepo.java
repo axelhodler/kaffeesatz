@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.eclipse.jgit.api.Git;
 
-public class GitRepo {
+public class JGitRepo {
 
   public Git byFilePath(String path) {
     File gitWorkDir = new File(path);

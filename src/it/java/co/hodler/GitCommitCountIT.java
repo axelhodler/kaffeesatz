@@ -8,7 +8,7 @@ import java.io.File;
 import org.eclipse.jgit.api.Git;
 import org.junit.Test;
 
-import co.hodler.kaffeesatz.actions.git.GitCommitCount;
+import co.hodler.kaffeesatz.actions.git.JGitCommitCount;
 
 public class GitCommitCountIT {
 
@@ -19,7 +19,7 @@ public class GitCommitCountIT {
     File gitWorkDir = new File(System.getenv("REPO_DIR").toString());
     Git git = Git.open(gitWorkDir);
 
-    GitCommitCount commitCount = new GitCommitCount(git);
+    JGitCommitCount commitCount = new JGitCommitCount(git);
 
     assertThat(commitCount.value(), greaterThanOrEqualTo(COMMIT_COUNT_WHEN_WRITING_THIS_TEST));
   }

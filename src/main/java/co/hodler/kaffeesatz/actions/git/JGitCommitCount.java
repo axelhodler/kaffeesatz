@@ -8,12 +8,12 @@ import org.eclipse.jgit.api.Git;
 
 import co.hodler.kaffeesatz.actions.CommitCount;
 
-public class GitCommitCount implements CommitCount {
+public class JGitCommitCount implements CommitCount {
 
   private Git git;
 
   @Inject
-  public GitCommitCount(Git git) {
+  public JGitCommitCount(Git git) {
     this.git = git;
   }
 

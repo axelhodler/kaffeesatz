@@ -9,7 +9,7 @@ import java.util.Set;
 import org.eclipse.jgit.api.Git;
 import org.junit.Test;
 
-import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.actions.git.JGitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
@@ -21,7 +21,7 @@ public class ProvideChangesBetweenTwoGitCommitsIT {
     File gitWorkDir = new File(System.getenv("REPO_DIR").toString());
     Git git = Git.open(gitWorkDir);
 
-    GitProvideChangesBetweenTwoCommits provideChanges = new GitProvideChangesBetweenTwoCommits(git);
+    JGitProvideChangesBetweenTwoCommits provideChanges = new JGitProvideChangesBetweenTwoCommits(git);
     Set<ChangedFile> changedFiles = provideChanges.fetchChangesBetween(
         new LinkedCommitHashPair(
             new CommitHash("1ab34bcc4b4e891577bdcd8254cccc6742955f51"),

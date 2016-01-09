@@ -17,12 +17,12 @@ import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
-public class GitProvideChangesBetweenTwoCommits implements ProvideChangesBetweenTwoCommits {
+public class JGitProvideChangesBetweenTwoCommits implements ProvideChangesBetweenTwoCommits {
 
   private Git git;
 
   @Inject
-  public GitProvideChangesBetweenTwoCommits(Git git) {
+  public JGitProvideChangesBetweenTwoCommits(Git git) {
     this.git = git;
   }
 
