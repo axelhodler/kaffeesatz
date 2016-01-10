@@ -1,6 +1,6 @@
 package co.hodler.kaffeesatz.model;
 
-public class LinkedCommitHashPair {
+public final class LinkedCommitHashPair {
 
   private CommitHash upperCommitHash;
   private CommitHash lowerCommitHash;

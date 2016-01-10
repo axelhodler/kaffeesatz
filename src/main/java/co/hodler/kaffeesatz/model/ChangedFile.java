@@ -1,6 +1,6 @@
 package co.hodler.kaffeesatz.model;
 
-public class ChangedFile {
+public final class ChangedFile {
 
   private String file;
 

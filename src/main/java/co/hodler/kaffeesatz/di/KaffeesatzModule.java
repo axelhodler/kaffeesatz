@@ -1,40 +1,30 @@
 package co.hodler.kaffeesatz.di;
 
-import org.eclipse.jgit.api.Git;
-
-import com.google.inject.AbstractModule;
-
-import co.hodler.kaffeesatz.actions.CommitCount;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
-import co.hodler.kaffeesatz.actions.ProvideLog;
-import co.hodler.kaffeesatz.actions.git.GitCommitCount;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
-import co.hodler.kaffeesatz.actions.git.GitProvideChangesBetweenTwoCommits;
-import co.hodler.kaffeesatz.actions.git.GitProvideLogHashes;
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
+import co.hodler.kaffeesatz.boundaries.JGitRepoInteraction;
 import co.hodler.kaffeesatz.ui.DisplayProgressBar;
 import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
+import com.google.inject.AbstractModule;
 
 public class KaffeesatzModule extends AbstractModule {
 
-  private Git git;
+  private String gitRepoPath;
 
-  public KaffeesatzModule(Git git) {
-    this.git = git;
+  public KaffeesatzModule(String gitRepoPath) {
+    this.gitRepoPath = gitRepoPath;
   }
 
   @Override
   protected void configure() {
-    bind(Git.class).toInstance(git);
+    JGitRepoInteraction gitRepoInteraction = new JGitRepoInteraction();
+    gitRepoInteraction.initFunctionality(gitRepoPath);
+    bind(GitRepoInteractions.class).toInstance(gitRepoInteraction);
 
-    bind(ProvideLog.class).to(GitProvideLogHashes.class);
     bind(FindLinkedCommitPairs.class).to(GitFindLinkedCommitPairs.class);
-
-    bind(CommitCount.class).to(GitCommitCount.class);
-
-    bind(ProvideChangesBetweenTwoCommits.class).to(GitProvideChangesBetweenTwoCommits.class);
 
     bind(DisplayProgressBar.class).to(TerminalDisplayProgressBar.class);
 

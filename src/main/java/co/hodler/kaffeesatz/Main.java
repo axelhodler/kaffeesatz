@@ -7,16 +7,14 @@ import org.eclipse.jgit.api.Git;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import co.hodler.kaffeesatz.actions.git.GitRepo;
 import co.hodler.kaffeesatz.di.KaffeesatzModule;
 
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    GitRepo gitRepo = new GitRepo();
-    Git git = gitRepo.byFilePath(args[0]);
+    String gitRepoPath = args[0];
 
-    Injector injector = Guice.createInjector(new KaffeesatzModule(git));
+    Injector injector = Guice.createInjector(new KaffeesatzModule(gitRepoPath));
     FileChangeChart fileChangeChart = injector.getInstance(FileChangeChart.class);
 
     Map<String, Integer> changedFilesChart = fileChangeChart.createTop(30);

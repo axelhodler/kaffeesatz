@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import javax.inject.Inject;
 
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
@@ -17,14 +17,14 @@ public class GatherChangesConcurrently {
   private GatherChangesThreadFactory gatherChangesThreadFactory;
   private GatherChangesFactory gatherChangesFactory;
   private TrackProgress trackProgress;
-  private ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
+  private GitRepoInteractions gitRepoInteractions;
 
   @Inject
   public GatherChangesConcurrently(
-      ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits,
+          GitRepoInteractions provideChangesBetweenTwoCommits,
       GatherChangesThreadFactory gatherChangesThreadFactory,
       GatherChangesFactory gatherChangesFactory, TrackProgress trackProgress) {
-    this.provideChangesBetweenTwoCommits = provideChangesBetweenTwoCommits;
+    this.gitRepoInteractions = provideChangesBetweenTwoCommits;
     this.gatherChangesThreadFactory = gatherChangesThreadFactory;
     this.gatherChangesFactory = gatherChangesFactory;
     this.trackProgress = trackProgress;
@@ -36,7 +36,7 @@ public class GatherChangesConcurrently {
       List<ChangedFile> groupOfChangedFiles = createListToHoldChangedFiles();
       GatherChangesThread t = gatherChangesThreadFactory.createThreadTo(
           gatherChangesFactory.createGatherChanges(groupsOfCommitPairs.get(counter),
-              provideChangesBetweenTwoCommits, trackProgress,
+                  gitRepoInteractions, trackProgress,
               groupOfChangedFiles));
       t.startGathering();
       t.waitToFinish();
