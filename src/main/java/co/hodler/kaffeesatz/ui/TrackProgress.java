@@ -24,23 +24,23 @@ public class TrackProgress {
 
     if (commitCounter == commitAmount)
       displayProgressBar.withPercentageDone(new Progress(100));
-    else if (percentageReached(0.1))
+    else if (percentageReached(new Progress(10)))
       displayProgressBar.withPercentageDone(new Progress(10));
-    else if (percentageReached(0.2))
+    else if (percentageReached(new Progress(20)))
       displayProgressBar.withPercentageDone(new Progress(20));
-    else if (percentageReached(0.3))
+    else if (percentageReached(new Progress(30)))
       displayProgressBar.withPercentageDone(new Progress(30));
-    else if (percentageReached(0.4))
+    else if (percentageReached(new Progress(40)))
       displayProgressBar.withPercentageDone(new Progress(40));
-    else if (percentageReached(0.5))
+    else if (percentageReached(new Progress(50)))
       displayProgressBar.withPercentageDone(new Progress(50));
-    else if (percentageReached(0.6))
+    else if (percentageReached(new Progress(60)))
       displayProgressBar.withPercentageDone(new Progress(60));
-    else if (percentageReached(0.7))
+    else if (percentageReached(new Progress(70)))
       displayProgressBar.withPercentageDone(new Progress(70));
-    else if (percentageReached(0.8))
+    else if (percentageReached(new Progress(80)))
       displayProgressBar.withPercentageDone(new Progress(80));
-    else if (percentageReached(0.9))
+    else if (percentageReached(new Progress(90)))
       displayProgressBar.withPercentageDone(new Progress(90));
   }
 
@@ -53,7 +53,7 @@ public class TrackProgress {
     return commitCounter;
   }
 
-  private boolean percentageReached(double percentage) {
-    return commitCounter == Math.round(commitAmount*percentage);
+  private boolean percentageReached(Progress progress) {
+    return commitCounter == Math.round(commitAmount*(((double)progress.intValue())/100));
   }
 }
