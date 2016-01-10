@@ -1,12 +1,10 @@
 package co.hodler.kaffeesatz.di;
 
-import co.hodler.kaffeesatz.actions.CommitCount;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
 import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
-import co.hodler.kaffeesatz.actions.git.JGitCommitCount;
 import co.hodler.kaffeesatz.actions.git.JGitProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.boundaries.JGitRepoInteraction;
@@ -37,8 +35,6 @@ public class KaffeesatzModule extends AbstractModule {
     bind(Git.class).toInstance(git);
 
     bind(FindLinkedCommitPairs.class).to(GitFindLinkedCommitPairs.class);
-
-    bind(CommitCount.class).to(JGitCommitCount.class);
 
     bind(ProvideChangesBetweenTwoCommits.class).to(JGitProvideChangesBetweenTwoCommits.class);
 

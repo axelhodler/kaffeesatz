@@ -3,12 +3,11 @@ package co.hodler.kaffeesatz.ui;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import co.hodler.kaffeesatz.actions.CommitCount;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrackProgressShould {
@@ -16,14 +15,14 @@ public class TrackProgressShould {
   @Mock
   DisplayProgressBar displayProgressBar;
   @Mock
-  CommitCount commitCount;
+  GitRepoInteractions gitRepoInteractions;
 
   private TestableTrackProgress trackProgress;
 
   @Test
   public void triggerBeginningDisplayOnFirstCall() {
-    given(commitCount.value()).willReturn(0);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(0);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
 
     trackProgress.track();
 
@@ -32,8 +31,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTenPercentMarkAs10PercentOfTheCommitsIsReached() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
 
     trackProgress.track();
 
@@ -42,8 +41,8 @@ public class TrackProgressShould {
 
   @Test
   public void thrityPercentMarkIsReachedOnSixthCommitOfTwenty() {
-    given(commitCount.value()).willReturn(20);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(20);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 5;
 
     trackProgress.track();
@@ -53,8 +52,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerFullProgressMarkAsTheLastCommitIsReached() {
-    given(commitCount.value()).willReturn(1);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(1);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
 
     trackProgress.track();
 
@@ -63,8 +62,8 @@ public class TrackProgressShould {
 
   @Test
   public void triggerTwentyPercentAsTwentyPercentOfCommitsIsReached() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -74,8 +73,8 @@ public class TrackProgressShould {
 
   @Test
   public void tenPercentIsTwoCommitsOutOf20() {
-    given(commitCount.value()).willReturn(20);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(20);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -85,8 +84,8 @@ public class TrackProgressShould {
 
   @Test
   public void thirtyPercentOfTenCommitsIsThreeCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 2;
 
     trackProgress.track();
@@ -96,8 +95,8 @@ public class TrackProgressShould {
 
   @Test
   public void thirtyPercentOfFifteenCommitsIsFiveCommits() {
-    given(commitCount.value()).willReturn(15);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(15);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 4;
 
     trackProgress.track();
@@ -107,8 +106,8 @@ public class TrackProgressShould {
 
   @Test
   public void twentyPercentOfSeventeenCommitsIsThreeCommits() {
-    given(commitCount.value()).willReturn(17);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(17);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 2;
 
     trackProgress.track();
@@ -118,8 +117,8 @@ public class TrackProgressShould {
 
   @Test
   public void fourtyPercentOfTenCommitsIsFourCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 3;
 
     trackProgress.track();
@@ -129,8 +128,8 @@ public class TrackProgressShould {
 
   @Test
   public void fiftyPercentOfTenCommitsIsFiveCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 4;
 
     trackProgress.track();
@@ -140,8 +139,8 @@ public class TrackProgressShould {
 
   @Test
   public void sixtyPercentOfTenCommitsIsSixCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 5;
 
     trackProgress.track();
@@ -151,8 +150,8 @@ public class TrackProgressShould {
 
   @Test
   public void seventyPercentOfTenCommitsIsSevenCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 6;
 
     trackProgress.track();
@@ -162,8 +161,8 @@ public class TrackProgressShould {
 
   @Test
   public void eightyPercentOfTenCommitsIsSevenCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 7;
 
     trackProgress.track();
@@ -173,8 +172,8 @@ public class TrackProgressShould {
 
   @Test
   public void ninetyPercentOfTenCommitsIsSevenCommits() {
-    given(commitCount.value()).willReturn(10);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(10);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 8;
 
     trackProgress.track();
@@ -184,8 +183,8 @@ public class TrackProgressShould {
 
   @Test
   public void tenPercentOfFifteenIsTwoCommits() {
-    given(commitCount.value()).willReturn(15);
-    trackProgress = new TestableTrackProgress(displayProgressBar, commitCount);
+    given(gitRepoInteractions.provideCommitCount()).willReturn(15);
+    trackProgress = new TestableTrackProgress(displayProgressBar, gitRepoInteractions);
     trackProgress.timesTracked = 1;
 
     trackProgress.track();
@@ -198,8 +197,8 @@ public class TrackProgressShould {
     public int timesTracked = 0;
 
     public TestableTrackProgress(DisplayProgressBar displayProgressBar,
-        CommitCount commitCount) {
-      super(displayProgressBar, commitCount);
+        GitRepoInteractions gitRepoInteractions) {
+      super(displayProgressBar, gitRepoInteractions);
     }
 
     @Override

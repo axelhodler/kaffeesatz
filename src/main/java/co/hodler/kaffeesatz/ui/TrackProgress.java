@@ -1,8 +1,8 @@
 package co.hodler.kaffeesatz.ui;
 
-import javax.inject.Inject;
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 
-import co.hodler.kaffeesatz.actions.CommitCount;
+import javax.inject.Inject;
 
 public class TrackProgress {
 
@@ -11,9 +11,9 @@ public class TrackProgress {
   private int commitCounter;
 
   @Inject
-  public TrackProgress(DisplayProgressBar displayProgressBar, CommitCount counter) {
+  public TrackProgress(DisplayProgressBar displayProgressBar, GitRepoInteractions gitRepoInteractions) {
     this.displayProgressBar = displayProgressBar;
-    this.commitAmount = counter.value();
+    this.commitAmount = gitRepoInteractions.provideCommitCount();
   }
 
   public void track() {
