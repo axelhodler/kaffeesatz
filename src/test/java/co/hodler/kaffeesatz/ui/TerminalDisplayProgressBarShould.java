@@ -4,9 +4,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -106,4 +109,7 @@ public class TerminalDisplayProgressBarShould {
   public void cleanUp() {
     System.setOut(null);
   }
+
+  @AfterClass
+  public static void tearDown() { System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));}
 }
