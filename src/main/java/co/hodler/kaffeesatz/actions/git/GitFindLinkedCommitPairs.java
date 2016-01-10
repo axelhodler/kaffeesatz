@@ -7,22 +7,22 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
-import co.hodler.kaffeesatz.actions.ProvideLog;
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
 public class GitFindLinkedCommitPairs implements FindLinkedCommitPairs {
 
-  private ProvideLog provideLog;
+  private GitRepoInteractions gitRepoInteractions;
 
   @Inject
-  public GitFindLinkedCommitPairs(ProvideLog provideLog) {
-    this.provideLog = provideLog;
+  public GitFindLinkedCommitPairs(GitRepoInteractions gitRepoInteractions) {
+    this.gitRepoInteractions = gitRepoInteractions;
   }
 
   @Override
   public Set<LinkedCommitHashPair> providePairs() {
-    Set<CommitHash> commitLog = provideLog.provide();
+    Set<CommitHash> commitLog = gitRepoInteractions.provideOrderedLogOfCommitHashes();
 
     Iterator<CommitHash> commitLogIter = commitLog.iterator();
     commitLogIter.next();
