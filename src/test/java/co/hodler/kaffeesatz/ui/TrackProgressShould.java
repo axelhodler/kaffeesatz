@@ -1,13 +1,14 @@
 package co.hodler.kaffeesatz.ui;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
 import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
+import co.hodler.kaffeesatz.model.Progress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrackProgressShould {
@@ -26,7 +27,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0);
+    verify(displayProgressBar).withPercentageDone(new Progress(0));
   }
 
   @Test
@@ -36,7 +37,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.1);
+    verify(displayProgressBar).withPercentageDone(new Progress(10));
   }
 
   @Test
@@ -47,7 +48,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.3);
+    verify(displayProgressBar).withPercentageDone(new Progress(30));
   }
 
   @Test
@@ -57,7 +58,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(1);
+    verify(displayProgressBar).withPercentageDone(new Progress(100));
   }
 
   @Test
@@ -68,7 +69,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.2);
+    verify(displayProgressBar).withPercentageDone(new Progress(20));
   }
 
   @Test
@@ -79,7 +80,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.1);
+    verify(displayProgressBar).withPercentageDone(new Progress(10));
   }
 
   @Test
@@ -90,7 +91,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.3);
+    verify(displayProgressBar).withPercentageDone(new Progress(30));
   }
 
   @Test
@@ -101,7 +102,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.3);
+    verify(displayProgressBar).withPercentageDone(new Progress(30));
   }
 
   @Test
@@ -112,7 +113,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.2);
+    verify(displayProgressBar).withPercentageDone(new Progress(20));
   }
 
   @Test
@@ -123,7 +124,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.4);
+    verify(displayProgressBar).withPercentageDone(new Progress(40));
   }
 
   @Test
@@ -134,7 +135,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.5);
+    verify(displayProgressBar).withPercentageDone(new Progress(50));
   }
 
   @Test
@@ -145,7 +146,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.6);
+    verify(displayProgressBar).withPercentageDone(new Progress(60));
   }
 
   @Test
@@ -156,7 +157,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.7);
+    verify(displayProgressBar).withPercentageDone(new Progress(70));
   }
 
   @Test
@@ -167,7 +168,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.8);
+    verify(displayProgressBar).withPercentageDone(new Progress(80));
   }
 
   @Test
@@ -178,7 +179,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.9);
+    verify(displayProgressBar).withPercentageDone(new Progress(90));
   }
 
   @Test
@@ -189,7 +190,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).withPercentageDone(0.1);
+    verify(displayProgressBar).withPercentageDone(new Progress(10));
   }
 
   class TestableTrackProgress extends TrackProgress {

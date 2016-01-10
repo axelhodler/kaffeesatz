@@ -1,5 +1,7 @@
 package co.hodler.kaffeesatz.ui;
 
+import co.hodler.kaffeesatz.model.Progress;
+
 public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   @Override
@@ -8,8 +10,8 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
   }
 
   @Override
-  public void withPercentageDone(double percentage) {
-    print(createProgressBarWithEqualSignAmountOf((int) (percentage * 10 + 0.5)));
+  public void withPercentageDone(Progress progress) {
+    print(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
   }
 
   private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {

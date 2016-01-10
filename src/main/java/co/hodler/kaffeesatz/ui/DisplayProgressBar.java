@@ -1,9 +1,11 @@
 package co.hodler.kaffeesatz.ui;
 
+import co.hodler.kaffeesatz.model.Progress;
+
 public interface DisplayProgressBar {
 
   void full();
 
-  void withPercentageDone(double percentage);
+  void withPercentageDone(Progress progress);
 
 }
