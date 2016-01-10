@@ -16,11 +16,6 @@ import org.eclipse.jgit.api.Git;
 public class KaffeesatzModule extends AbstractModule {
 
   private String gitRepoPath;
-  private Git git;
-
-  public KaffeesatzModule(Git git) {
-    this.git = git;
-  }
 
   public KaffeesatzModule(String gitRepoPath) {
     this.gitRepoPath = gitRepoPath;
@@ -31,8 +26,6 @@ public class KaffeesatzModule extends AbstractModule {
     JGitRepoInteraction gitRepoInteraction = new JGitRepoInteraction();
     gitRepoInteraction.initFunctionality(gitRepoPath);
     bind(GitRepoInteractions.class).toInstance(gitRepoInteraction);
-
-    bind(Git.class).toInstance(git);
 
     bind(FindLinkedCommitPairs.class).to(GitFindLinkedCommitPairs.class);
 
