@@ -27,7 +27,7 @@ public class TerminalDisplayProgressBarShould {
 
   @Test
   public void displayAMovingProgressbar() {
-    progressBar.begin();
+    progressBar.withPercentageDone(0);
 
     assertThat(sysOutputContent.toString(), is("|>         |\r"));
   }
@@ -41,63 +41,63 @@ public class TerminalDisplayProgressBarShould {
 
   @Test
   public void display10Percent() {
-    progressBar.tenPercentDone();
+    progressBar.withPercentageDone(0.1);
 
     assertThat(sysOutputContent.toString(), is("|=>        |\r"));
   }
 
   @Test
   public void display20Percent() {
-    progressBar.twentyPercentDone();
+    progressBar.withPercentageDone(0.2);
 
     assertThat(sysOutputContent.toString(), is("|==>       |\r"));
   }
 
   @Test
   public void display30Precent() {
-    progressBar.thirtyPercentDone();
+    progressBar.withPercentageDone(0.3);
 
     assertThat(sysOutputContent.toString(), is("|===>      |\r"));
   }
 
   @Test
   public void display40Precent() {
-    progressBar.fourtyPercentDone();
+    progressBar.withPercentageDone(0.4);
 
     assertThat(sysOutputContent.toString(), is("|====>     |\r"));
   }
 
   @Test
   public void display50Precent() {
-    progressBar.fiftyPercentDone();
+    progressBar.withPercentageDone(0.5);
 
     assertThat(sysOutputContent.toString(), is("|=====>    |\r"));
   }
 
   @Test
   public void display60Precent() {
-    progressBar.sixtyPercentDone();
+    progressBar.withPercentageDone(0.6);
 
     assertThat(sysOutputContent.toString(), is("|======>   |\r"));
   }
 
   @Test
   public void display70Precent() {
-    progressBar.seventyPercentDone();
+    progressBar.withPercentageDone(0.7);
 
     assertThat(sysOutputContent.toString(), is("|=======>  |\r"));
   }
 
   @Test
   public void display80Precent() {
-    progressBar.eightyPercentDone();
+    progressBar.withPercentageDone(0.8);
 
     assertThat(sysOutputContent.toString(), is("|========> |\r"));
   }
 
   @Test
   public void display90Precent() {
-    progressBar.ninetyPercentDone();
+    progressBar.withPercentageDone(0.9);
 
     assertThat(sysOutputContent.toString(), is("|=========>|\r"));
   }

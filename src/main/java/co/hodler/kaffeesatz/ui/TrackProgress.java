@@ -18,29 +18,29 @@ public class TrackProgress {
 
   public void track() {
     if (trackingHasBegun())
-      displayProgressBar.begin();
+      displayProgressBar.withPercentageDone(0);
     commitCounter = timesTracked() + 1;
 
     if (commitCounter == commitAmount)
-      displayProgressBar.full();
+      displayProgressBar.withPercentageDone(1);
     else if (percentageReached(0.1))
-      displayProgressBar.tenPercentDone();
+      displayProgressBar.withPercentageDone(0.1);
     else if (percentageReached(0.2))
-      displayProgressBar.twentyPercentDone();
+      displayProgressBar.withPercentageDone(0.2);
     else if (percentageReached(0.3))
-      displayProgressBar.thirtyPercentDone();
+      displayProgressBar.withPercentageDone(0.3);
     else if (percentageReached(0.4))
-      displayProgressBar.fourtyPercentDone();
+      displayProgressBar.withPercentageDone(0.4);
     else if (percentageReached(0.5))
-      displayProgressBar.fiftyPercentDone();
+      displayProgressBar.withPercentageDone(0.5);
     else if (percentageReached(0.6))
-      displayProgressBar.sixtyPercentDone();
+      displayProgressBar.withPercentageDone(0.6);
     else if (percentageReached(0.7))
-      displayProgressBar.seventyPercentDone();
+      displayProgressBar.withPercentageDone(0.7);
     else if (percentageReached(0.8))
-      displayProgressBar.eightyPercentDone();
+      displayProgressBar.withPercentageDone(0.8);
     else if (percentageReached(0.9))
-      displayProgressBar.ninetyPercentDone();
+      displayProgressBar.withPercentageDone(0.9);
   }
 
   private boolean trackingHasBegun() {

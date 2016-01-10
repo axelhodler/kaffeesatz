@@ -26,7 +26,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).begin();
+    verify(displayProgressBar).withPercentageDone(0);
   }
 
   @Test
@@ -36,7 +36,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).tenPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.1);
   }
 
   @Test
@@ -47,7 +47,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thirtyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.3);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).full();
+    verify(displayProgressBar).withPercentageDone(1);
   }
 
   @Test
@@ -68,7 +68,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).twentyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.2);
   }
 
   @Test
@@ -79,7 +79,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).tenPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.1);
   }
 
   @Test
@@ -90,7 +90,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thirtyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.3);
   }
 
   @Test
@@ -101,7 +101,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).thirtyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.3);
   }
 
   @Test
@@ -112,7 +112,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).twentyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.2);
   }
 
   @Test
@@ -123,7 +123,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).fourtyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.4);
   }
 
   @Test
@@ -134,7 +134,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).fiftyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.5);
   }
 
   @Test
@@ -145,7 +145,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).sixtyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.6);
   }
 
   @Test
@@ -156,7 +156,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).seventyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.7);
   }
 
   @Test
@@ -167,7 +167,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).eightyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.8);
   }
 
   @Test
@@ -178,7 +178,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).ninetyPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.9);
   }
 
   @Test
@@ -189,7 +189,7 @@ public class TrackProgressShould {
 
     trackProgress.track();
 
-    verify(displayProgressBar).tenPercentDone();
+    verify(displayProgressBar).withPercentageDone(0.1);
   }
 
   class TestableTrackProgress extends TrackProgress {
