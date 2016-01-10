@@ -12,13 +12,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
@@ -29,7 +29,7 @@ public class GatherChangesConcurrentlyShould {
   @Mock
   TrackProgress trackProgress;
   @Mock
-  ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
+  GitRepoInteractions gitRepoInteractions;
   @Mock
   GatherChangesFactory gatherChangesFactory;
   @Mock
@@ -44,13 +44,13 @@ public class GatherChangesConcurrentlyShould {
   @Before
   public void initialize() {
     gatherChangesConcurrently = new TestableGatherChangesConcurrently(
-        provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
+            gitRepoInteractions, gatherChangesThreadFactory,
         gatherChangesFactory, trackProgress);
 
     groupsOfCommitPairs = new ArrayList<>();
 
     given(gatherChangesFactory.createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, changedFiles()))
+            gitRepoInteractions, trackProgress, changedFiles()))
             .willReturn(gatherChangesObject());
     // beware, a mock is returning a mock
     given(gatherChangesThreadFactory.createThreadTo(gatherChangesObject()))
@@ -64,7 +64,7 @@ public class GatherChangesConcurrentlyShould {
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesFactory).createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, changedFiles());
+            gitRepoInteractions, trackProgress, changedFiles());
   }
 
   @Test
@@ -75,7 +75,7 @@ public class GatherChangesConcurrentlyShould {
     gatherChangesConcurrently.gather(groupsOfCommitPairs);
 
     verify(gatherChangesFactory, times(2)).createGatherChanges(new HashSet<>(),
-        provideChangesBetweenTwoCommits, trackProgress, changedFiles());
+            gitRepoInteractions, trackProgress, changedFiles());
   }
 
   @Test
@@ -120,11 +120,11 @@ public class GatherChangesConcurrentlyShould {
   public class TestableGatherChangesConcurrently extends GatherChangesConcurrently {
 
     public TestableGatherChangesConcurrently(
-        ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits,
+        GitRepoInteractions gitRepoInteractions,
         GatherChangesThreadFactory gatherChangesThreadFactory,
         GatherChangesFactory gatherChangesFactory,
         TrackProgress trackProgress) {
-      super(provideChangesBetweenTwoCommits, gatherChangesThreadFactory,
+      super(gitRepoInteractions, gatherChangesThreadFactory,
           gatherChangesFactory, trackProgress);
     }
 
@@ -141,7 +141,7 @@ public class GatherChangesConcurrentlyShould {
   }
 
   private GatherChanges gatherChangesObject() {
-    return new GatherChanges(new HashSet<>(), provideChangesBetweenTwoCommits,
+    return new GatherChanges(new HashSet<>(), gitRepoInteractions,
         trackProgress, changedFiles());
   }
 }

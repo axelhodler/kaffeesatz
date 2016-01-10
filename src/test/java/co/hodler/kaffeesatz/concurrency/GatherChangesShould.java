@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.internal.util.collections.Sets;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
@@ -28,7 +28,8 @@ public class GatherChangesShould {
   @Mock
   TrackProgress trackProgress;
   @Mock
-  ProvideChangesBetweenTwoCommits provideChanges;
+  GitRepoInteractions gitRepoInteractions;
+
   private List<ChangedFile> changedFiles;
   private GatherChanges gatherChanges;
 
@@ -36,13 +37,13 @@ public class GatherChangesShould {
   public void initialise() {
     changedFiles = new ArrayList<>();
     gatherChanges = new GatherChanges(
-        Sets.newSet(firstPair(), secondPair()), provideChanges, trackProgress,
+        Sets.newSet(firstPair(), secondPair()), gitRepoInteractions, trackProgress,
         changedFiles);
   }
 
   @Test
   public void gather_changes() {
-    given(provideChanges.fetchChangesBetween(firstPair()))
+    given(gitRepoInteractions.provideChangesBetween(firstPair()))
         .willReturn(Sets.newSet(new ChangedFile("README.md")));
 
     gatherChanges.run();

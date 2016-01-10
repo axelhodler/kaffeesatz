@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.hodler.kaffeesatz.actions.ProvideChangesBetweenTwoCommits;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
@@ -22,7 +22,7 @@ import co.hodler.kaffeesatz.ui.TrackProgress;
 public class GatherChangesFactoryShould {
 
   @Mock
-  ProvideChangesBetweenTwoCommits provideChangesBetweenTwoCommits;
+  GitRepoInteractions gitRepoInteractions;
   @Mock
   TrackProgress trackProgress;
 
@@ -34,10 +34,10 @@ public class GatherChangesFactoryShould {
 
     GatherChanges gatherChangesRunnable = gatherChangesFactory
         .createGatherChanges(commitPairs,
-            provideChangesBetweenTwoCommits, trackProgress, changedFiles);
+                gitRepoInteractions, trackProgress, changedFiles);
 
     GatherChanges expectedGatherChangesRunnable = 
-        new GatherChanges(commitPairs, provideChangesBetweenTwoCommits,
+        new GatherChanges(commitPairs, gitRepoInteractions,
             trackProgress, changedFiles);
     assertThat(gatherChangesRunnable, is(expectedGatherChangesRunnable));
   }
