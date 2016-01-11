@@ -18,8 +18,10 @@ public class TrackProgress {
   }
 
   public void track() {
+    Progress initialProgress = new Progress(0);
+
     if (trackingHasBegun())
-      displayProgressBar.withPercentageDone(new Progress(0));
+      displayProgressBar.withPercentageDone(initialProgress);
     commitCounter = timesTracked() + 1;
 
     if (commitCounter == commitAmount.intValue())
