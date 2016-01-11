@@ -1,16 +1,18 @@
 package co.hodler.kaffeesatz.ui;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
+import co.hodler.kaffeesatz.model.Progress;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
+import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TerminalDisplayProgressBarShould {
 
@@ -27,7 +29,7 @@ public class TerminalDisplayProgressBarShould {
 
   @Test
   public void displayAMovingProgressbar() {
-    progressBar.begin();
+    progressBar.withPercentageDone(new Progress(0));
 
     assertThat(sysOutputContent.toString(), is("|>         |\r"));
   }
@@ -41,63 +43,63 @@ public class TerminalDisplayProgressBarShould {
 
   @Test
   public void display10Percent() {
-    progressBar.tenPercentDone();
+    progressBar.withPercentageDone(new Progress(10));
 
     assertThat(sysOutputContent.toString(), is("|=>        |\r"));
   }
 
   @Test
   public void display20Percent() {
-    progressBar.twentyPercentDone();
+    progressBar.withPercentageDone(new Progress(20));
 
     assertThat(sysOutputContent.toString(), is("|==>       |\r"));
   }
 
   @Test
   public void display30Precent() {
-    progressBar.thirtyPercentDone();
+    progressBar.withPercentageDone(new Progress(30));
 
     assertThat(sysOutputContent.toString(), is("|===>      |\r"));
   }
 
   @Test
   public void display40Precent() {
-    progressBar.fourtyPercentDone();
+    progressBar.withPercentageDone(new Progress(40));
 
     assertThat(sysOutputContent.toString(), is("|====>     |\r"));
   }
 
   @Test
   public void display50Precent() {
-    progressBar.fiftyPercentDone();
+    progressBar.withPercentageDone(new Progress(50));
 
     assertThat(sysOutputContent.toString(), is("|=====>    |\r"));
   }
 
   @Test
   public void display60Precent() {
-    progressBar.sixtyPercentDone();
+    progressBar.withPercentageDone(new Progress(60));
 
     assertThat(sysOutputContent.toString(), is("|======>   |\r"));
   }
 
   @Test
   public void display70Precent() {
-    progressBar.seventyPercentDone();
+    progressBar.withPercentageDone(new Progress(70));
 
     assertThat(sysOutputContent.toString(), is("|=======>  |\r"));
   }
 
   @Test
   public void display80Precent() {
-    progressBar.eightyPercentDone();
+    progressBar.withPercentageDone(new Progress(80));
 
     assertThat(sysOutputContent.toString(), is("|========> |\r"));
   }
 
   @Test
   public void display90Precent() {
-    progressBar.ninetyPercentDone();
+    progressBar.withPercentageDone(new Progress(90));
 
     assertThat(sysOutputContent.toString(), is("|=========>|\r"));
   }
@@ -106,4 +108,7 @@ public class TerminalDisplayProgressBarShould {
   public void cleanUp() {
     System.setOut(null);
   }
+
+  @AfterClass
+  public static void tearDown() { System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));}
 }

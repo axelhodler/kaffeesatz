@@ -1,27 +1,11 @@
 package co.hodler.kaffeesatz.ui;
 
-public interface DisplayProgressBar {
+import co.hodler.kaffeesatz.model.Progress;
 
-  void begin();
+public interface DisplayProgressBar {
 
   void full();
 
-  void tenPercentDone();
-
-  void twentyPercentDone();
-
-  void thirtyPercentDone();
-
-  void fourtyPercentDone();
-
-  void fiftyPercentDone();
-
-  void sixtyPercentDone();
-
-  void seventyPercentDone();
-
-  void eightyPercentDone();
-
-  void ninetyPercentDone();
+  void withPercentageDone(Progress progress);
 
 }

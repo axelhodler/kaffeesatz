@@ -1,11 +1,8 @@
 package co.hodler.kaffeesatz.ui;
 
-public class TerminalDisplayProgressBar implements DisplayProgressBar {
+import co.hodler.kaffeesatz.model.Progress;
 
-  @Override
-  public void begin() {
-    print(createProgressBarWithEqualSignAmountOf(0));
-  }
+public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   @Override
   public void full() {
@@ -13,48 +10,8 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
   }
 
   @Override
-  public void tenPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(1));
-  }
-
-  @Override
-  public void twentyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(2));
-  }
-
-  @Override
-  public void thirtyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(3));
-  }
-
-  @Override
-  public void fourtyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(4));
-  }
-
-  @Override
-  public void fiftyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(5));
-  }
-
-  @Override
-  public void sixtyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(6));
-  }
-
-  @Override
-  public void seventyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(7));
-  }
-
-  @Override
-  public void eightyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(8));
-  }
-
-  @Override
-  public void ninetyPercentDone() {
-    print(createProgressBarWithEqualSignAmountOf(9));
+  public void withPercentageDone(final Progress progress) {
+    print(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
   }
 
   private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {

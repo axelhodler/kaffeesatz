@@ -1,58 +1,48 @@
 package co.hodler.kaffeesatz.ui;
 
-import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
+import co.hodler.kaffeesatz.model.CommitCount;
+import co.hodler.kaffeesatz.model.Progress;
 
 import javax.inject.Inject;
 
 public class TrackProgress {
 
+  private Progress currentProgress = new Progress(0);
   private DisplayProgressBar displayProgressBar;
-  private int commitAmount;
+  private CommitCount commitAmount;
   private int commitCounter;
 
   @Inject
-  public TrackProgress(DisplayProgressBar displayProgressBar, GitRepoInteractions gitRepoInteractions) {
+  public TrackProgress(DisplayProgressBar displayProgressBar, CommitCount commitCount) {
     this.displayProgressBar = displayProgressBar;
-    this.commitAmount = gitRepoInteractions.provideCommitCount();
+    this.commitAmount = commitCount;
   }
 
   public void track() {
-    if (trackingHasBegun())
-      displayProgressBar.begin();
-    commitCounter = timesTracked() + 1;
+    if (trackingHasBegun()) {
+      displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
+      currentProgress.increaseByTen();
+    }
+    commitCounter += 1;
 
-    if (commitCounter == commitAmount)
-      displayProgressBar.full();
-    else if (percentageReached(0.1))
-      displayProgressBar.tenPercentDone();
-    else if (percentageReached(0.2))
-      displayProgressBar.twentyPercentDone();
-    else if (percentageReached(0.3))
-      displayProgressBar.thirtyPercentDone();
-    else if (percentageReached(0.4))
-      displayProgressBar.fourtyPercentDone();
-    else if (percentageReached(0.5))
-      displayProgressBar.fiftyPercentDone();
-    else if (percentageReached(0.6))
-      displayProgressBar.sixtyPercentDone();
-    else if (percentageReached(0.7))
-      displayProgressBar.seventyPercentDone();
-    else if (percentageReached(0.8))
-      displayProgressBar.eightyPercentDone();
-    else if (percentageReached(0.9))
-      displayProgressBar.ninetyPercentDone();
+    if (lastCommit())
+      displayProgressBar.withPercentageDone(new Progress(100));
+
+    if (percentageReached(currentProgress)) {
+      displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
+      currentProgress.increaseByTen();
+    }
+  }
+
+  private boolean lastCommit() {
+    return commitCounter == commitAmount.intValue();
   }
 
   private boolean trackingHasBegun() {
-    commitCounter = timesTracked();
     return commitCounter == 0;
   }
 
-  protected int timesTracked() {
-    return commitCounter;
-  }
-
-  private boolean percentageReached(double percentage) {
-    return commitCounter == Math.round(commitAmount*percentage);
+  private boolean percentageReached(Progress progress) {
+    return commitCounter == Math.round(commitAmount.intValue()*(((double)progress.intValue())/100));
   }
 }
