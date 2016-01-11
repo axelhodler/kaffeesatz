@@ -10,7 +10,7 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
   }
 
   @Override
-  public void withPercentageDone(Progress progress) {
+  public void withPercentageDone(final Progress progress) {
     print(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
   }
 

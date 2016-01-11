@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 public class TrackProgress {
 
+  private Progress currentProgress = new Progress(0);
   private DisplayProgressBar displayProgressBar;
   private CommitCount commitAmount;
   private int commitCounter;
@@ -18,41 +19,22 @@ public class TrackProgress {
   }
 
   public void track() {
-    Progress initialProgress = new Progress(0);
-
-    if (trackingHasBegun())
-      displayProgressBar.withPercentageDone(initialProgress);
-    commitCounter = timesTracked() + 1;
+    if (trackingHasBegun()) {
+      displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
+      currentProgress.increaseByTen();
+    }
+    commitCounter += 1;
 
     if (commitCounter == commitAmount.intValue())
       displayProgressBar.withPercentageDone(new Progress(100));
-    else if (percentageReached(new Progress(10)))
-      displayProgressBar.withPercentageDone(new Progress(10));
-    else if (percentageReached(new Progress(20)))
-      displayProgressBar.withPercentageDone(new Progress(20));
-    else if (percentageReached(new Progress(30)))
-      displayProgressBar.withPercentageDone(new Progress(30));
-    else if (percentageReached(new Progress(40)))
-      displayProgressBar.withPercentageDone(new Progress(40));
-    else if (percentageReached(new Progress(50)))
-      displayProgressBar.withPercentageDone(new Progress(50));
-    else if (percentageReached(new Progress(60)))
-      displayProgressBar.withPercentageDone(new Progress(60));
-    else if (percentageReached(new Progress(70)))
-      displayProgressBar.withPercentageDone(new Progress(70));
-    else if (percentageReached(new Progress(80)))
-      displayProgressBar.withPercentageDone(new Progress(80));
-    else if (percentageReached(new Progress(90)))
-      displayProgressBar.withPercentageDone(new Progress(90));
+    else if (percentageReached(currentProgress)) {
+      displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
+      currentProgress.increaseByTen();
+    }
   }
 
   private boolean trackingHasBegun() {
-    commitCounter = timesTracked();
     return commitCounter == 0;
-  }
-
-  protected int timesTracked() {
-    return commitCounter;
   }
 
   private boolean percentageReached(Progress progress) {

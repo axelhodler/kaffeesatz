@@ -1,10 +1,14 @@
 package co.hodler.kaffeesatz.model;
 
 public final class Progress {
-  private final int progress;
+  private int progress;
 
   public Progress(int progress) {
     this.progress = progress;
+  }
+
+  public void increaseByTen() {
+    this.progress += 10;
   }
 
   public int intValue() {
