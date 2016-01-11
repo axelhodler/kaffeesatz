@@ -25,12 +25,17 @@ public class TrackProgress {
     }
     commitCounter += 1;
 
-    if (commitCounter == commitAmount.intValue())
+    if (lastCommit())
       displayProgressBar.withPercentageDone(new Progress(100));
-    else if (percentageReached(currentProgress)) {
+
+    if (percentageReached(currentProgress)) {
       displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
       currentProgress.increaseByTen();
     }
+  }
+
+  private boolean lastCommit() {
+    return commitCounter == commitAmount.intValue();
   }
 
   private boolean trackingHasBegun() {
