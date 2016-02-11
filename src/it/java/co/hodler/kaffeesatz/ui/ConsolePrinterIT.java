@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class ConsolePrinterIT {
 
   @Test
-  public void printToConsole() {
+  public void shouldPrintWithCarriageReturn() {
     ByteArrayOutputStream sysOutputContent = new ByteArrayOutputStream();
     System.setOut(new PrintStream(sysOutputContent));
 
