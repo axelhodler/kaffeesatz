@@ -7,7 +7,9 @@ import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
 import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.boundaries.JGitRepoInteraction;
 import co.hodler.kaffeesatz.model.CommitCount;
+import co.hodler.kaffeesatz.ui.ConsolePrinter;
 import co.hodler.kaffeesatz.ui.DisplayProgressBar;
+import co.hodler.kaffeesatz.ui.Printer;
 import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 import com.google.inject.AbstractModule;
 
@@ -28,6 +30,7 @@ public class KaffeesatzModule extends AbstractModule {
 
     bind(FindLinkedCommitPairs.class).to(GitFindLinkedCommitPairs.class);
 
+    bind(Printer.class).to(ConsolePrinter.class);
     bind(DisplayProgressBar.class).to(TerminalDisplayProgressBar.class);
 
     bind(FetchChangedFiles.class).to(GitFetchChangedFiles.class);
