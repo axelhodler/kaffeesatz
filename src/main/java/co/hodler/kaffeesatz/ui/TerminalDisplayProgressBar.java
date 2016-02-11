@@ -15,19 +15,19 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   @Override
   public void full() {
-    printer.print("|==========|\r");
+    printer.display("|==========|");
   }
 
   @Override
   public void withPercentageDone(final Progress progress) {
-    printer.print(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
+    printer.display(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
   }
 
   private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {
     return "|" + repeatEqualSignTimes(amountOfEqualSigns)
         .concat(">")
         .concat(repeatSpacesTimes(9 - amountOfEqualSigns))
-        .concat("|\r");
+        .concat("|");
   }
 
   private String repeatEqualSignTimes(int amountOfEqualSigns) {

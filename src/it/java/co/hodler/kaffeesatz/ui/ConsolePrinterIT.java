@@ -19,9 +19,9 @@ public class ConsolePrinterIT {
 
     Printer p = new ConsolePrinter();
 
-    p.print("hello");
+    p.display("hello");
 
-    assertThat(sysOutputContent.toString(), is("hello"));
+    assertThat(sysOutputContent.toString(), is("hello\r"));
     System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
   }
 

@@ -26,76 +26,76 @@ public class TerminalDisplayProgressBarShould {
   public void displayAMovingProgressbar() {
     progressBar.withPercentageDone(new Progress(0));
 
-    verify(printer).print("|>         |\r");
+    verify(printer).display("|>         |");
   }
 
   @Test
   public void displayFullProgressBar() {
     progressBar.full();
 
-    verify(printer).print("|==========|\r");
+    verify(printer).display("|==========|");
   }
 
   @Test
   public void display10Percent() {
     progressBar.withPercentageDone(new Progress(10));
 
-    verify(printer).print("|=>        |\r");
+    verify(printer).display("|=>        |");
   }
 
   @Test
   public void display20Percent() {
     progressBar.withPercentageDone(new Progress(20));
 
-    verify(printer).print("|==>       |\r");
+    verify(printer).display("|==>       |");
   }
 
   @Test
   public void display30Precent() {
     progressBar.withPercentageDone(new Progress(30));
 
-    verify(printer).print("|===>      |\r");
+    verify(printer).display("|===>      |");
   }
 
   @Test
   public void display40Precent() {
     progressBar.withPercentageDone(new Progress(40));
 
-    verify(printer).print("|====>     |\r");
+    verify(printer).display("|====>     |");
   }
 
   @Test
   public void display50Precent() {
     progressBar.withPercentageDone(new Progress(50));
 
-    verify(printer).print("|=====>    |\r");
+    verify(printer).display("|=====>    |");
   }
 
   @Test
   public void display60Precent() {
     progressBar.withPercentageDone(new Progress(60));
 
-    verify(printer).print("|======>   |\r");
+    verify(printer).display("|======>   |");
   }
 
   @Test
   public void display70Precent() {
     progressBar.withPercentageDone(new Progress(70));
 
-    verify(printer).print("|=======>  |\r");
+    verify(printer).display("|=======>  |");
   }
 
   @Test
   public void display80Precent() {
     progressBar.withPercentageDone(new Progress(80));
 
-    verify(printer).print("|========> |\r");
+    verify(printer).display("|========> |");
   }
 
   @Test
   public void display90Precent() {
     progressBar.withPercentageDone(new Progress(90));
 
-    verify(printer).print("|=========>|\r");
+    verify(printer).display("|=========>|");
   }
 }
