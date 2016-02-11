@@ -2,23 +2,32 @@ package co.hodler.kaffeesatz.ui;
 
 import co.hodler.kaffeesatz.model.Progress;
 
+import javax.inject.Inject;
+
 public class TerminalDisplayProgressBar implements DisplayProgressBar {
+
+  private Printer printer;
+
+  @Inject
+  public TerminalDisplayProgressBar(Printer printer) {
+    this.printer = printer;
+  }
 
   @Override
   public void full() {
-    print("|==========|\r");
+    printer.display("|==========|");
   }
 
   @Override
   public void withPercentageDone(final Progress progress) {
-    print(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
+    printer.display(createProgressBarWithEqualSignAmountOf(progress.intValue()/10));
   }
 
   private String createProgressBarWithEqualSignAmountOf(int amountOfEqualSigns) {
     return "|" + repeatEqualSignTimes(amountOfEqualSigns)
         .concat(">")
         .concat(repeatSpacesTimes(9 - amountOfEqualSigns))
-        .concat("|\r");
+        .concat("|");
   }
 
   private String repeatEqualSignTimes(int amountOfEqualSigns) {
@@ -27,9 +36,5 @@ public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   private String repeatSpacesTimes(int amountOfSpaces) {
     return new String(new char[amountOfSpaces]).replace("\0", " ");
-  }
-
-  private void print(String toPrint) {
-    System.out.print(toPrint);
   }
 }
