@@ -5,6 +5,7 @@ import co.hodler.kaffeesatz.model.ChangedFile;
 
 import javax.inject.Inject;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class FileChangeChart {
@@ -26,22 +27,21 @@ public class FileChangeChart {
 
     return changesWithAmount.entrySet().stream()
         .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-        .collect(Collectors.toMap(
-                entry -> entry.getKey(),
-                entry -> entry.getValue(),
-                (v1, v2) -> { throw new RuntimeException();},
-                LinkedHashMap::new));
+        .collect(toLinkedHashMap());
   }
 
   public Map<String, Integer> createTop(int amount) {
     return create().entrySet()
             .stream()
             .limit(amount)
-            .collect(Collectors.toMap(
-                    entry -> entry.getKey(),
-                    entry -> entry.getValue(),
-                    (v1, v2) -> { throw new RuntimeException(); },
-                    LinkedHashMap::new));
+            .collect(toLinkedHashMap());
   }
 
+  private Collector<Map.Entry<String, Integer>, ?, LinkedHashMap<String, Integer>> toLinkedHashMap() {
+    return Collectors.toMap(
+            entry -> entry.getKey(),
+            entry -> entry.getValue(),
+            (v1, v2) -> { throw new RuntimeException();},
+            LinkedHashMap::new);
+  }
 }
