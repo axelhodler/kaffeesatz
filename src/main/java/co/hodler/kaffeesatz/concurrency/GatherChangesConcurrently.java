@@ -1,8 +1,7 @@
 package co.hodler.kaffeesatz.concurrency;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.inject.Inject;
@@ -43,12 +42,9 @@ public class GatherChangesConcurrently {
       allGroups.add(groupOfChangedFiles);
     });
 
-    List<ChangedFile> allChangedFiles = new ArrayList<>();
-
-    allGroups.stream().forEach(
-        group -> allChangedFiles.addAll(group));
-
-    return allChangedFiles;
+    return allGroups.stream()
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
   }
 
   protected List<ChangedFile> createListToHoldChangedFiles() {
