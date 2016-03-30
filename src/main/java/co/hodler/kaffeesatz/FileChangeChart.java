@@ -24,14 +24,12 @@ public class FileChangeChart {
   }
 
   public Map<String, Integer> create() {
-    Map<String, Integer> changesWithAmount = new HashMap<>();
     List<ChangedFile> filesWithChanges = changedFiles.fetchChangedFiles();
-
     Set<ChangedFile> uniqueFiles = new HashSet<>(filesWithChanges);
 
-    for (ChangedFile key : uniqueFiles) {
-      changesWithAmount.put(key.value(), Collections.frequency(filesWithChanges, key));
-    }
+    Map<String, Integer> changesWithAmount = uniqueFiles.stream()
+            .collect(Collectors.toMap(file -> file.value(),
+                    file -> Collections.frequency(filesWithChanges, file)));
 
     Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();
 
