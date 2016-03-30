@@ -1,18 +1,11 @@
 package co.hodler.kaffeesatz;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.model.ChangedFile;
+
+import javax.inject.Inject;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FileChangeChart {
 
@@ -31,13 +24,13 @@ public class FileChangeChart {
             .collect(Collectors.toMap(file -> file.value(),
                     file -> Collections.frequency(filesWithChanges, file)));
 
-    Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();
-
-    changesWithAmount.entrySet().stream()
+    return changesWithAmount.entrySet().stream()
         .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-        .forEach(entry -> changesSortedByAmount.put(entry.getKey(), entry.getValue()));
-
-    return changesSortedByAmount;
+        .collect(Collectors.toMap(
+                entry -> entry.getKey(),
+                entry -> entry.getValue(),
+                (v1, v2) -> { throw new RuntimeException();},
+                LinkedHashMap::new));
   }
 
   public Map<String, Integer> createTop(int amount) {
