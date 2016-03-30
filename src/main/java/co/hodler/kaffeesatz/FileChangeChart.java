@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -42,10 +43,14 @@ public class FileChangeChart {
   }
 
   public Map<String, Integer> createTop(int amount) {
-    Map<String, Integer> changesSortedByAmount = new LinkedHashMap<>();
-    create().entrySet().stream().limit(amount).forEach(
-        entry -> changesSortedByAmount.put(entry.getKey(), entry.getValue()));
-    return changesSortedByAmount;
+    return create().entrySet()
+            .stream()
+            .limit(amount)
+            .collect(Collectors.toMap(
+                    entry -> entry.getKey(),
+                    entry -> entry.getValue(),
+                    (v1, v2) -> { throw new RuntimeException(); },
+                    LinkedHashMap::new));
   }
 
 }
