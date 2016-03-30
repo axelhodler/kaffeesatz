@@ -35,12 +35,9 @@ public class SplitPairsSetIntoEqualParts {
 
   private List<Set<LinkedCommitHashPair>> toSet(int amount,
       Map<Object, List<LinkedCommitHashPair>> groups) {
-    List<Set<LinkedCommitHashPair>> splitPairs = new ArrayList<>();
-    IntStream.rangeClosed(1, amount)
-      .forEach(key -> {
-        splitPairs.add(addGroupsToSet(groups, key));
-      });
-    return splitPairs;
+    return IntStream.rangeClosed(1, amount)
+      .mapToObj(key -> addGroupsToSet(groups, key))
+      .collect(Collectors.toList());
   }
 
   private Set<LinkedCommitHashPair> addGroupsToSet(
