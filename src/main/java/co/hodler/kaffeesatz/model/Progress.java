@@ -7,6 +7,10 @@ public final class Progress {
     this.progress = initialProgress;
   }
 
+  public boolean areNextTenPercentReached(int commitCounter, CommitCount commitCount) {
+    return commitCounter == Math.round(commitCount.intValue()*(((double)this.intValue())/100));
+  }
+
   public void increaseByTen() {
     this.progress += 10;
   }
