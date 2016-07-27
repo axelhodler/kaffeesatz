@@ -28,7 +28,7 @@ public class TrackProgress {
     if (lastCommit())
       displayProgressBar.withPercentageDone(new Progress(100));
 
-    if (percentageReached(currentProgress)) {
+    if (currentProgress.areNextTenPercentReached(commitCounter, commitAmount)) {
       displayProgressBar.withPercentageDone(new Progress(currentProgress.intValue()));
       currentProgress.increaseByTen();
     }
@@ -40,9 +40,5 @@ public class TrackProgress {
 
   private boolean trackingHasBegun() {
     return commitCounter == 0;
-  }
-
-  private boolean percentageReached(Progress progress) {
-    return commitCounter == Math.round(commitAmount.intValue()*(((double)progress.intValue())/100));
   }
 }

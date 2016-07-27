@@ -3,8 +3,12 @@ package co.hodler.kaffeesatz.model;
 public final class Progress {
   private int progress;
 
-  public Progress(int progress) {
-    this.progress = progress;
+  public Progress(int initialProgress) {
+    this.progress = initialProgress;
+  }
+
+  public boolean areNextTenPercentReached(int commitCounter, CommitCount commitCount) {
+    return commitCounter == Math.round(commitCount.intValue()*(((double)this.intValue())/100));
   }
 
   public void increaseByTen() {
