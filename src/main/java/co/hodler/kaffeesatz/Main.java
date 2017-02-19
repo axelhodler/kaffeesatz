@@ -11,14 +11,22 @@ import co.hodler.kaffeesatz.model.CommitCount;
 import co.hodler.kaffeesatz.ui.ConsolePrinter;
 import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
 import co.hodler.kaffeesatz.ui.TrackProgress;
+import org.eclipse.jgit.api.Git;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    JGitRepoInteraction gitRepoInteraction = new JGitRepoInteraction();
-    gitRepoInteraction.initFunctionality(args[0]);
+    Git git;
+    try {
+      git = Git.open(new File(args[0]));
+    } catch (IOException e) {
+      throw new RuntimeException("Could not find provided git repo", e);
+    }
+    JGitRepoInteraction gitRepoInteraction = new JGitRepoInteraction(git);
 
     FileChangeChart fileChangeChart = new FileChangeChart(
       new GitFetchChangedFiles(

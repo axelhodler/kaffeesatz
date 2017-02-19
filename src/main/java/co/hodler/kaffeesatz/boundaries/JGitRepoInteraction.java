@@ -11,8 +11,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,14 +21,8 @@ public class JGitRepoInteraction implements GitRepoInteractions {
 
   private Git gitRepo;
 
-  @Override
-  public void initFunctionality(String path) {
-    File gitWorkDir = new File(path);
-    try {
-      this.gitRepo = Git.open(gitWorkDir);
-    } catch (IOException e) {
-      throw new RuntimeException("Could not find provided git repo", e);
-    }
+  public JGitRepoInteraction(Git gitRepo) {
+    this.gitRepo = gitRepo;
   }
 
   @Override
