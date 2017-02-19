@@ -32,11 +32,6 @@
       <artifactId>org.eclipse.jgit</artifactId>
       <version>${jgit.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-      <version>${guice.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -130,7 +125,6 @@
           <aggregate>true</aggregate>
           <instrumentation>
             <excludes>
-              <exclude>co/hodler/kaffeesatz/di/*.class</exclude>
             </excludes>
           </instrumentation>
         </configuration>

@@ -3,8 +3,6 @@ package co.hodler.kaffeesatz.ui;
 import co.hodler.kaffeesatz.model.CommitCount;
 import co.hodler.kaffeesatz.model.Progress;
 
-import javax.inject.Inject;
-
 public class TrackProgress {
 
   private Progress currentProgress = new Progress(0);
@@ -12,7 +10,6 @@ public class TrackProgress {
   private CommitCount commitAmount;
   private int commitCounter;
 
-  @Inject
   public TrackProgress(DisplayProgressBar displayProgressBar, CommitCount commitCount) {
     this.displayProgressBar = displayProgressBar;
     this.commitAmount = commitCount;

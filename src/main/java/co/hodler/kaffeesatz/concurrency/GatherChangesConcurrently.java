@@ -1,15 +1,16 @@
 package co.hodler.kaffeesatz.concurrency;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import javax.inject.Inject;
-
 import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.model.ChangedFile;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 import co.hodler.kaffeesatz.ui.TrackProgress;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class GatherChangesConcurrently {
 
@@ -18,7 +19,6 @@ public class GatherChangesConcurrently {
   private TrackProgress trackProgress;
   private GitRepoInteractions gitRepoInteractions;
 
-  @Inject
   public GatherChangesConcurrently(
           GitRepoInteractions provideChangesBetweenTwoCommits,
       GatherChangesThreadFactory gatherChangesThreadFactory,

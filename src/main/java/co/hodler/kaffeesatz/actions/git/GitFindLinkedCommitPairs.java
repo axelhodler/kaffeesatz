@@ -1,21 +1,18 @@
 package co.hodler.kaffeesatz.actions.git;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import javax.inject.Inject;
-
 import co.hodler.kaffeesatz.actions.FindLinkedCommitPairs;
 import co.hodler.kaffeesatz.boundaries.GitRepoInteractions;
 import co.hodler.kaffeesatz.model.CommitHash;
 import co.hodler.kaffeesatz.model.LinkedCommitHashPair;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class GitFindLinkedCommitPairs implements FindLinkedCommitPairs {
 
   private GitRepoInteractions gitRepoInteractions;
 
-  @Inject
   public GitFindLinkedCommitPairs(GitRepoInteractions gitRepoInteractions) {
     this.gitRepoInteractions = gitRepoInteractions;
   }

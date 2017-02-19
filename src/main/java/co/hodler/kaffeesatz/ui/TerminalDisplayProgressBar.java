@@ -2,13 +2,10 @@ package co.hodler.kaffeesatz.ui;
 
 import co.hodler.kaffeesatz.model.Progress;
 
-import javax.inject.Inject;
-
 public class TerminalDisplayProgressBar implements DisplayProgressBar {
 
   private Printer printer;
 
-  @Inject
   public TerminalDisplayProgressBar(Printer printer) {
     this.printer = printer;
   }

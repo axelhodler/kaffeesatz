@@ -1,24 +1,40 @@
 package co.hodler.kaffeesatz;
 
+import co.hodler.kaffeesatz.actions.git.GitFetchChangedFiles;
+import co.hodler.kaffeesatz.actions.git.GitFindLinkedCommitPairs;
+import co.hodler.kaffeesatz.boundaries.JGitRepoInteraction;
+import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
+import co.hodler.kaffeesatz.concurrency.GatherChangesFactory;
+import co.hodler.kaffeesatz.concurrency.GatherChangesThreadFactory;
+import co.hodler.kaffeesatz.concurrency.SplitPairsSetIntoEqualParts;
+import co.hodler.kaffeesatz.model.CommitCount;
+import co.hodler.kaffeesatz.ui.ConsolePrinter;
+import co.hodler.kaffeesatz.ui.TerminalDisplayProgressBar;
+import co.hodler.kaffeesatz.ui.TrackProgress;
+
 import java.util.Map;
-
-import org.eclipse.jgit.api.Git;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-import co.hodler.kaffeesatz.di.KaffeesatzModule;
 
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    String gitRepoPath = args[0];
+    JGitRepoInteraction gitRepoInteraction = new JGitRepoInteraction();
+    gitRepoInteraction.initFunctionality(args[0]);
 
-    Injector injector = Guice.createInjector(new KaffeesatzModule(gitRepoPath));
-    FileChangeChart fileChangeChart = injector.getInstance(FileChangeChart.class);
+    FileChangeChart fileChangeChart = new FileChangeChart(
+      new GitFetchChangedFiles(
+        new SplitPairsSetIntoEqualParts(
+          new GitFindLinkedCommitPairs(gitRepoInteraction)
+        ), new GatherChangesConcurrently(gitRepoInteraction,
+        new GatherChangesThreadFactory(),
+        new GatherChangesFactory(),
+        new TrackProgress(
+          new TerminalDisplayProgressBar(
+            new ConsolePrinter()),
+          new CommitCount(gitRepoInteraction.provideCommitCount()))
+      )));
 
     Map<String, Integer> changedFilesChart = fileChangeChart.createTop(30);
     changedFilesChart.keySet().stream().forEach(
-        key -> System.out.printf("%d | %s\n", changedFilesChart.get(key), key));
+      key -> System.out.printf("%d | %s\n", changedFilesChart.get(key), key));
   }
 }

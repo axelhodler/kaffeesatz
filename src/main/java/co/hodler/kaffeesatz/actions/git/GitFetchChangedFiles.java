@@ -1,20 +1,17 @@
 package co.hodler.kaffeesatz.actions.git;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.concurrency.GatherChangesConcurrently;
 import co.hodler.kaffeesatz.concurrency.SplitPairsSetIntoEqualParts;
 import co.hodler.kaffeesatz.model.ChangedFile;
+
+import java.util.List;
 
 public class GitFetchChangedFiles implements FetchChangedFiles {
 
   private SplitPairsSetIntoEqualParts logSplitter;
   private GatherChangesConcurrently gatherChangesConcurrently;
 
-  @Inject
   public GitFetchChangedFiles(SplitPairsSetIntoEqualParts logSplitter,
       GatherChangesConcurrently gatherChangesConcurrently) {
     this.logSplitter = logSplitter;

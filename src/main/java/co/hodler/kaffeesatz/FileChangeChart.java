@@ -3,7 +3,6 @@ package co.hodler.kaffeesatz;
 import co.hodler.kaffeesatz.actions.FetchChangedFiles;
 import co.hodler.kaffeesatz.model.ChangedFile;
 
-import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ public class FileChangeChart {
 
   private FetchChangedFiles changedFiles;
 
-  @Inject
   public FileChangeChart(FetchChangedFiles changedFiles) {
     this.changedFiles = changedFiles;
   }
