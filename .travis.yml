@@ -6,7 +6,7 @@ git:
   depth: 10000
 
 jdk:
-  - oraclejdk8
+  - openjdk11
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
